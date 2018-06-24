@@ -1,3 +1,5 @@
-# Unity Package Manager UI
+# Unity Immediate Window
 
-Unity Package Manager UI as a Unity Package
+An immediate window we can all believe in!
+
+Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second Guessing: Mathieu Rivest
