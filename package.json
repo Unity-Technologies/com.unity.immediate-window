@@ -1,0 +1,9 @@
+{
+	"name": "com.unity.immediate-window",
+	"displayName": "Immediate Window",
+	"version": "0.0.1-preview.1",
+	"unity": "2018.3",
+	"description": "Gives you immediate access to your code.",
+	"author": {"name": "Mathieu Rivest", "email": "mathieur@unity3d.com", "url": ""},
+	"dependencies": {}
+}
