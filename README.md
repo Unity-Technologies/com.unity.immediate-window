@@ -20,12 +20,16 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
     * Show a list of last "usings" (assembly list with a 'using' checkbox)
 - Object Inspector
     + To show and inspect values
+    * Add all properties
+        * getters/setters (expandable for value)
+        * Arrays
+            * With pagination for large arrays)
+        * Methods
+    * Add pagination for all (...)
 - Save Settings
     + Better experience
     * Save List of 'using'
     * Save typing history (up to xxx)
-- Single line
-    * Clear last statement after execution
 - Multiline
     + Refine a method
     * Show line numbers for easier debugging
@@ -65,4 +69,13 @@ UnityEditor.ImmediateWindow.UI.TestClass.Test("asdsa")
 using UnityEditor.ImmediateWindow.UI; TestClass.Test("asdsa")
 
 public class A {public int X {get;set;} public string Y {get {return "yes";}}}; new A()
+
+-- Multiline Output --
+class A
+{
+ public int X = 12;
+ public string Name = "Mat";
+}
+var x = new A();
+x
 ```

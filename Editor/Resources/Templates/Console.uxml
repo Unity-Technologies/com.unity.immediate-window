@@ -8,7 +8,10 @@
     <engine:VisualElement name="container">
         <imw:ConsoleToolbar name="toolbarContainer"/>
 
-        <imw:ConsoleOutput name="console-output"/>
-        <engine:TextField name="console-input"/>
+        <engine:VisualElement name="console-mode-singleline">
+        </engine:VisualElement>
+
+        <engine:VisualElement name="console-mode-multiline">
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

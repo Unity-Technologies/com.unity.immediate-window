@@ -263,6 +263,16 @@ $toolbar-height: 18;
 	#console {
 		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
 
+		&.singleline {
+
+		}
+
+		&.multiline {
+			#console-output {
+				height: 125;
+			}
+		}
+
 		#console-output {
 			height: $height-console-output;
 			overflow: hidden;
@@ -288,20 +298,48 @@ $toolbar-height: 18;
 		#console-input {
 			position-bottom: 0;
 		}
-	}
 
-	#toolbarContainer {
-		#viewPrivateLabel {
-			margin-right: 0;
-		}
-
-		#viewPrivate {
-			margin-left: 0;
+		#console-input-multiline {
+			position-bottom: 0;
+			height: 250;
 		}
 	}
 }
 
+#toggleContainer {
+	flex: 0 0 auto;
+	flex-direction: row;
+
+	.label {
+		margin-right: 0;
+	}
+
+	.toggle {
+		margin-left: 0;
+	}
+}
+
 .icon {
+	&.popup {
+		width: 14;
+		height: 14;
+		background-image: $popup-background;
+
+		&.pressed {
+			background-image: $popup-pressed-background;
+		}
+	}
+
+	&.play {
+		width: 14;
+		height: 14;
+		background-image: $play-background;
+
+		&.pressed {
+			background-image: $play-pressed-background;
+		}
+	}
+
 	&.cancel {
 		width: 14;
 		height: 14;
@@ -318,11 +356,6 @@ $toolbar-height: 18;
 	flex-direction: row;
 	align-items: flex-start;
 	height: $toolbar-height;
-
-	#toggleContainer {
-		flex: 0 0 auto;
-		flex-direction: row;
-	}
 
 	#toolbarView {
 		flex: 1 0 0;

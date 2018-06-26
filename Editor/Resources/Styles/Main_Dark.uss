@@ -1,399 +1,87 @@
-/***************************************************************************************************
+/*
+Error: Undefined variable: "$play-background".
+        on line 336 of _common.scss
+        from line 79 of Main_Dark.scss
 
-														*** Auto-Generated - Do not modify .uss File ***
-
-																		Only Modify Main.scss
-
-***************************************************************************************************/
-.display-none {
-  position: absolute;
-  overflow: hidden;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-}
-
-.row {
-  flex: 1 0 0;
-  flex-direction: row;
-}
-
-.column, #immediateWindow .scrollView {
-  flex: 1 0 0;
-  flex-direction: column;
-}
-
-.tag {
-  border-top-width: 1;
-  border-left-width: 1;
-  border-bottom-width: 1;
-  border-right-width: 1;
-  padding-top: 1;
-  padding-left: 3;
-  padding-bottom: 1;
-  padding-right: 3;
-  font-size: 9;
-  border-radius: 5;
-  text-alignment: middle-center;
-  border-color: #000000;
-  text-color: #000000;
-}
-
-#immediateWindow .scrollView #VerticalScroller {
-  position-bottom: 0;
-}
-#immediateWindow .scrollView #HorizontalScroller {
-  height: 0;
-}
-#immediateWindow .scrollView #ContentViewport {
-  position-bottom: 0;
-}
-#immediateWindow .scrollView #ContentViewport #ContentView {
-  position-right: 0;
-  position-left: 0;
-}
-#immediateWindow .no-background, #immediateWindow #console #console-output .output-item #text {
-  background: rgba(0, 0, 0, 0);
-  background-image: none;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
-#immediateWindow .alert {
-  background-color: rgba(200, 0, 0, 0.8);
-  border-color: #FF0000;
-  flex-direction: row;
-  border-top-width: 1;
-  border-left-width: 1;
-  border-bottom-width: 1;
-  border-right-width: 1;
-  padding-top: 5;
-  padding-left: 10;
-  padding-bottom: 5;
-  padding-right: 10;
-}
-#immediateWindow .alert #alertMessage {
-  flex: 1 0 0;
-  text-color: #f4f4f4;
-  word-wrap: true;
-  overflow: hidden;
-}
-#immediateWindow .alert #close {
-  flex: 0 0 auto;
-  max-height: 30;
-  position-left: 5;
-  flex: 0 0 auto;
-  padding-top: 3;
-  padding-left: 3;
-  padding-bottom: 4;
-  padding-right: 3;
-  slice-top: 4;
-  slice-left: 6;
-  slice-bottom: 4;
-  slice-right: 6;
-}
-#immediateWindow .alert #close.display-none {
-  position: absolute;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
-  min-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  slice-top: 0;
-  slice-left: 0;
-  slice-bottom: 0;
-  slice-right: 0;
-  visibility: hidden;
-}
-#immediateWindow .alert #close:hover {
-  text-color: #b4b4b4;
-}
-#immediateWindow .spinner {
-  flex: 0 0 auto;
-  position-top: -7;
-  position-left: -7;
-  min-width: 14;
-  min-height: 14;
-  max-width: 14;
-  max-height: 14;
-  background-image: resource("Images/Dark/loading");
-}
-#immediateWindow .largeSpinner {
-  flex: 0 0 auto;
-  position-top: -16;
-  position-left: -16;
-  min-width: 32;
-  min-height: 32;
-  max-width: 32;
-  max-height: 32;
-  background-image: resource("Images/Dark/loading");
-}
-#immediateWindow #console #console-output {
-  height: 250;
-  overflow: hidden;
-}
-#immediateWindow #console #console-output #output-content {
-  height: 250;
-}
-#immediateWindow #console #console-output .output-item {
-  margin-top: 0;
-  margin-left: 6;
-  margin-bottom: 0;
-  margin-right: 6;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 1;
-  border-right-width: 0;
-  border-color: rgba(0, 0, 0, 0.05);
-}
-#immediateWindow #console #console-input {
-  position-bottom: 0;
-}
-#immediateWindow #toolbarContainer #viewPrivateLabel {
-  margin-right: 0;
-}
-#immediateWindow #toolbarContainer #viewPrivate {
-  margin-left: 0;
-}
-
-.icon.cancel {
-  width: 14;
-  height: 14;
-  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus.png");
-}
-.icon.cancel.pressed {
-  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus act.png");
-}
-
-#toolbarContainer {
-  flex: 0 0 auto;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 18;
-}
-#toolbarContainer #toggleContainer {
-  flex: 0 0 auto;
-  flex-direction: row;
-}
-#toolbarContainer #toolbarView {
-  flex: 1 0 0;
-  flex-direction: row;
-  align-items: flex-start;
-  background-image: resource("Builtin Skins/DarkSkin/Images/Toolbar.png");
-  margin-top: -1;
-  slice-top: 1;
-  slice-left: 1;
-  slice-bottom: 1;
-  slice-right: 1;
-}
-#toolbarContainer #toolbarView .toolbarButton {
-  flex: 1 0 0;
-  font-size: 9;
-  text-alignment: middle-center;
-  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
-  flex: 0 0 auto;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  slice-top: 4;
-  slice-left: 6;
-  slice-bottom: 4;
-  slice-right: 6;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: -1;
-  padding-top: 0;
-  padding-left: 5;
-  padding-bottom: 0;
-  padding-right: 5;
-  height: 19;
-}
-#toolbarContainer #toolbarView .toolbarButton.display-none {
-  position: absolute;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
-  min-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  slice-top: 0;
-  slice-left: 0;
-  slice-bottom: 0;
-  slice-right: 0;
-  visibility: hidden;
-}
-#toolbarContainer #toolbarView .toolbarButton:hover {
-  text-color: #b4b4b4;
-}
-#toolbarContainer #toolbarView .toolbarButton.space {
-  margin-left: 7;
-}
-#toolbarContainer #toolbarView .toolbarButton.active {
-  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button act.png");
-}
-#toolbarContainer #toolbarView .toolbarButton.pulldown:active {
-  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
-}
-#toolbarContainer #toolbarView #toolbarLeft {
-  flex: 0 0 auto;
-  flex-direction: row;
-  align-items: flex-start;
-}
-#toolbarContainer #toolbarView #toolbarRight {
-  flex: 1 0 0;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-#toolbarContainer #toolbarView #toolbarRight #toolbarSearch {
-  flex: 1 0 0;
-  height: 18;
-  max-width: 500;
-  flex-direction: row;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 5;
-}
-
-.quickInspector {
-  flex-direction: row;
-  align-items: center;
-  margin-top: 2;
-  margin-left: 4;
-  margin-bottom: 2;
-  margin-right: 4;
-  padding-top: 1;
-  padding-left: 2;
-  padding-bottom: 2;
-  padding-right: 2;
-}
-.quickInspector .arrow {
-  font-size: 8;
-  padding-top: 3;
-  margin-right: 2;
-}
-.quickInspector .value {
-  flex-direction: column;
-  justify-content: center;
-}
-.quickInspector .propertyLabelGroup {
-  flex-direction: row;
-  align-items: center;
-}
-.quickInspector .typename {
-  font-style: italic;
-  opacity: 0.5;
-}
-.quickInspector .propertyValueGroup {
-  flex-direction: row;
-  align-items: flex-start;
-}
-.quickInspector .propertyValueGroup.private .propertyLabel {
-  text-color: #b95600;
-}
-.quickInspector .row {
-  flex-direction: row;
-  align-items: center;
-}
-.quickInspector .collapsedPropertyGroup {
-  flex-direction: row;
-  align-items: center;
-  margin-left: 4;
-  margin-right: 4;
-}
-.quickInspector .expandedPropertyGroup {
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 10;
-}
-.quickInspector .isNumber {
-  text-color: #1c01d2;
-}
-.quickInspector .isNull {
-  font-style: italic;
-  text-color: #1c01d2;
-}
-.quickInspector .isString {
-  text-color: #c51916;
-}
-.quickInspector .propertyLabel {
-  text-color: #8e2296;
-}
-.quickInspector .span {
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
-.quickInspector .empty {
-  opacity: 0.25;
-  font-style: italic;
-}
+Backtrace:
+_common.scss:336
+Main_Dark.scss:79
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/script/tree/variable.rb:49:in `_perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/script/tree/node.rb:50:in `perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:329:in `block (2 levels) in visit_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:329:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:329:in `block in visit_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:88:in `block in with_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:88:in `with_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:326:in `visit_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:161:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:20:in `render'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/engine.rb:290:in `render'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:464:in `update_stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:320:in `block in watch'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$play-background\".\A         on line 336 of _common.scss\A         from line 79 of Main_Dark.scss"; }

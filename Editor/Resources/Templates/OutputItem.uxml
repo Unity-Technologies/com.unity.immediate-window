@@ -6,6 +6,5 @@
         xsi:schemaLocation="UnityEngine.Experimental.UIElements UIElementsSchema/UnityEngine.Experimental.UIElements.xsd
                             UnityEditor.ImmediateWindow.UI UIElementsSchema/UnityEditor.ImmediateWindow.UI.xsd">
     <engine:VisualElement name="content">
-        <engine:TextField name="text" multiline="true"/>
     </engine:VisualElement>
 </engine:UXML>
