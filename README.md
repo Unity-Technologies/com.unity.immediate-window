@@ -48,6 +48,8 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
     * Need to separate roslyn into a separate package and have visual scripting use this also
  - UI
     * Responsive (currently console size is locked)
+    * Reduce margin size for expanded properties
+        * (currently goes after the property name but should go under like in browsers)
 - QA
     * Freeze-proof (while(true) {} shouldn't freeze unity/computer)
 ```

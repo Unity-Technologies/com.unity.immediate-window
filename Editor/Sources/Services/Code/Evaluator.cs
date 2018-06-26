@@ -17,7 +17,8 @@ namespace UnityEditor.ImmediateWindow.Services
         private static Evaluator instance = new Evaluator();
         public static Evaluator Instance { get { return instance; } }
 
-        public event Action<string> OnEvaluation = delegate { };
+        public event Action<object> OnEvaluationSuccess = delegate { };
+        public event Action<string, CompilationErrorException> OnEvaluationError = delegate { };
         public event Action<string> OnBeforeEvaluation = delegate { };
         
         private ScriptState State { get; set; }
@@ -53,20 +54,23 @@ namespace UnityEditor.ImmediateWindow.Services
         public async void Evaluate(string code)
         {
             OnBeforeEvaluation(code);
-            
+            CompilationErrorException error = null;
             try
             {
                 State = await State.ContinueWithAsync(code);
-                var result = State.ReturnValue;
-                if (result == null)
-                    result = "(no result -- perhaps you ended your statement with a ';' ?)";
-                
-                OnEvaluation(result.ToString());
             }
             catch (CompilationErrorException e)
             {
-                var message = string.Join(Environment.NewLine, e.Diagnostics);
-                OnEvaluation(message);
+                error = e;
+            }
+
+            // Don't call delegate method in try/catch block to avoid silencing throws
+            if (error == null)
+                OnEvaluationSuccess(State.ReturnValue);
+            else
+            {
+                var message = string.Join(Environment.NewLine, error.Diagnostics);
+                OnEvaluationError(message, error);                
             }
         }
     }

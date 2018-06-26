@@ -193,10 +193,16 @@
 #immediateWindow #console #console-input {
   position-bottom: 0;
 }
+#immediateWindow #toolbarContainer #viewPrivateLabel {
+  margin-right: 0;
+}
+#immediateWindow #toolbarContainer #viewPrivate {
+  margin-left: 0;
+}
 
 .icon.cancel {
-  min-width: 14;
-  min-height: 14;
+  width: 14;
+  height: 14;
   background-image: resource("Builtin Skins/DarkSkin/Images/ol minus.png");
 }
 .icon.cancel.pressed {
@@ -208,6 +214,10 @@
   flex-direction: row;
   align-items: flex-start;
   height: 18;
+}
+#toolbarContainer #toggleContainer {
+  flex: 0 0 auto;
+  flex-direction: row;
 }
 #toolbarContainer #toolbarView {
   flex: 1 0 0;
@@ -307,4 +317,83 @@
   margin-left: 0;
   margin-bottom: 0;
   margin-right: 5;
+}
+
+.quickInspector {
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2;
+  margin-left: 4;
+  margin-bottom: 2;
+  margin-right: 4;
+  padding-top: 1;
+  padding-left: 2;
+  padding-bottom: 2;
+  padding-right: 2;
+}
+.quickInspector .arrow {
+  font-size: 8;
+  padding-top: 3;
+  margin-right: 2;
+}
+.quickInspector .value {
+  flex-direction: column;
+  justify-content: center;
+}
+.quickInspector .propertyLabelGroup {
+  flex-direction: row;
+  align-items: center;
+}
+.quickInspector .typename {
+  font-style: italic;
+  opacity: 0.5;
+}
+.quickInspector .propertyValueGroup {
+  flex-direction: row;
+  align-items: flex-start;
+}
+.quickInspector .propertyValueGroup.private .propertyLabel {
+  text-color: #b95600;
+}
+.quickInspector .row {
+  flex-direction: row;
+  align-items: center;
+}
+.quickInspector .collapsedPropertyGroup {
+  flex-direction: row;
+  align-items: center;
+  margin-left: 4;
+  margin-right: 4;
+}
+.quickInspector .expandedPropertyGroup {
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10;
+}
+.quickInspector .isNumber {
+  text-color: #1c01d2;
+}
+.quickInspector .isNull {
+  font-style: italic;
+  text-color: #1c01d2;
+}
+.quickInspector .isString {
+  text-color: #c51916;
+}
+.quickInspector .propertyLabel {
+  text-color: #8e2296;
+}
+.quickInspector .span {
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.quickInspector .empty {
+  opacity: 0.25;
+  font-style: italic;
 }

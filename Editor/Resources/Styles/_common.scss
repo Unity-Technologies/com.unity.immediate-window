@@ -289,12 +289,22 @@ $toolbar-height: 18;
 			position-bottom: 0;
 		}
 	}
+
+	#toolbarContainer {
+		#viewPrivateLabel {
+			margin-right: 0;
+		}
+
+		#viewPrivate {
+			margin-left: 0;
+		}
+	}
 }
 
 .icon {
 	&.cancel {
-		min-width: 14;
-		min-height: 14;
+		width: 14;
+		height: 14;
 		background-image: $cancel-background;
 
 		&.pressed {
@@ -308,6 +318,11 @@ $toolbar-height: 18;
 	flex-direction: row;
 	align-items: flex-start;
 	height: $toolbar-height;
+
+	#toggleContainer {
+		flex: 0 0 auto;
+		flex-direction: row;
+	}
 
 	#toolbarView {
 		flex: 1 0 0;
@@ -365,3 +380,89 @@ $toolbar-height: 18;
 	}
 }
 
+
+.quickInspector {
+	flex-direction: row;
+	align-items: center;
+	@include margin(2, 4, 2, 4);		// Default editor for Label
+	@include padding(1, 2, 2, 2);		 // Default editor for Label
+
+	.arrow {
+		font-size: 8;
+		padding-top: 3;
+		margin-right: 2;
+	}
+
+	.value {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.propertyLabelGroup {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.typename {
+		font-style: italic;
+		opacity: 0.5;
+	}
+
+	.propertyValueGroup {
+		flex-direction: row;
+		align-items: flex-start;
+
+		&.private {
+			.propertyLabel {
+				text-color: rgb(185, 86, 0);
+			}
+		}
+	}
+
+	.row {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.collapsedPropertyGroup {
+		flex-direction: row;
+		align-items: center;
+
+		margin-left: 4;
+		margin-right: 4;
+	}
+
+	.expandedPropertyGroup {
+		flex-direction: column;
+		justify-content: center;
+		margin-left: 10;
+	}
+
+	.isNumber {
+		text-color: rgb(28, 1, 210);
+	}
+
+	.isNull {
+		font-style: italic;
+		text-color: rgb(28, 1, 210);
+	}
+
+	.isString {
+		text-color: rgb(197, 25, 22);
+	}
+
+	.propertyLabel {
+		text-color: rgb(142, 34, 150);
+	}
+
+	// Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
+	.span {
+		@include margin-box(0);
+		@include padding-box(0);
+	}
+
+	.empty {
+		opacity: 0.25;
+		font-style:italic;
+	}
+}
