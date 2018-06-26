@@ -329,7 +329,7 @@ namespace UnityEditor.ImmediateWindow.UI
             try
             {
                 /*
-                if (obj != null && (int)obj == 1)
+                if (obj != null && typeof(int) == obj.GetType() && (int)obj == 1)
                     obj = ComplexStruct.Create();
                 */
             

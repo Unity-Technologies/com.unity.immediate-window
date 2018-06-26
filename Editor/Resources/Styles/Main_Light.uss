@@ -172,6 +172,9 @@
   max-height: 32;
   background-image: resource("Images/Light/loading");
 }
+#immediateWindow #console.multiline #console-output {
+  height: 125;
+}
 #immediateWindow #console #console-output {
   height: 250;
   overflow: hidden;
@@ -193,13 +196,38 @@
 #immediateWindow #console #console-input {
   position-bottom: 0;
 }
-#immediateWindow #toolbarContainer #viewPrivateLabel {
+#immediateWindow #console #console-input-multiline {
+  position-bottom: 0;
+  height: 250;
+}
+
+#toggleContainer {
+  flex: 0 0 auto;
+  flex-direction: row;
+}
+#toggleContainer .label {
   margin-right: 0;
 }
-#immediateWindow #toolbarContainer #viewPrivate {
+#toggleContainer .toggle {
   margin-left: 0;
 }
 
+.icon.popup {
+  width: 14;
+  height: 14;
+  background-image: resource("Builtin Skins/LightSkin/Images/popup.png");
+}
+.icon.popup.pressed {
+  background-image: resource("Builtin Skins/LightSkin/Images/popup act.png");
+}
+.icon.play {
+  width: 14;
+  height: 14;
+  background-image: resource("Builtin Skins/LightSkin/Images/IN foldout act.png");
+}
+.icon.play.pressed {
+  background-image: resource("Builtin Skins/LightSkin/Images/IN foldout.png");
+}
 .icon.cancel {
   width: 14;
   height: 14;
@@ -214,10 +242,6 @@
   flex-direction: row;
   align-items: flex-start;
   height: 18;
-}
-#toolbarContainer #toggleContainer {
-  flex: 0 0 auto;
-  flex-direction: row;
 }
 #toolbarContainer #toolbarView {
   flex: 1 0 0;

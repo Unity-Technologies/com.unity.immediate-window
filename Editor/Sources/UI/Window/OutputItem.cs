@@ -23,9 +23,16 @@ namespace UnityEditor.ImmediateWindow.UI
 
         public OutputItem(string text) : this()
         {
-            Text.value = text;
+            var textField = new TextField();
+            textField.multiline = true;
+            textField.name = "text";
+            textField.value = text;
+            Add(textField);
         }
 
-        private TextField Text {get { return root.Q<TextField>("text"); }}
+        public OutputItem(object obj) : this()
+        {
+            Add(new QuickInspector(obj));
+        }
     }
 }

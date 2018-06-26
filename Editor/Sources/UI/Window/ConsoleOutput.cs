@@ -27,7 +27,7 @@ namespace UnityEditor.ImmediateWindow.UI
             Evaluator.Instance.OnEvaluationError += OnEvaluationError;
             Evaluator.Instance.OnBeforeEvaluation += OnBeforeEvaluation;
             
-            //Content.Add(new QuickInspector(1));
+            //Content.Add(new OutputItem(1));
         }
 
         private void OnBeforeEvaluation(string code)
@@ -53,7 +53,7 @@ namespace UnityEditor.ImmediateWindow.UI
                 Content.Add(new OutputItem(output.ToString()));                
             }
             
-            Content.Add(new QuickInspector(output));
+            Content.Add(new OutputItem(output));
 
             ScrollToEnd();
         }

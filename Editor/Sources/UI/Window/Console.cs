@@ -10,17 +10,67 @@ namespace UnityEditor.ImmediateWindow.UI
     {
         internal new class UxmlFactory : UxmlFactory<Console> { }
         private readonly VisualElement root;
+        private TextField ConsoleInput { get; set; }
+        private TextField ConsoleInputMultiLine { get; set; }
+        private bool MultiLineMode { get; set; }
         
+        public ConsoleOutput ConsoleOutput { get; set; }
+
         public Console()
         {
             root = Resources.GetTemplate("Console.uxml");
             Add(root);
 
-            ConsoleInput.RegisterCallback<KeyDownEvent>(CodeEvaluate);
+            ConsoleOutput = new ConsoleOutput();
+            ConsoleOutput.name = "console-output";
+
+            ConsoleInput =  new TextField();
+            ConsoleInput.name = "console-input";
+            ConsoleInput.RegisterCallback<KeyDownEvent>(OnInputKeyPressed);
+            ConsoleSingleLine.Add(ConsoleOutput);
+            ConsoleSingleLine.Add(ConsoleInput);
+            
+            ConsoleInputMultiLine = new TextField();
+            ConsoleInputMultiLine.multiline = true;
+            ConsoleInputMultiLine.name = "console-input-multiline";
+            ConsoleMultiLine.Add(ConsoleInputMultiLine);
+            
             ConsoleToolbar.Console = this;
+
+            SetMode(false);
         }
-        
-        private void CodeEvaluate(KeyDownEvent evt)
+
+        public void SetMode(bool multiline)
+        {
+            MultiLineMode = multiline;
+            
+            if (MultiLineMode)
+            {
+                if (ConsoleSingleLine.Contains(ConsoleOutput))
+                    ConsoleSingleLine.Remove(ConsoleOutput);
+                
+                UIUtils.SetElementDisplay(ConsoleSingleLine, !MultiLineMode);
+                UIUtils.SetElementDisplay(ConsoleMultiLine, MultiLineMode);
+
+                ConsoleMultiLine.Add(ConsoleOutput);
+                RemoveFromClassList("singleline");
+                AddToClassList("multiline");
+            }
+            else
+            {
+                if (ConsoleMultiLine.Contains(ConsoleOutput))
+                    ConsoleMultiLine.Remove(ConsoleOutput);
+                
+                UIUtils.SetElementDisplay(ConsoleSingleLine, !MultiLineMode);
+                UIUtils.SetElementDisplay(ConsoleMultiLine, MultiLineMode);
+
+                ConsoleSingleLine.Insert(0, ConsoleOutput);
+                AddToClassList("singleline");
+                RemoveFromClassList("multiline");
+            }
+        }
+
+        private void OnInputKeyPressed(KeyDownEvent evt)
         {
             var doEvaluate = false;
             switch (evt.keyCode)
@@ -35,16 +85,25 @@ namespace UnityEditor.ImmediateWindow.UI
             
             if (doEvaluate)
             {
-                Evaluator.Instance.Evaluate(ConsoleInput.text);
+                CodeEvaluate();
             }
             else
             {
                 // Autocomplete
-            }
+            }            
+        }
+        
+        public void CodeEvaluate()
+        {
+            var code = MultiLineMode ? ConsoleInputMultiLine.text : ConsoleInput.text;
+            if (!MultiLineMode)
+                ConsoleInput.value = "";
+            
+            Evaluator.Instance.Evaluate(code);
         }
 
-        public TextField ConsoleInput {get { return root.Q<TextField>("console-input"); }}
-        public ConsoleOutput ConsoleOutput {get { return root.Q<ConsoleOutput>("console-output"); }}
+        private VisualElement ConsoleSingleLine {get { return root.Q<VisualElement>("console-mode-singleline"); }}
+        private VisualElement ConsoleMultiLine {get { return root.Q<VisualElement>("console-mode-multiline"); }}
         private ConsoleToolbar ConsoleToolbar {get { return root.Q<ConsoleToolbar>("toolbarContainer"); }}
     }
 }
