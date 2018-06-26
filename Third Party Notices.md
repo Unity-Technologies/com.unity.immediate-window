@@ -1,7 +1,7 @@
 This package contains third-party software components governed by the license(s) indicated below:
 
-Component Name: Semver
+Component Name: Roslyn
 
-License Type: "MIT"
+License Type: "Apache License 2.0"
 
-[SemVer License](https://github.com/maxhauser/semver/blob/master/License.txt)
+[Roslyn License](https://github.com/dotnet/roslyn/blob/master/License.txt)
