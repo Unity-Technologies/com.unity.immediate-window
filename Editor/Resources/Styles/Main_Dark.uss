@@ -1,0 +1,310 @@
+/***************************************************************************************************
+
+														*** Auto-Generated - Do not modify .uss File ***
+
+																		Only Modify Main.scss
+
+***************************************************************************************************/
+.display-none {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  min-height: 0;
+  max-height: 0;
+  min-width: 0;
+  max-width: 0;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  border-right: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+}
+
+.row {
+  flex: 1 0 0;
+  flex-direction: row;
+}
+
+.column, #immediateWindow .scrollView {
+  flex: 1 0 0;
+  flex-direction: column;
+}
+
+.tag {
+  border-top-width: 1;
+  border-left-width: 1;
+  border-bottom-width: 1;
+  border-right-width: 1;
+  padding-top: 1;
+  padding-left: 3;
+  padding-bottom: 1;
+  padding-right: 3;
+  font-size: 9;
+  border-radius: 5;
+  text-alignment: middle-center;
+  border-color: #000000;
+  text-color: #000000;
+}
+
+#immediateWindow .scrollView #VerticalScroller {
+  position-bottom: 0;
+}
+#immediateWindow .scrollView #HorizontalScroller {
+  height: 0;
+}
+#immediateWindow .scrollView #ContentViewport {
+  position-bottom: 0;
+}
+#immediateWindow .scrollView #ContentViewport #ContentView {
+  position-right: 0;
+  position-left: 0;
+}
+#immediateWindow .no-background, #immediateWindow #console #console-output .output-item #text {
+  background: rgba(0, 0, 0, 0);
+  background-image: none;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+#immediateWindow .alert {
+  background-color: rgba(200, 0, 0, 0.8);
+  border-color: #FF0000;
+  flex-direction: row;
+  border-top-width: 1;
+  border-left-width: 1;
+  border-bottom-width: 1;
+  border-right-width: 1;
+  padding-top: 5;
+  padding-left: 10;
+  padding-bottom: 5;
+  padding-right: 10;
+}
+#immediateWindow .alert #alertMessage {
+  flex: 1 0 0;
+  text-color: #f4f4f4;
+  word-wrap: true;
+  overflow: hidden;
+}
+#immediateWindow .alert #close {
+  flex: 0 0 auto;
+  max-height: 30;
+  position-left: 5;
+  flex: 0 0 auto;
+  padding-top: 3;
+  padding-left: 3;
+  padding-bottom: 4;
+  padding-right: 3;
+  slice-top: 4;
+  slice-left: 6;
+  slice-bottom: 4;
+  slice-right: 6;
+}
+#immediateWindow .alert #close.display-none {
+  position: absolute;
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  min-height: 0;
+  max-height: 0;
+  min-width: 0;
+  max-width: 0;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  border-right: 0;
+  min-width: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  slice-top: 0;
+  slice-left: 0;
+  slice-bottom: 0;
+  slice-right: 0;
+  visibility: hidden;
+}
+#immediateWindow .alert #close:hover {
+  text-color: #b4b4b4;
+}
+#immediateWindow .spinner {
+  flex: 0 0 auto;
+  position-top: -7;
+  position-left: -7;
+  min-width: 14;
+  min-height: 14;
+  max-width: 14;
+  max-height: 14;
+  background-image: resource("Images/Dark/loading");
+}
+#immediateWindow .largeSpinner {
+  flex: 0 0 auto;
+  position-top: -16;
+  position-left: -16;
+  min-width: 32;
+  min-height: 32;
+  max-width: 32;
+  max-height: 32;
+  background-image: resource("Images/Dark/loading");
+}
+#immediateWindow #console #console-output {
+  height: 250;
+  overflow: hidden;
+}
+#immediateWindow #console #console-output #output-content {
+  height: 250;
+}
+#immediateWindow #console #console-output .output-item {
+  margin-top: 0;
+  margin-left: 6;
+  margin-bottom: 0;
+  margin-right: 6;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 1;
+  border-right-width: 0;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+#immediateWindow #console #console-input {
+  position-bottom: 0;
+}
+
+.icon.cancel {
+  min-width: 14;
+  min-height: 14;
+  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus.png");
+}
+.icon.cancel.pressed {
+  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus act.png");
+}
+
+#toolbarContainer {
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 18;
+}
+#toolbarContainer #toolbarView {
+  flex: 1 0 0;
+  flex-direction: row;
+  align-items: flex-start;
+  background-image: resource("Builtin Skins/DarkSkin/Images/Toolbar.png");
+  margin-top: -1;
+  slice-top: 1;
+  slice-left: 1;
+  slice-bottom: 1;
+  slice-right: 1;
+}
+#toolbarContainer #toolbarView .toolbarButton {
+  flex: 1 0 0;
+  font-size: 9;
+  text-alignment: middle-center;
+  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
+  flex: 0 0 auto;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  slice-top: 4;
+  slice-left: 6;
+  slice-bottom: 4;
+  slice-right: 6;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: -1;
+  padding-top: 0;
+  padding-left: 5;
+  padding-bottom: 0;
+  padding-right: 5;
+  height: 19;
+}
+#toolbarContainer #toolbarView .toolbarButton.display-none {
+  position: absolute;
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  min-height: 0;
+  max-height: 0;
+  min-width: 0;
+  max-width: 0;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  border-right: 0;
+  min-width: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  slice-top: 0;
+  slice-left: 0;
+  slice-bottom: 0;
+  slice-right: 0;
+  visibility: hidden;
+}
+#toolbarContainer #toolbarView .toolbarButton:hover {
+  text-color: #b4b4b4;
+}
+#toolbarContainer #toolbarView .toolbarButton.space {
+  margin-left: 7;
+}
+#toolbarContainer #toolbarView .toolbarButton.active {
+  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button act.png");
+}
+#toolbarContainer #toolbarView .toolbarButton.pulldown:active {
+  background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
+}
+#toolbarContainer #toolbarView #toolbarLeft {
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: flex-start;
+}
+#toolbarContainer #toolbarView #toolbarRight {
+  flex: 1 0 0;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#toolbarContainer #toolbarView #toolbarRight #toolbarSearch {
+  flex: 1 0 0;
+  height: 18;
+  max-width: 500;
+  flex-direction: row;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 5;
+}

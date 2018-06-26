@@ -1,0 +1,367 @@
+// If you are using IntelliJ Rider, you can simply turn on the SCSS compiler, otherwise here is how to convert scss to uss
+//		# Install Sass
+//				gem install sass
+//
+//		# Convert
+//				sass --sourcemap=none --style=expanded --scss --no-cache Main_Dark.scss Main_Dark.uss
+//				sass --sourcemap=none --style=expanded --scss --no-cache Main_Light.scss Main_Light.uss
+//
+//		# Watch
+//				sass --watch --sourcemap=none --style=expanded --scss --no-cache Main_Light.scss:Main_Light.uss Main_Dark.scss:Main_Dark.uss
+//
+//	Sass to Uss Notes
+//		- Sass converts rgb(0,0,0) to css 'black'. Uss doesn't support named colors. The workaround is to set the color in sass as #000000
+//
+// Uss Notes
+//		Runtime\UIElements\Managed\StyleSheets\StyleSheetCache.cs:50 to see which properties are available (until there is a doc)
+
+//--------------------------------------------------------------------------------------------------
+// Helper Mixins
+//--------------------------------------------------------------------------------------------------
+
+@mixin border($top, $right, $bottom, $left) {
+	@if $top != 'auto' {border-top-width: $top;}
+	@if $left != 'auto' {border-left-width: $right;}
+	@if $bottom != 'auto' {border-bottom-width: $bottom;}
+	@if $right != 'auto' {border-right-width: $left;}
+}
+
+@mixin border-box($width: 1) {
+	@include border($width, $width, $width, $width);
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+	@if $top != 'auto' {padding-top: $top;}
+	@if $left != 'auto' {padding-left: $left;}
+	@if $bottom != 'auto' {padding-bottom: $bottom;}
+	@if $right != 'auto' {padding-right: $right;}
+}
+
+@mixin padding-box($size) {
+	@include padding($size, $size, $size, $size);
+}
+
+@mixin margin($top, $right, $bottom, $left) {
+	@if $top != 'auto' {margin-top: $top;}
+	@if $left != 'auto' {margin-left: $left;}
+	@if $bottom != 'auto' {margin-bottom: $bottom;}
+	@if $right != 'auto' {margin-right: $right;}
+}
+
+@mixin margin-box($size) {
+	@include margin($size, $size, $size, $size);
+}
+
+@mixin slice($top, $right, $bottom, $left) {
+	@if $top != 'auto' {slice-top: $top;}
+	@if $left != 'auto' {slice-left: $left;}
+	@if $bottom != 'auto' {slice-bottom: $bottom;}
+	@if $right != 'auto' {slice-right: $right;}
+}
+
+@mixin slice-box($size) {
+	@include slice($size, $size, $size, $size);
+}
+
+@mixin position($top, $right, $bottom, $left) {
+	@if $top != 'auto' {position-top: $top;}
+	@if $left != 'auto' {position-left: $left;}
+	@if $bottom != 'auto' {position-bottom: $bottom;}
+	@if $right != 'auto' {position-right: $right;}
+}
+
+@mixin text-clip() {
+	overflow: hidden;
+}
+
+@mixin selected-element() {
+	background-color: $unity-list-selected-background;
+	text-color: $unity-text-color-highlight;
+}
+
+@mixin active-tab() {
+	background-color: $unity-background-dark-contrast;
+	text-color: $unity-text-color-highlight;
+}
+
+@mixin inactive-tab() {
+	background-color: $unity-background-light-contrast;
+	text-color: $unity-text-color;
+}
+
+@mixin button($top, $right, $bottom, $left) {
+	flex: 0 0 auto;
+
+	@include padding($top, $right, $bottom, $left);
+	@include slice(4, 6, 4, 6);
+
+	&.display-none {
+		position: absolute;
+		border-radius: 0;
+		width: 0;
+		height: 0;
+		min-height: 0;
+		max-height: 0;
+		min-width: 0;
+		max-width: 0;
+		border-top: 0;
+		border-left: 0;
+		border-bottom: 0;
+		border-right: 0;
+		min-width: 0;
+		@include border-box(0);
+		@include padding-box(0);
+		@include margin-box(0);
+		@include slice-box(0);
+		visibility: hidden;
+	}
+
+	&:hover {
+		text-color: $unity-text-color;
+	}
+}
+
+@mixin button-box($size) {
+	@include button($size, $size, $size, $size);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Font
+//--------------------------------------------------------------------------------------------------
+
+@mixin font-small() {
+	font-size: 9;
+}
+
+@mixin font-normal() {
+	font-size: 12;
+}
+
+//--------------------------------------------------------------------------------------------------
+// Styles
+//--------------------------------------------------------------------------------------------------
+.display-none {
+	position: absolute;
+	overflow: hidden;
+	border-radius: 0;
+	width: 0;
+	height: 0;
+	min-height: 0;
+	max-height: 0;
+	min-width: 0;
+	max-width: 0;
+	border-top: 0;
+	border-left: 0;
+	border-bottom: 0;
+	border-right: 0;
+	@include border-box(0);
+	@include padding-box(0);
+	@include margin-box(0);
+}
+
+.row {
+	flex: 1 0 0;
+	flex-direction: row;
+}
+
+.column {
+	flex: 1 0 0;
+	flex-direction: column;
+}
+
+.tag {
+	@include border-box(1);
+	@include padding(1, 3, 1, 3);
+	@include font-small();
+	border-radius: 5;
+	text-alignment: middle-center;
+
+	border-color: #000000;
+	text-color: #000000;
+}
+
+$spinner-large-size: 32;
+$spinner-large-half-size: 16;
+$spinner-normal-size: 14;
+$spinner-normal-half-size: 7;
+$toolbar-height: 18;
+
+#immediateWindow {
+	.scrollView {
+		@extend .column;
+
+		#VerticalScroller {
+			position-bottom: 0;
+		}
+
+		#HorizontalScroller {
+			height: 0;
+		}
+
+		#ContentViewport {
+			position-bottom: 0;
+
+			#ContentView {
+				position-right: 0;
+				position-left: 0;
+			}
+		}
+	}
+
+	.no-background {
+		background: rgba(0, 0, 0, 0);
+		background-image: none;
+		@include margin-box(0);
+		@include padding-box(0);
+	}
+
+	.alert {
+		background-color: rgba(200,0,0,0.8);
+		border-color: #FF0000;
+		flex-direction: row;
+
+		@include border-box(1);
+		@include padding(5, 10, 5, 10);
+
+		#alertMessage {
+			flex: 1 0 0;
+			text-color: $unity-text-color-highlight;
+			word-wrap: true;
+			@include text-clip();
+		}
+
+		#close {
+			flex: 0 0 auto;
+			max-height: 30;
+			@include position(auto, auto, auto, 5);
+			@include button(3,3,4,3);
+		}
+	}
+
+	.spinner {
+		flex: 0 0 auto;
+		@include position(-$spinner-normal-half-size, auto, auto, -$spinner-normal-half-size);
+
+		min-width: $spinner-normal-size;
+		min-height: $spinner-normal-size;
+		max-width: $spinner-normal-size;
+		max-height: $spinner-normal-size;
+		background-image: $background-spinner-normal;
+	}
+
+	.largeSpinner {
+		flex: 0 0 auto;
+		@include position(-$spinner-large-half-size, auto, auto, -$spinner-large-half-size);
+
+		min-width: $spinner-large-size;
+		min-height: $spinner-large-size;
+		max-width: $spinner-large-size;
+		max-height: $spinner-large-size;
+		background-image: $background-spinner-large;
+	}
+
+	#console {
+		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
+
+		#console-output {
+			height: $height-console-output;
+			overflow: hidden;
+
+			#output-content {
+				height: $height-console-output;
+			}
+
+			.output-item {
+				@include margin(0, 6, 0, 6);
+				@include border(0, 0, 1, 0);
+				border-color: rgba(0, 0, 0, 0.05);
+
+				#content {
+				}
+
+				#text {
+					@extend .no-background;
+				}
+			}
+		}
+
+		#console-input {
+			position-bottom: 0;
+		}
+	}
+}
+
+.icon {
+	&.cancel {
+		min-width: 14;
+		min-height: 14;
+		background-image: $cancel-background;
+
+		&.pressed {
+			background-image: $cancel-pressed-background;
+		}
+	}
+}
+
+#toolbarContainer {
+	flex: 0 0 auto;
+	flex-direction: row;
+	align-items: flex-start;
+	height: $toolbar-height;
+
+	#toolbarView {
+		flex: 1 0 0;
+		flex-direction: row;
+		align-items: flex-start;
+		background-image: $toolbar-background;
+		margin-top: -1;
+		@include slice(1, 1, 1, 1);
+
+		.toolbarButton {
+			flex: 1 0 0;
+			font-size: 9;
+			text-alignment: middle-center;
+			background-image: $toolbar-button-background;
+			@include button-box(0);
+			@include margin(0, -1, 0, 0);
+			@include padding(0, 5, 0, 5);
+			height: 19;
+
+			&.space {
+				margin-left: 7;
+			}
+
+			&.active {
+				background-image: $toolbar-button-active-background;
+			}
+
+			&.pulldown {
+
+				&:active {
+					background-image: $toolbar-button-background;
+				}
+			}
+		}
+
+		#toolbarLeft {
+			flex: 0 0 auto;
+			flex-direction: row;
+			align-items: flex-start;
+		}
+
+		#toolbarRight {
+			flex: 1 0 0;
+			flex-direction: row;
+			justify-content: flex-end;
+
+			#toolbarSearch {
+				flex: 1 0 0;
+				height: $toolbar-height;
+				max-width: 500;
+				flex-direction: row;
+				@include margin(0, 5, 0, 0);
+			}
+		}
+	}
+}
+
