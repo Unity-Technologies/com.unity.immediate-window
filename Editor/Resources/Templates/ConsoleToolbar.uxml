@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<engine:UXML 
-        xmlns:engine="UnityEngine.Experimental.UIElements" 
+<engine:UXML
+        xmlns:engine="UnityEngine.Experimental.UIElements"
         xmlns:imw="UnityEditor.ImmediateWindow.UI"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:egnine="UnityEngine.Experimental.UIElements"
         xsi:schemaLocation="UnityEngine.Experimental.UIElements UIElementsSchema/UnityEngine.Experimental.UIElements.xsd
                             UnityEditor.PackageManager.UI UIElementsSchema/UnityEditor.ImmediateWindow.UI.xsd">
     <engine:VisualElement name="toolbarView">
@@ -13,6 +13,10 @@
         <engine:VisualElement name="toolbarRight">
             <!-- <engine:Label name="toolbarAdvancedButton" class="toolbarButton pulldown" text="Advanced ▾"/> -->
             <!-- imw:SearchToolbar name="toolbarSearch"/ -->
+            <egnine:VisualElement name="toggleContainer">
+                <engine:Label name="viewPrivateLabel" text="View Private"/>
+                <engine:Toggle name="viewPrivate" value="true"/>
+            </egnine:VisualElement>
             <engine:Label name="clear" class="icon cancel"/>
         </engine:VisualElement>
     </engine:VisualElement>

@@ -17,6 +17,9 @@ namespace UnityEditor.ImmediateWindow.UI
             
             ClearButton.RegisterCallback<MouseDownEvent>(ClearClick);
             ClearButton.RegisterCallback<MouseUpEvent>(ClearStopClick);
+            PrivateToggle.OnValueChanged(OnPrivateToggle);
+
+            OnPrivateToggle(null);
         }
 
         private void ClearStopClick(MouseUpEvent evt)
@@ -30,7 +33,12 @@ namespace UnityEditor.ImmediateWindow.UI
             Console.ConsoleOutput.ClearLog();
         }
 
-        private Label ClearButton {get { return root.Q<Label>("clear"); }}
+        private void OnPrivateToggle(ChangeEvent<bool> evt)
+        {
+            PropertyUtils.ShowPrivate = PrivateToggle.value;
+        }
 
+        private Label ClearButton {get { return root.Q<Label>("clear"); }}
+        private Toggle PrivateToggle {get { return root.Q<Toggle>("viewPrivate"); }}
     }
 }

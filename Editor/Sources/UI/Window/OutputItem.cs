@@ -16,6 +16,7 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             root = Resources.GetTemplate("OutputItem.uxml");
             Add(root);
+            SetEnabled(false);
             
             AddToClassList("output-item");
         }

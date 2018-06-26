@@ -1,4 +1,5 @@
-﻿using UnityEngine.Experimental.UIElements;
+﻿using Microsoft.CodeAnalysis.Scripting;
+using UnityEngine.Experimental.UIElements;
 using UnityScript.Scripting;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
@@ -22,8 +23,11 @@ namespace UnityEditor.ImmediateWindow.UI
             Add(root);
             CreateScrollView();
             
-            Evaluator.Instance.OnEvaluation += OnEvaluation;
+            Evaluator.Instance.OnEvaluationSuccess += OnEvaluationSuccess;
+            Evaluator.Instance.OnEvaluationError += OnEvaluationError;
             Evaluator.Instance.OnBeforeEvaluation += OnBeforeEvaluation;
+            
+            //Content.Add(new QuickInspector(1));
         }
 
         private void OnBeforeEvaluation(string code)
@@ -31,11 +35,39 @@ namespace UnityEditor.ImmediateWindow.UI
             isScrolled = Content.scrollOffset.y > Content.verticalScroller.highValue;
         }
 
-        private void OnEvaluation(string output)
+        private void OnEvaluationSuccess(string output)
         {
             Content.Add(new OutputItem(output));
 
             EditorApplication.update += UpdateScroll;
+        }
+
+        bool SimpleOutput = false;
+        private void OnEvaluationSuccess(object output)
+        {
+            if (SimpleOutput)
+            {
+                if (output == null)
+                    output = "(no result -- perhaps you ended your statement with a ';' ?)";
+
+                Content.Add(new OutputItem(output.ToString()));                
+            }
+            
+            Content.Add(new QuickInspector(output));
+
+            ScrollToEnd();
+        }
+
+        private void ScrollToEnd()
+        {
+            EditorApplication.update += UpdateScroll;
+        }
+
+        private void OnEvaluationError(string output, CompilationErrorException error)
+        {
+            Content.Add(new OutputItem(output));
+
+            ScrollToEnd();
         }
 
         void UpdateScroll()
