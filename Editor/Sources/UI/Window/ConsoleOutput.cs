@@ -29,7 +29,7 @@ namespace UnityEditor.ImmediateWindow.UI
             Evaluator.Instance.OnEvaluationError += OnEvaluationError;
             Evaluator.Instance.OnBeforeEvaluation += OnBeforeEvaluation;
             
-            /*
+            /* Used for debug
             Evaluator.Instance.Evaluate("_9");
             Evaluator.Instance.Evaluate("1");
             Evaluator.Instance.Evaluate("1");

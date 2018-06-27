@@ -73,4 +73,7 @@ class A
 }
 var x = new A();
 x
+
+-- Using Namespace --
+GameObject.Find("Main Camera")
 ```

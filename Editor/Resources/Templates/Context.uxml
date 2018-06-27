@@ -5,12 +5,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="UnityEngine.Experimental.UIElements UIElementsSchema/UnityEngine.Experimental.UIElements.xsd
                             UnityEditor.ImmediateWindow.UI UIElementsSchema/UnityEditor.ImmediateWindow.UI.xsd">
-    <engine:VisualElement name="immediateWindow">
-        <engine:VisualElement name="windowContent">
-            <imw:Console name="console" />
-            <engine:VisualElement name="sideview">
-                <imw:Context name="context"/>
-            </engine:VisualElement>
-        </engine:VisualElement>
+    <engine:VisualElement name="container" class="context">
     </engine:VisualElement>
 </engine:UXML>

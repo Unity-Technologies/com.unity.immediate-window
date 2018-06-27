@@ -13,6 +13,7 @@ namespace UnityEditor.ImmediateWindow.UI
         private ExpandedPropertyGroup ExpandedPropertyGroup { get; set; }
         private Span PinnedItem { get; set; }
         private string PinnedSymbol { get; set; }
+        private Arrow Arrow { get; set; }
 
         public ClassType(object obj, bool showValue = true)
         {
@@ -31,8 +32,11 @@ namespace UnityEditor.ImmediateWindow.UI
 
             // Secondary objects are not clickable
             if (showValue)
-                LabelRow.Add(new Arrow(Arrow.Direction.Right));
-            
+            {
+                Arrow = new Arrow(Arrow.Direction.Right);
+                LabelRow.Add(Arrow);
+            }
+
             SetObject(obj, showValue);
         }
 
@@ -44,7 +48,7 @@ namespace UnityEditor.ImmediateWindow.UI
         void ToggleExpand()
         {
             CurrentState = CurrentState == State.Collapsed ? State.Expanded : State.Collapsed;
-
+            Arrow.SetDirection( CurrentState == State.Collapsed ? Arrow.Direction.Right : Arrow.Direction.Down);
             Refresh();
         }
 
