@@ -17,7 +17,8 @@ namespace UnityEditor.ImmediateWindow.Services
     [Serializable]
     internal class History
     {
-        private static int MaxHistory = 50;
+        // Disabled until it can be made to work properly
+        //private static int MaxHistory = 50;
         
         private static History instance = new History();
         public static History Instance { get { return instance; } }

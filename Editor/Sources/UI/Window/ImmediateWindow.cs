@@ -13,13 +13,15 @@ namespace UnityEditor.ImmediateWindow.UI
         private const string DarkStylePath = ResourcesPath + "Styles/Main_Dark.uss";
         private const string LightStylePath = ResourcesPath + "Styles/Main_Light.uss";
 
-        private const double targetVersionNumber = 2018.3;
+        public static ImmediateWindow CurrentWindow;
         
         public Evaluator Evaluator;
         public History History;
 
         public void OnEnable()
         {
+            CurrentWindow = this;
+            
             Evaluator.Init(ref Evaluator);
             History.Init(ref History);
 
@@ -35,6 +37,7 @@ namespace UnityEditor.ImmediateWindow.UI
         }
 
         internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
+        internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
         
         [MenuItem("Window/Debug/Immediate Window", priority = 1500)]
         internal static void ShowPackageManagerWindow()

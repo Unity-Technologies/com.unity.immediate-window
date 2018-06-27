@@ -1,5 +1,13 @@
 ﻿using System;
 
+namespace UnityEditor.ImmediateWindow.TestObjects
+{
+    public class SecretStruct
+    {
+        public int BestValue = 1978;
+    }
+}
+
 namespace UnityEditor.ImmediateWindow.UI
 {
     public struct SimpleStruct

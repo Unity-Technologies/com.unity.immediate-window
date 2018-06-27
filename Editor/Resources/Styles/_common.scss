@@ -193,6 +193,11 @@ $toolbar-height: 18;
 		flex: 1 0 0;
 	}
 
+	#windowContent {
+		flex: 1 0 0;
+		flex-direction: row;
+	}
+
 	.scrollView {
 		@extend .column;
 
@@ -322,6 +327,48 @@ $toolbar-height: 18;
 			height: 250;
 		}
 	}
+
+	#sideview {
+		flex: 0.5 0 0;
+
+		border-left-width: 1;
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+
+	#context {
+		flex: 1 0 0;
+
+		#contextInspector {
+			flex: 1 0 0;
+
+			.context-inspector-scrollview {
+				flex: 1 0 0;
+			}
+		}
+
+		.context-inspector {
+			flex: 1 0 0;
+
+			.assembly {
+			}
+
+			.assembly-label {
+				flex: 1 0 0;
+				font-style: bold;
+				word-wrap: true;
+			}
+
+			.namespace {
+				margin-left: 10;
+
+				.namespace-label {
+					flex: 1 0 0;
+					font-style: italic;
+					word-wrap: true;
+				}
+			}
+		}
+	}
 }
 
 #toggleContainer {
@@ -431,18 +478,17 @@ $toolbar-height: 18;
 	}
 }
 
+.arrow {
+	font-size: 8;
+	padding-top: 3;
+	margin-right: 2;
+}
 
 .quickInspector {
 	flex-direction: row;
 	align-items: center;
 	@include margin(2, 4, 2, 4);		// Default editor for Label
 	@include padding(1, 2, 2, 2);		 // Default editor for Label
-
-	.arrow {
-		font-size: 8;
-		padding-top: 3;
-		margin-right: 2;
-	}
 
 	.value {
 		flex-direction: column;
@@ -477,6 +523,7 @@ $toolbar-height: 18;
 
 	.collapsedPropertyGroup {
 		flex-direction: row;
+		flex-wrap: wrap;
 		align-items: center;
 
 		margin-left: 4;

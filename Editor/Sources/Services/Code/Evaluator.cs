@@ -47,12 +47,22 @@ namespace UnityEditor.ImmediateWindow.Services
             SymbolCount = 1;
             Globals = new Globals();
             List<MetadataReference> references = new List<MetadataReference>();
+            foreach(var assembly in Inspector.GetAllAssemblies())
+                references.Add(MetadataReference.CreateFromFile(assembly.Location));
+
+            /* For easier debuggin
             references.Add(MetadataReference.CreateFromFile(typeof(Evaluator).Assembly.Location));
             references.Add(MetadataReference.CreateFromFile(typeof(UnityEditor.BuildOptions).Assembly.Location));
             references.Add(MetadataReference.CreateFromFile(typeof(UnityEngine.Application).Assembly.Location));
+            */
+            
             var options = ScriptOptions.Default.WithReferences(references);
 
             State = await CSharpScript.RunAsync("", options, globals: Globals);
+            
+            // Set some default common namespaces
+            await AddNamespace("UnityEngine");
+            await AddNamespace("UnityEditor");
         }
         
         public async void Evaluate(string code)
@@ -71,7 +81,7 @@ namespace UnityEditor.ImmediateWindow.Services
         }
 
         // Evaluate without telling the delegates
-        async Task<CompilationErrorException> EvaluateSilently(string code)
+        public async Task<CompilationErrorException> EvaluateSilently(string code)
         {
             CompilationErrorException error = null;
             try
@@ -117,6 +127,17 @@ namespace UnityEditor.ImmediateWindow.Services
             OnUnRegister = onUnRegister;
             
             return symbol;
+        }
+
+        // More then a little possibly not the best way to do this. There has to be a more
+        // solid way to add a namespace without simply re-evaluating.
+        public async Task<CompilationErrorException> AddNamespace(string ns)
+        {
+            var error = await EvaluateSilently($"using {ns};");
+            if (error != null)
+                Debug.Log("Error clicking namespace: " + error.Message);
+
+            return error;
         }
     }
 }

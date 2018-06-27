@@ -8,6 +8,7 @@ namespace UnityEditor.ImmediateWindow.UI
     internal class Console : VisualElement
     {
         internal new class UxmlFactory : UxmlFactory<Console> { }
+        
         private readonly VisualElement root;
         private TextField ConsoleInput { get; set; }
         private TextField ConsoleInputMultiLine { get; set; }
@@ -86,7 +87,11 @@ namespace UnityEditor.ImmediateWindow.UI
                 case KeyCode.KeypadEnter:
                 {
                     if (evt.ctrlKey || evt.commandKey)
+                    {
                         doEvaluate = true;
+                        evt.PreventDefault();
+                        evt.StopImmediatePropagation();
+                    }
                     break;                    
                 }
             }
@@ -126,7 +131,9 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             CurrentCommand = History.Instance.PreviousCommand(CurrentCommand);
             if (CurrentCommand != null)
+            {
                 ConsoleInput.value = CurrentCommand.code;
+            }
         }
 
         public void NextCommand()

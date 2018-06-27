@@ -17,13 +17,29 @@ namespace UnityEditor.ImmediateWindow.UI
             var publicProperties = obj.GetType().GetFields().ToList();
             var privateProperties = obj.GetType().GetFields(privateBindingFlags).ToList();
             
-            foreach (var prop in publicProperties)
-                properties.Add(new PropertyInfo {Property = prop, IsPrivate = false, Object = obj});
+            foreach (var field in publicProperties)
+                properties.Add(new PropertyInfo {Field = field, Property = null, IsPrivate = false, Object = obj});
+
+            foreach (var prop in obj.GetType().GetProperties())
+            {
+                if (prop.GetGetMethod() == null)
+                    continue;
+
+                // TODO: Technically should not skip them but simply mark them as such in the inspector
+                if (prop.GetCustomAttributes().OfType<System.ObsoleteAttribute>().Any())
+                    continue;
+
+                // TODO: Technically should at least add those. Just can't show the value (since they take arguments)
+                if (prop.GetGetMethod().GetParameters().Any())
+                    continue;
+                
+                properties.Add(new PropertyInfo {Field = null, Property = prop, IsPrivate = false, Object = obj});
+            }
 
             if (ShowPrivate)
             {
                 foreach (var prop in privateProperties)
-                    properties.Add(new PropertyInfo {Property = prop, IsPrivate = true, Object = obj});
+                    properties.Add(new PropertyInfo {Field = prop, IsPrivate = true, Object = obj});
             }
 
             return properties;

@@ -15,12 +15,14 @@ namespace UnityEditor.ImmediateWindow.UI
             bool isClipped = properties.Count > Config.ShowMaxCollapsedProperties;
             properties = properties.Take(Config.ShowMaxCollapsedProperties).ToList();
 
+            int i = 0;
             foreach (var property in properties)
             {
-                if (property.Property != properties.First().Property)
+                if (i != 0)
                     Add(new Span(", "));
 
                 Add(new PropertyValueGroup(property, false));
+                i++;
             }
 
             if (isClipped)

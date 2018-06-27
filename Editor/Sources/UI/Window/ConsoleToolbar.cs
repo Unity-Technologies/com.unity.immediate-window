@@ -1,5 +1,4 @@
 ﻿using UnityEngine.Experimental.UIElements;
-using UnityScript.Scripting;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 
@@ -64,9 +63,10 @@ namespace UnityEditor.ImmediateWindow.UI
 
         private void ResetClick(MouseUpEvent evt)
         {
-            Services.Evaluator.Instance.Init();
+            Evaluator.Instance.Init();
             Console.ConsoleOutput.ClearLog();
             History.Instance.Clear();        // Only clearing history in case anything went wrong with it as a way to reset to valid state
+            ImmediateWindow.CurrentWindow.Context.Reset();
             Console.CurrentCommand = null;
         }
 

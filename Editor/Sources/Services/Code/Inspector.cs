@@ -16,11 +16,9 @@ namespace UnityEditor.ImmediateWindow.Services
         {
             var objects = new List<object>();
             
-            AppDomain app = AppDomain.CurrentDomain;
-            var ass = app.GetAssemblies()
-                .Where(assembly => /*assembly.FullName.ToLower().Contains("unity")*/ assembly.FullName.ToLower().Contains("immediate"));
+            var assemblies = GetAllAssemblies();
 
-            foreach (Assembly a in ass)
+            foreach (Assembly a in assemblies)
             {
                 //Debug.Log("Assembly: " + a.FullName);
                 
@@ -48,6 +46,25 @@ namespace UnityEditor.ImmediateWindow.Services
             //Debug.Log("Count: " + objects.Count);
             
             return objects;
+        }
+
+        // Get list of all relevant assemblies
+        public static IEnumerable<Assembly> GetAllAssemblies()
+        {
+            AppDomain app = AppDomain.CurrentDomain;
+            var assemblies = app.GetAssemblies()
+                .Where(assembly => assembly.FullName.ToLower().Contains("unity") /* assembly.FullName.ToLower().Contains("immediate")*/)
+                .OrderBy(assembly => assembly.FullName);
+
+            return assemblies;
+        }
+        
+        public static IEnumerable<string> GetAllNamespaces(Assembly assembly)
+        {
+            return assembly.GetTypes()
+                .Select(t => t.Namespace)
+                .Distinct()
+                .OrderBy(ns => ns);
         }
     }
 }

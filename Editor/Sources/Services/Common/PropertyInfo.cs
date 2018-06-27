@@ -4,7 +4,8 @@ namespace UnityEditor.ImmediateWindow.UI
 {
     internal struct PropertyInfo
     {
-        public FieldInfo Property;
+        public FieldInfo Field;
+        public System.Reflection.PropertyInfo Property;
         public bool IsPrivate;
         public object Object;
     }

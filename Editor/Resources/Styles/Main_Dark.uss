@@ -65,6 +65,10 @@
 #immediateWindow .root {
   flex: 1 0 0;
 }
+#immediateWindow #windowContent {
+  flex: 1 0 0;
+  flex-direction: row;
+}
 #immediateWindow .scrollView #VerticalScroller {
   position-bottom: 0;
 }
@@ -217,6 +221,36 @@
   position-bottom: 0;
   height: 250;
 }
+#immediateWindow #sideview {
+  flex: 0.5 0 0;
+  border-left-width: 1;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+#immediateWindow #context {
+  flex: 1 0 0;
+}
+#immediateWindow #context #contextInspector {
+  flex: 1 0 0;
+}
+#immediateWindow #context #contextInspector .context-inspector-scrollview {
+  flex: 1 0 0;
+}
+#immediateWindow #context .context-inspector {
+  flex: 1 0 0;
+}
+#immediateWindow #context .context-inspector .assembly-label {
+  flex: 1 0 0;
+  font-style: bold;
+  word-wrap: true;
+}
+#immediateWindow #context .context-inspector .namespace {
+  margin-left: 10;
+}
+#immediateWindow #context .context-inspector .namespace .namespace-label {
+  flex: 1 0 0;
+  font-style: italic;
+  word-wrap: true;
+}
 
 #toggleContainer {
   flex: 0 0 auto;
@@ -360,6 +394,12 @@
   margin-right: 5;
 }
 
+.arrow {
+  font-size: 8;
+  padding-top: 3;
+  margin-right: 2;
+}
+
 .quickInspector {
   flex-direction: row;
   align-items: center;
@@ -371,11 +411,6 @@
   padding-left: 2;
   padding-bottom: 2;
   padding-right: 2;
-}
-.quickInspector .arrow {
-  font-size: 8;
-  padding-top: 3;
-  margin-right: 2;
 }
 .quickInspector .value {
   flex-direction: column;
@@ -402,6 +437,7 @@
 }
 .quickInspector .collapsedPropertyGroup {
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-left: 4;
   margin-right: 4;
