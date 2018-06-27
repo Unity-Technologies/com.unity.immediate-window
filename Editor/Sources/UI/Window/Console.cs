@@ -1,5 +1,4 @@
 ﻿using UnityEngine.Experimental.UIElements;
-using UnityScript.Scripting;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
@@ -13,13 +12,16 @@ namespace UnityEditor.ImmediateWindow.UI
         private TextField ConsoleInput { get; set; }
         private TextField ConsoleInputMultiLine { get; set; }
         private bool MultiLineMode { get; set; }
+        public Command CurrentCommand { get; set; }
         
         public ConsoleOutput ConsoleOutput { get; set; }
+        public ConsoleOutput ConsoleOutputMultiline { get; set; }
 
         public Console()
         {
             root = Resources.GetTemplate("Console.uxml");
             Add(root);
+            root.StretchToParentSize();
 
             ConsoleOutput = new ConsoleOutput();
             ConsoleOutput.name = "console-output";
@@ -34,6 +36,7 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleInputMultiLine.multiline = true;
             ConsoleInputMultiLine.name = "console-input-multiline";
             ConsoleMultiLine.Add(ConsoleInputMultiLine);
+            ConsoleInputMultiLine.RegisterCallback<KeyDownEvent>(OnMultiLineInputKeyPressed);
             
             ConsoleToolbar.Console = this;
 
@@ -68,6 +71,28 @@ namespace UnityEditor.ImmediateWindow.UI
                 AddToClassList("singleline");
                 RemoveFromClassList("multiline");
             }
+            
+            ConsoleOutput.ResetScrollView(true);
+        }
+
+        private void OnMultiLineInputKeyPressed(KeyDownEvent evt)
+        {
+            var doEvaluate = false;
+            switch (evt.keyCode)
+            {
+                case KeyCode.Escape:
+                    break;
+                case KeyCode.Return:
+                case KeyCode.KeypadEnter:
+                {
+                    if (evt.ctrlKey || evt.commandKey)
+                        doEvaluate = true;
+                    break;                    
+                }
+            }
+            
+            if (doEvaluate)
+                CodeEvaluate();
         }
 
         private void OnInputKeyPressed(KeyDownEvent evt)
@@ -75,6 +100,16 @@ namespace UnityEditor.ImmediateWindow.UI
             var doEvaluate = false;
             switch (evt.keyCode)
             {
+                case KeyCode.UpArrow:
+                {
+                    PreviousCommand();
+                    break;
+                }
+                case KeyCode.DownArrow:
+                {
+                    NextCommand();
+                    break;
+                }
                 case KeyCode.Escape:
                     break;
                 case KeyCode.Return:
@@ -84,22 +119,41 @@ namespace UnityEditor.ImmediateWindow.UI
             }
             
             if (doEvaluate)
-            {
                 CodeEvaluate();
-            }
-            else
-            {
-                // Autocomplete
-            }            
         }
-        
+
+        public void PreviousCommand()
+        {
+            CurrentCommand = History.Instance.PreviousCommand(CurrentCommand);
+            if (CurrentCommand != null)
+                ConsoleInput.value = CurrentCommand.code;
+        }
+
+        public void NextCommand()
+        {
+            CurrentCommand = History.Instance.NextCommand(CurrentCommand);
+            if (CurrentCommand != null)
+                ConsoleInput.value = CurrentCommand.code;
+            else
+                ConsoleInput.value = ""; // Clear when reach the end
+        }
+
         public void CodeEvaluate()
         {
             var code = MultiLineMode ? ConsoleInputMultiLine.text : ConsoleInput.text;
             if (!MultiLineMode)
+            {
+                CurrentCommand = null;
+                History.Instance.AddCommand(code);
                 ConsoleInput.value = "";
-            
+            }
+
             Evaluator.Instance.Evaluate(code);
+        }
+
+        public void SetMultilineCode(string code)
+        {
+            ConsoleInputMultiLine.value = code;
         }
 
         private VisualElement ConsoleSingleLine {get { return root.Q<VisualElement>("console-mode-singleline"); }}

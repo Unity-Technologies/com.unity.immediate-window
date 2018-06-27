@@ -29,13 +29,12 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
 - Save Settings
     + Better experience
     * Save List of 'using'
-    * Save typing history (up to xxx)
+    * Save typing history up to xxx
 - Multiline
     + Refine a method
     * Show line numbers for easier debugging
 - Typing history
     + Better experience
-    * Keyboard up/down usage
     * History list
         * with click to paste, and double-click to call
 - Autocomplete
@@ -45,13 +44,9 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
 - Use cases
     * Can I do RMGUI?
     * Can I do IMGUI?
-- In-memory state
-    * Allow 'with continuations' statement in console
-    * Reset in-memory state in multiline mode
  - Remove Visual Scripting dependency
     * Need to separate roslyn into a separate package and have visual scripting use this also
  - UI
-    * Responsive (currently console size is locked)
     * Reduce margin size for expanded properties
         * (currently goes after the property name but should go under like in browsers)
 - QA

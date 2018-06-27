@@ -1,11 +1,18 @@
-﻿namespace UnityEditor.ImmediateWindow.UI
+﻿using System;
+
+namespace UnityEditor.ImmediateWindow.UI
 {
-    internal struct SimpleStruct
+    public struct SimpleStruct
     {
         public int a;
         public string x;
         private float y;
 
+        public float TestFunction(int x)
+        {
+            return y * x;
+        }
+        
         public static SimpleStruct Create()
         {
             var obj = new SimpleStruct();
@@ -18,7 +25,7 @@
         }
     }
 
-    internal struct ComplexStruct
+    public struct ComplexStruct
     {
         public int myOhMy;
         public SimpleStruct Simple;
@@ -37,11 +44,16 @@
                 HasLooped = true;                
             }
 
+            // Silence warning for obj.y not used
+            var tmp = new SimpleStruct();
+            if (tmp.a < (new Random()).Next())
+                tmp.TestFunction(10);
+
             return obj;
         }
     }
     
-    internal class SimpleObject
+    public class SimpleObject
     {
     }
 }

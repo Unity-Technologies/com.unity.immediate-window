@@ -1,23 +1,10 @@
-using System;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEditor.Experimental.UIElements;
 using UnityEditor.ImmediateWindow.Services;
-using Random = System.Random;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    public class TestClass 
-    {
-        public static int Test(string str)
-        {    
-            Debug.Log("testing: " + str);
-
-            return (new Random()).Next();
-        }    
-    }
-    
     internal class ImmediateWindow : EditorWindow
     {
         public const string PackagePath = "Packages/com.unity.immediate-window/";
@@ -29,10 +16,12 @@ namespace UnityEditor.ImmediateWindow.UI
         private const double targetVersionNumber = 2018.3;
         
         public Evaluator Evaluator;
+        public History History;
 
         public void OnEnable()
         {
             Evaluator.Init(ref Evaluator);
+            History.Init(ref History);
 
             this.GetRootVisualContainer().AddStyleSheetPath(EditorGUIUtility.isProSkin ? DarkStylePath : LightStylePath);
 
@@ -41,13 +30,13 @@ namespace UnityEditor.ImmediateWindow.UI
             {
                 var template = windowResource.CloneTree(null);
                 this.GetRootVisualContainer().Add(template);
+                template.StretchToParentSize();
             }
         }
 
         internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
         
         [MenuItem("Window/Debug/Immediate Window", priority = 1500)]
-        [MenuItem("Window/Immediate Window",  priority = 0)]
         internal static void ShowPackageManagerWindow()
         {
             var window = GetWindow<ImmediateWindow>(false, "Immediate", true);

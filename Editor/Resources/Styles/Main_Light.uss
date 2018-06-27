@@ -59,6 +59,12 @@
   text-color: #000000;
 }
 
+#immediateWindow {
+  flex: 1 0 0;
+}
+#immediateWindow .root {
+  flex: 1 0 0;
+}
 #immediateWindow .scrollView #VerticalScroller {
   position-bottom: 0;
 }
@@ -172,15 +178,23 @@
   max-height: 32;
   background-image: resource("Images/Light/loading");
 }
-#immediateWindow #console.multiline #console-output {
-  height: 125;
+#immediateWindow #console {
+  flex: 1 0 0;
+}
+#immediateWindow #console #console-mode-singleline {
+  flex: 1 0 0;
+}
+#immediateWindow #console #console-mode-multiline {
+  flex: 1 0 0;
 }
 #immediateWindow #console #console-output {
-  height: 250;
-  overflow: hidden;
+  flex: 1 0 0;
 }
 #immediateWindow #console #console-output #output-content {
-  height: 250;
+  flex: 1 0 0;
+}
+#immediateWindow #console #console-output .content-view {
+  flex: 1 0 0;
 }
 #immediateWindow #console #console-output .output-item {
   margin-top: 0;
@@ -192,6 +206,9 @@
   border-bottom-width: 1;
   border-right-width: 0;
   border-color: rgba(0, 0, 0, 0.05);
+}
+#immediateWindow #console #console-output .output-item #text {
+  word-wrap: true;
 }
 #immediateWindow #console #console-input {
   position-bottom: 0;
@@ -416,6 +433,11 @@
   padding-left: 0;
   padding-bottom: 0;
   padding-right: 0;
+}
+.quickInspector .span.pinned {
+  margin-left: 75;
+  font-style: italic;
+  opacity: 0.25;
 }
 .quickInspector .empty {
   opacity: 0.25;
