@@ -7,20 +7,21 @@
                             UnityEditor.PackageManager.UI UIElementsSchema/UnityEditor.ImmediateWindow.UI.xsd">
     <engine:VisualElement name="toolbarView">
         <engine:VisualElement name="toolbarLeft">
-            <!--engine:Label name="toolbarFilterButton" class="toolbarButton space pulldown" text="Contexts ▾"/-->
+            <engine:Label name="templates" class="toolbarButton space pulldown" text="Templates ▾" tooltip="Quick code templates to get started with."/>
             <engine:Label class="toolbarButton"/>
         </engine:VisualElement>
         <engine:VisualElement name="toolbarRight">
             <!-- <engine:Label name="toolbarAdvancedButton" class="toolbarButton pulldown" text="Advanced ▾"/> -->
             <!-- imw:SearchToolbar name="toolbarSearch"/ -->
-            <engine:Label name="run" class="icon play"/>
+            <engine:Button name="reset" text="Reset" tooltip="Reset execution context (will erase objects you'v created in this session)."/>
+            <engine:Label name="run" class="icon play" tooltip="Execute script"/>
 
-            <egnine:VisualElement name="toggleContainer">
+            <egnine:VisualElement name="toggleContainer" tooltip="View private members when inspecting objects.">
                 <engine:Label text="View Private" class="label"/>
                 <engine:Toggle name="viewPrivate" value="true" class="toggle"/>
             </egnine:VisualElement>
-            <engine:Label name="multiline" class="icon popup"/>
-            <engine:Label name="clear" class="icon cancel"/>
+            <engine:Label name="multiline" class="icon popup" tooltip="Full script mode."/>
+            <engine:Label name="clear" class="icon cancel" tooltip="Clear console output."/>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

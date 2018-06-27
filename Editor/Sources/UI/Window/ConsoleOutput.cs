@@ -1,4 +1,6 @@
-﻿using Microsoft.CodeAnalysis.Scripting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis.Scripting;
 using UnityEngine.Experimental.UIElements;
 using UnityScript.Scripting;
 using UnityEditor.ImmediateWindow.Services;
@@ -15,19 +17,27 @@ namespace UnityEditor.ImmediateWindow.UI
         
         private readonly VisualElement root;
         private bool isScrolled = false;
-        private ScrollView Content { get; set; }
+        public ScrollView Content { get; set; }
 
         public ConsoleOutput()
         {
             root = Resources.GetTemplate("ConsoleOutput.uxml");
             Add(root);
-            CreateScrollView();
+            ResetScrollView();
             
             Evaluator.Instance.OnEvaluationSuccess += OnEvaluationSuccess;
             Evaluator.Instance.OnEvaluationError += OnEvaluationError;
             Evaluator.Instance.OnBeforeEvaluation += OnBeforeEvaluation;
             
-            //Content.Add(new OutputItem(1));
+            /*
+            Evaluator.Instance.Evaluate("_9");
+            Evaluator.Instance.Evaluate("1");
+            Evaluator.Instance.Evaluate("1");
+            Evaluator.Instance.Evaluate("1");
+            Evaluator.Instance.Evaluate("1");
+            Evaluator.Instance.Evaluate("1");
+            Evaluator.Instance.Evaluate("1");
+            */
         }
 
         private void OnBeforeEvaluation(string code)
@@ -58,6 +68,8 @@ namespace UnityEditor.ImmediateWindow.UI
             ScrollToEnd();
         }
 
+        // TODO: Doesn't quite work.
+        // Ugly hack to try and get it to scroll at the end. Need to check with RmGui
         private void ScrollToEnd()
         {
             EditorApplication.update += UpdateScroll;
@@ -74,25 +86,40 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             if (Content.verticalScroller.highValue != 100)
                 Content.scrollOffset = new Vector2(0, Content.verticalScroller.highValue);
-            
+                        
             EditorApplication.update -= UpdateScroll;
         }
 
         
-        void CreateScrollView()
+        public void ResetScrollView(bool transferPreviousContent = false)
         {
+            var previous = new List<VisualElement>();
+            if (Content != null)
+                previous = Content.Children().ToList();
+            
             Content = new ScrollView();
             Content.name = "output-content";
             Content.verticalScroller.slider.pageSize = 10;
             Add(Content);
             Content.stretchContentWidth = true;
+            Content.StretchToParentSize();
+
+            // Transfer previous scrollview's content. This is a hack because ScrollView
+            // Currently doesn't resize properly if put under a new parent.
+            if (transferPreviousContent)
+            {
+                foreach (var child in previous)
+                    Content.Add(child);
+
+                ScrollToEnd();
+            }
         }
         
         public void ClearLog()
         {
             // Currently need to remove the scroll view to clear it since Clear() doesn't reset scroll position.
             Remove(Content);
-            CreateScrollView();
+            ResetScrollView();
         }
     }
 }

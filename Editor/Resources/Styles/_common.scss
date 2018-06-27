@@ -187,6 +187,12 @@ $spinner-normal-half-size: 7;
 $toolbar-height: 18;
 
 #immediateWindow {
+	flex: 1 0 0;
+
+	.root {
+		flex: 1 0 0;
+	}
+
 	.scrollView {
 		@extend .column;
 
@@ -261,7 +267,16 @@ $toolbar-height: 18;
 	}
 
 	#console {
+		flex: 1 0 0;
 		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
+
+		#console-mode-singleline {
+			flex: 1 0 0;
+		}
+
+		#console-mode-multiline {
+			flex: 1 0 0;
+		}
 
 		&.singleline {
 
@@ -269,16 +284,18 @@ $toolbar-height: 18;
 
 		&.multiline {
 			#console-output {
-				height: 125;
 			}
 		}
 
 		#console-output {
-			height: $height-console-output;
-			overflow: hidden;
+			flex: 1 0 0;
 
 			#output-content {
-				height: $height-console-output;
+				flex: 1 0 0;
+			}
+
+			.content-view {
+				flex: 1 0 0;
 			}
 
 			.output-item {
@@ -291,6 +308,7 @@ $toolbar-height: 18;
 
 				#text {
 					@extend .no-background;
+					word-wrap: true;
 				}
 			}
 		}
@@ -492,6 +510,12 @@ $toolbar-height: 18;
 	.span {
 		@include margin-box(0);
 		@include padding-box(0);
+
+		&.pinned {
+			margin-left: 75;
+			font-style: italic;
+			opacity: 0.25;
+		}
 	}
 
 	.empty {
