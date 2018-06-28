@@ -385,6 +385,16 @@ $toolbar-height: 18;
 }
 
 .icon {
+	&.context {
+		max-width: 14;
+		max-height: 14;
+		background-image: $context-background;
+
+		&.pressed {
+			background-image: $context-pressed-background;
+		}
+	}
+
 	&.popup {
 		width: 14;
 		height: 14;
@@ -486,6 +496,7 @@ $toolbar-height: 18;
 
 .quickInspector {
 	flex-direction: row;
+	flex-wrap: wrap;							// Note: Pretty much every flex row should wrap.. ?
 	align-items: center;
 	@include margin(2, 4, 2, 4);		// Default editor for Label
 	@include padding(1, 2, 2, 2);		 // Default editor for Label
@@ -508,6 +519,7 @@ $toolbar-height: 18;
 	.propertyValueGroup {
 		flex-direction: row;
 		align-items: flex-start;
+		flex-wrap: wrap;
 
 		&.private {
 			.propertyLabel {
@@ -516,9 +528,16 @@ $toolbar-height: 18;
 		}
 	}
 
+	.objectType {
+	}
+
+	.collapsed {
+	}
+
 	.row {
 		flex-direction: row;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	.collapsedPropertyGroup {

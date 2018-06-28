@@ -20,6 +20,7 @@
                 <engine:Label text="View Private" class="label"/>
                 <engine:Toggle name="viewPrivate" value="true" class="toggle"/>
             </egnine:VisualElement>
+            <engine:Label name="context" class="icon context" tooltip="Show context explorer to browse namespaces, assemblies and objects."/>
             <engine:Label name="multiline" class="icon popup" tooltip="Full script mode."/>
             <engine:Label name="clear" class="icon cancel" tooltip="Clear console output."/>
         </engine:VisualElement>

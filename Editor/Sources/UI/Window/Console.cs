@@ -2,7 +2,7 @@
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
-
+ 
 namespace UnityEditor.ImmediateWindow.UI
 {
     internal class Console : VisualElement
@@ -12,7 +12,11 @@ namespace UnityEditor.ImmediateWindow.UI
         private readonly VisualElement root;
         private TextField ConsoleInput { get; set; }
         private TextField ConsoleInputMultiLine { get; set; }
-        private bool MultiLineMode { get; set; }
+        private bool MultiLineMode
+        {
+            get { return State.Instance.MultiLineMode;}
+            set { State.Instance.MultiLineMode = value; }
+        }
         public Command CurrentCommand { get; set; }
         
         public ConsoleOutput ConsoleOutput { get; set; }
@@ -38,14 +42,21 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleInputMultiLine.name = "console-input-multiline";
             ConsoleMultiLine.Add(ConsoleInputMultiLine);
             ConsoleInputMultiLine.RegisterCallback<KeyDownEvent>(OnMultiLineInputKeyPressed);
+            ConsoleInputMultiLine.RegisterCallback<FocusOutEvent>(OnMultiLineFocusOut);
             
             ConsoleToolbar.Console = this;
 
-            SetMode(false);
+            SetMode(MultiLineMode);
+        }
+
+        private void OnMultiLineFocusOut(FocusOutEvent evt)
+        {
+            SaveMultiLineState();
         }
 
         public void SetMode(bool multiline)
         {
+            var changed = MultiLineMode == multiline;
             MultiLineMode = multiline;
             
             if (MultiLineMode)
@@ -56,12 +67,20 @@ namespace UnityEditor.ImmediateWindow.UI
                 UIUtils.SetElementDisplay(ConsoleSingleLine, !MultiLineMode);
                 UIUtils.SetElementDisplay(ConsoleMultiLine, MultiLineMode);
 
+                
                 ConsoleMultiLine.Add(ConsoleOutput);
                 RemoveFromClassList("singleline");
                 AddToClassList("multiline");
+
+                SetMultilineCode(State.Instance.ScriptCode, false);
             }
             else
             {
+                // Make sure we store current script since we always restore it from state 
+                // when changing mode
+                if (changed)
+                    SaveMultiLineState();
+
                 if (ConsoleMultiLine.Contains(ConsoleOutput))
                     ConsoleMultiLine.Remove(ConsoleOutput);
                 
@@ -154,13 +173,25 @@ namespace UnityEditor.ImmediateWindow.UI
                 History.Instance.AddCommand(code);
                 ConsoleInput.value = "";
             }
+            else
+            {
+                SaveMultiLineState();    // Save last code to survive domain reloads
+            }
 
             Evaluator.Instance.Evaluate(code);
         }
 
-        public void SetMultilineCode(string code)
+        public void SetMultilineCode(string code, bool save = true)
         {
             ConsoleInputMultiLine.value = code;
+
+            if (save)
+                SaveMultiLineState();
+        }
+
+        public void SaveMultiLineState()
+        {
+            State.Instance.ScriptCode = ConsoleInputMultiLine.value ;
         }
 
         private VisualElement ConsoleSingleLine {get { return root.Q<VisualElement>("console-mode-singleline"); }}

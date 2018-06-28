@@ -10,7 +10,7 @@ namespace UnityEditor.ImmediateWindow.TestObjects
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    public struct SimpleStruct
+    public class SimpleObject
     {
         public int a;
         public string x;
@@ -21,9 +21,9 @@ namespace UnityEditor.ImmediateWindow.UI
             return y * x;
         }
         
-        public static SimpleStruct Create()
+        public static SimpleObject Create()
         {
-            var obj = new SimpleStruct();
+            var obj = new SimpleObject();
             
             obj.a = 12;
             obj.x = "my string";
@@ -33,35 +33,31 @@ namespace UnityEditor.ImmediateWindow.UI
         }
     }
 
-    public struct ComplexStruct
+    public class ComplexObject
     {
         public int myOhMy;
-        public SimpleStruct Simple;
+        public SimpleObject Simple;
         public object Loop;
 
         static public bool HasLooped = false;
         
-        public static ComplexStruct Create()
+        public static ComplexObject Create()
         {
-            var obj = new ComplexStruct();
-            obj.Simple = SimpleStruct.Create();
+            var obj = new ComplexObject();
+            obj.Simple = SimpleObject.Create();
             obj.myOhMy = 123456;
             if (!HasLooped)
             {
-                obj.Loop = new ComplexStruct();
+                obj.Loop = new ComplexObject();
                 HasLooped = true;                
             }
 
             // Silence warning for obj.y not used
-            var tmp = new SimpleStruct();
+            var tmp = new SimpleObject();
             if (tmp.a < (new Random()).Next())
                 tmp.TestFunction(10);
 
             return obj;
         }
-    }
-    
-    public class SimpleObject
-    {
     }
 }

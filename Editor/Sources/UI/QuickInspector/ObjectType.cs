@@ -6,6 +6,7 @@ namespace UnityEditor.ImmediateWindow.UI
     {
         public ObjectType(object obj, bool showValue = true, bool isRoot = false) : base()
         {
+            AddToClassList("objectType");
             SetObject(obj, showValue, isRoot);
         }        
 

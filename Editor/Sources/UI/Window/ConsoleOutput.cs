@@ -95,7 +95,9 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             var previous = new List<VisualElement>();
             if (Content != null)
+            {
                 previous = Content.Children().ToList();
+            }
             
             Content = new ScrollView();
             Content.name = "output-content";
