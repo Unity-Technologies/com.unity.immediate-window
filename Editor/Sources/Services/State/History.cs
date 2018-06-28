@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using UnityEngine;
 
 namespace UnityEditor.ImmediateWindow.Services
 {
-    
-    [Serializable]
-    internal class Command
-    {
-        public int index;
-        public string code;
-    }
-    
     [Serializable]
     internal class History
     {
@@ -22,29 +12,14 @@ namespace UnityEditor.ImmediateWindow.Services
         
         private static History instance = new History();
         public static History Instance { get { return instance; } }
-        
-        protected List<Command> Commands;
+
+        protected List<Command> Commands
+        {
+            get { return State.Instance.Commands; }
+        }
         
         public History()
         {
-            Init();
-        }
-
-        public static void Init(ref History value)
-        {
-            if (value == null)  // UI window opened
-            {
-                value = instance;
-            }
-            else // Domain reload
-            {
-                instance = value;
-            }
-        }
-
-        public void Init()
-        {
-            Commands = new List<Command>();            
         }
 
         public Command AddCommand(string code)

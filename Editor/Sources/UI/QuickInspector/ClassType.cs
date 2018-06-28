@@ -48,7 +48,8 @@ namespace UnityEditor.ImmediateWindow.UI
         void ToggleExpand()
         {
             CurrentState = CurrentState == State.Collapsed ? State.Expanded : State.Collapsed;
-            Arrow.SetDirection( CurrentState == State.Collapsed ? Arrow.Direction.Right : Arrow.Direction.Down);
+            if (Arrow != null)
+                Arrow.SetDirection( CurrentState == State.Collapsed ? Arrow.Direction.Right : Arrow.Direction.Down);
             Refresh();
         }
 

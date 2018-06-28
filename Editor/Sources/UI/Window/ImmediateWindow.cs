@@ -16,14 +16,14 @@ namespace UnityEditor.ImmediateWindow.UI
         public static ImmediateWindow CurrentWindow;
         
         public Evaluator Evaluator;
-        public History History;
+        public State State;
 
         public void OnEnable()
         {
             CurrentWindow = this;
             
             Evaluator.Init(ref Evaluator);
-            History.Init(ref History);
+            State.Init(ref State);
 
             this.GetRootVisualContainer().AddStyleSheetPath(EditorGUIUtility.isProSkin ? DarkStylePath : LightStylePath);
 
@@ -36,8 +36,14 @@ namespace UnityEditor.ImmediateWindow.UI
             }
         }
 
+        public void SetSideViewVisibility(bool visibility)
+        {
+            UIUtils.SetElementDisplay(SideView, visibility);
+        }
+        
         internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
         internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
+        internal VisualElement SideView { get { return this.GetRootVisualContainer().Q<VisualElement>("sideview"); } }
         
         [MenuItem("Window/Debug/Immediate Window", priority = 1500)]
         internal static void ShowPackageManagerWindow()

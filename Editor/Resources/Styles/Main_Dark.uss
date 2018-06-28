@@ -263,6 +263,14 @@
   margin-left: 0;
 }
 
+.icon.context {
+  max-width: 14;
+  max-height: 14;
+  background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenModuleActive.png");
+}
+.icon.context.pressed {
+  background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenEmitterActive.png");
+}
 .icon.popup {
   width: 14;
   height: 14;
@@ -402,6 +410,7 @@
 
 .quickInspector {
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 2;
   margin-left: 4;
@@ -427,6 +436,7 @@
 .quickInspector .propertyValueGroup {
   flex-direction: row;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 .quickInspector .propertyValueGroup.private .propertyLabel {
   text-color: #b95600;
@@ -434,6 +444,7 @@
 .quickInspector .row {
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 .quickInspector .collapsedPropertyGroup {
   flex-direction: row;

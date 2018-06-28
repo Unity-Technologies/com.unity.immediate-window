@@ -13,9 +13,9 @@ namespace UnityEditor.ImmediateWindow.Services
         public object _4;
         public object _5 = Inspector.GetAllStaticInstances().ToArray();
         public object _6 = new SecretStruct();
-        public object _7 = new SimpleObject();
-        public object _8 = SimpleStruct.Create();
-        public object _9 = ComplexStruct.Create();
+        public object _7;
+        public object _8 = SimpleObject.Create();
+        public object _9 = ComplexObject.Create();
 
         public object _ImmediateWindowReservedGlobal;
     }

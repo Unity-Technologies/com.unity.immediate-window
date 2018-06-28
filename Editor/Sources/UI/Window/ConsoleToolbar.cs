@@ -1,14 +1,23 @@
 ﻿using UnityEngine.Experimental.UIElements;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
-
+ 
 namespace UnityEditor.ImmediateWindow.UI
 {
     internal class ConsoleToolbar : VisualElement
     {
         internal new class UxmlFactory : UxmlFactory<ConsoleToolbar> { }
         private readonly VisualElement root;
-        private bool ConsoleMultiline;
+        private bool MultiLineMode
+        {
+            get { return State.Instance.MultiLineMode;}
+            set { State.Instance.MultiLineMode = value; }
+        }
+        private bool ShowContext
+        {
+            get { return State.Instance.ShowContext;}
+            set { State.Instance.ShowContext = value; }
+        }
 
         public Console Console { get; set; }
         
@@ -21,14 +30,18 @@ namespace UnityEditor.ImmediateWindow.UI
             ClearButton.RegisterCallback<MouseDownEvent>(ClearClick);
             ClearButton.RegisterCallback<MouseUpEvent>(ClearStopClick);
             MultilineButton.RegisterCallback<MouseDownEvent>(ConsoleExpandToggle);
+            ContextButton.RegisterCallback<MouseDownEvent>(ContextExpandToggle);
             RunButton.RegisterCallback<MouseDownEvent>(RunClick);
             RunButton.RegisterCallback<MouseUpEvent>(ClearRunClick);
             ResetButton.RegisterCallback<MouseUpEvent>(ResetClick);
             TemplatesDropdown.RegisterCallback<MouseUpEvent>(TemplatesClick);
             PrivateToggle.OnValueChanged(OnPrivateToggle);
 
+            PrivateToggle.value = State.Instance.ShowPrivate;
+
             OnPrivateToggle(null);
             RefreshConsoleState();
+            RefreshContextState();
         }
 
         private void TemplatesClick(MouseUpEvent evt)
@@ -83,21 +96,36 @@ namespace UnityEditor.ImmediateWindow.UI
 
         private void ConsoleExpandToggle(MouseDownEvent evt)
         {
-            ConsoleMultiline = !ConsoleMultiline;
+            MultiLineMode = !MultiLineMode;
             RefreshConsoleState();
+        }
+
+        private void ContextExpandToggle(MouseDownEvent evt)
+        {
+            ShowContext = !ShowContext;
+            RefreshContextState();
+        }
+
+        void RefreshContextState()
+        {
+            ContextButton.RemoveFromClassList("pressed");
+            ImmediateWindow.CurrentWindow.SetSideViewVisibility(ShowContext);
+            
+            if (ShowContext)
+                ContextButton.AddToClassList("pressed");
         }
 
         void RefreshConsoleState()
         {
-            if (ConsoleMultiline)
+            if (MultiLineMode)
                 MultilineButton.AddToClassList("pressed");
             else
                 MultilineButton.RemoveFromClassList("pressed");
             
-            UIUtils.SetElementDisplay(TemplatesDropdown, ConsoleMultiline);
+            UIUtils.SetElementDisplay(TemplatesDropdown, MultiLineMode);
             
             if (Console != null)
-                Console.SetMode(ConsoleMultiline);
+                Console.SetMode(MultiLineMode);
         }
 
         private void ClearStopClick(MouseUpEvent evt)
@@ -114,6 +142,7 @@ namespace UnityEditor.ImmediateWindow.UI
         private void OnPrivateToggle(ChangeEvent<bool> evt)
         {
             PropertyUtils.ShowPrivate = PrivateToggle.value;
+            State.Instance.ShowPrivate = PrivateToggle.value;
         }
 
         private Label TemplatesDropdown {get { return root.Q<Label>("templates"); }}
@@ -121,6 +150,7 @@ namespace UnityEditor.ImmediateWindow.UI
         private Label ClearButton {get { return root.Q<Label>("clear"); }}
         private Label RunButton {get { return root.Q<Label>("run"); }}
         private Label MultilineButton {get { return root.Q<Label>("multiline"); }}
+        private Label ContextButton {get { return root.Q<Label>("context"); }}
         private Toggle PrivateToggle {get { return root.Q<Toggle>("viewPrivate"); }}
     }
 }
