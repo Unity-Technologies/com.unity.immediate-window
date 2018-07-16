@@ -9,17 +9,24 @@ namespace UnityEditor.ImmediateWindow.UI
     /**
      * Displays most generic object (will decide what is the proper display type should be)
      */
-
     internal class QuickInspector : VisualElement
     {
         private object Obj { get; set; }
-        
-        public QuickInspector() {}
+
+        public QuickInspector()
+        {
+            Init();            
+        }
 
         public QuickInspector(object obj)
         {
+            Init();
             SetObject(obj);
-            AddToClassList("quickInspector");
+        }
+
+        void Init()
+        {
+            AddToClassList("quickInspector");            
         }
 
         public void SetObject(object obj)
@@ -27,7 +34,7 @@ namespace UnityEditor.ImmediateWindow.UI
             try
             {
                 Obj = obj;
-                Add(new ObjectType(obj, true, true));
+                Add(new TypeInspector(obj, new ViewContext()));
             }
             catch (Exception e)
             {

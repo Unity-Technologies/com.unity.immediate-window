@@ -10,7 +10,7 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             if (element == null)
                 return;
-            
+
             if (value)
                 element.RemoveFromClassList(DisplayNone);
             else

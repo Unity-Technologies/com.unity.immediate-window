@@ -125,6 +125,11 @@
 	@include button($size, $size, $size, $size);
 }
 
+@mixin console-margins() {
+	@include margin(2, 4, 2, 4); // Default editor for Label
+	@include padding(1, 2, 2, 2); // Default editor for Label
+}
+
 //--------------------------------------------------------------------------------------------------
 // Font
 //--------------------------------------------------------------------------------------------------
@@ -160,7 +165,7 @@
 }
 
 .row {
-	flex: 1 0 0;
+	flex: 0 0 auto;
 	flex-direction: row;
 }
 
@@ -230,6 +235,7 @@ $toolbar-height: 18;
 		background-color: rgba(200,0,0,0.8);
 		border-color: #FF0000;
 		flex-direction: row;
+		word-wrap: true;
 
 		@include border-box(1);
 		@include padding(5, 10, 5, 10);
@@ -275,6 +281,11 @@ $toolbar-height: 18;
 		flex: 1 0 0;
 		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
 
+		.console-log {
+			word-wrap: true;
+		}
+
+
 		#console-mode-singleline {
 			flex: 1 0 0;
 		}
@@ -300,20 +311,17 @@ $toolbar-height: 18;
 			}
 
 			.content-view {
-				flex: 1 0 0;
+				flex: 0 0 auto;
 			}
 
 			.output-item {
-				@include margin(0, 6, 0, 6);
+				flex: 0 0 auto;
+
+				@include console-margins();
 				@include border(0, 0, 1, 0);
 				border-color: rgba(0, 0, 0, 0.05);
 
 				#content {
-				}
-
-				#text {
-					@extend .no-background;
-					word-wrap: true;
 				}
 			}
 		}
@@ -366,6 +374,11 @@ $toolbar-height: 18;
 					font-style: italic;
 					word-wrap: true;
 				}
+
+				// Possibly should be in quick inspector if quick inspector starts having assemblies and namespaces too
+				.object-container {
+					flex: 1 0 0;
+				}
 			}
 		}
 	}
@@ -392,6 +405,42 @@ $toolbar-height: 18;
 
 		&.pressed {
 			background-image: $context-pressed-background;
+		}
+	}
+
+	&.node0 {
+		width: 14;
+		height: 14;
+		background-image: $icon-node0;
+		@include margin-box(0);
+		@include padding-box(0);
+
+		&.pressed {
+			background-image: $icon-node0-on;
+		}
+	}
+
+	&.node1 {
+		width: 14;
+		height: 14;
+		background-image: $icon-node1;
+		@include margin-box(0);
+		@include padding-box(0);
+
+		&.pressed {
+			background-image: $icon-node1-on;
+		}
+	}
+
+	&.node2 {
+		width: 14;
+		height: 14;
+		background-image: $icon-node2;
+		@include margin-box(0);
+		@include padding-box(0);
+
+		&.pressed {
+			background-image: $icon-node2-on;
 		}
 	}
 
@@ -486,6 +535,12 @@ $toolbar-height: 18;
 			}
 		}
 	}
+
+	Button.compact {
+		@include margin-box(0);
+		@include padding-box(0);
+	}
+
 }
 
 .arrow {
@@ -495,11 +550,10 @@ $toolbar-height: 18;
 }
 
 .quickInspector {
+	flex: 0 0 auto;
 	flex-direction: row;
 	flex-wrap: wrap;							// Note: Pretty much every flex row should wrap.. ?
 	align-items: center;
-	@include margin(2, 4, 2, 4);		// Default editor for Label
-	@include padding(1, 2, 2, 2);		 // Default editor for Label
 
 	.value {
 		flex-direction: column;
@@ -514,24 +568,25 @@ $toolbar-height: 18;
 	.typename {
 		font-style: italic;
 		opacity: 0.5;
+		word-wrap: false;
 	}
 
 	.propertyValueGroup {
 		flex-direction: row;
 		align-items: flex-start;
 		flex-wrap: wrap;
+		flex: 0 0 auto;
 
 		&.private {
 			.propertyLabel {
-				text-color: rgb(185, 86, 0);
+				text-color: $property-label-private;
 			}
 		}
 	}
 
-	.objectType {
-	}
-
-	.collapsed {
+	.typeInspector {
+		flex: 1 0 0;
+		flex-wrap: wrap;
 	}
 
 	.row {
@@ -540,52 +595,164 @@ $toolbar-height: 18;
 		flex-wrap: wrap;
 	}
 
-	.collapsedPropertyGroup {
-		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-
-		margin-left: 4;
-		margin-right: 4;
-	}
-
-	.expandedPropertyGroup {
-		flex-direction: column;
-		justify-content: center;
-		margin-left: 10;
-	}
 
 	.isNumber {
-		text-color: rgb(28, 1, 210);
+		text-color: $value-number;
 	}
 
 	.isNull {
 		font-style: italic;
-		text-color: rgb(28, 1, 210);
+		text-color: $value-null;
+		padding-right: 2;				// Hack to Fix italic getting clipped
 	}
 
 	.isString {
-		text-color: rgb(197, 25, 22);
+		text-color: $value-string;
 	}
 
 	.propertyLabel {
-		text-color: rgb(142, 34, 150);
+		text-color: $property-label;
+		word-wrap: false;
+		flex: 0 0 auto;
 	}
 
-	// Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
-	.span {
-		@include margin-box(0);
-		@include padding-box(0);
-
-		&.pinned {
-			margin-left: 75;
+	.enumerable {
+		.propertyLabel {
+			text-color: $property-label-enumerable;
 			font-style: italic;
-			opacity: 0.25;
 		}
 	}
 
 	.empty {
 		opacity: 0.25;
 		font-style:italic;
+		word-wrap: true;
 	}
+
+	.span {
+		&#pinned-symbol {
+			margin-left: 75;
+			font-style: italic;
+			opacity: 0.25;
+		}
+	}
+
+	.collapsedPropertyGroup, .collapsedArrayGroup {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		flex: 0 1 auto;
+
+		margin-left: 4;
+		margin-right: 4;
+
+		.typeInspector {
+			flex: 1 0 auto;
+			flex-wrap: wrap;
+		}
+	}
+
+	.expandedPropertyGroup, .expandedArrayGroup {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.expandable {
+		.viewModes {
+			@extend .row;
+			flex-wrap: wrap;
+		}
+
+		ExpandedClassType {
+			.expandedClassLabel {
+				text-color: $text-faded;
+			}
+		}
+
+		ExpandedMethodGroup {
+			Method {
+				flex: 1 0 auto;
+				flex-direction: row;
+
+				.name {
+					text-color: $method-name;
+				}
+
+				.return {
+					margin-right: 4;
+					text-color: $methiod-return;
+				}
+
+				.parameter {
+					@extend .row;
+
+					.parameterType {
+						text-color: $method-argument;
+						margin-right: 4;
+					}
+
+					.parameterName {
+					}
+				}
+
+				.parameters {
+					flex: 0 1 auto;
+					flex-direction: row;
+					flex-wrap: wrap;
+				}
+			}
+		}
+	}
+}
+
+.expandable {
+	flex: 0 0 auto;
+	flex-wrap: wrap;
+
+	.expandedGroup {
+		margin-left: 10;
+	}
+
+	.collapseRow {
+		flex: 1 0 0;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.collapsedGroup {
+		flex: 0 1 auto;
+		flex-direction: row;
+	}
+
+	.collapseView {
+		flex: 0 1 auto;
+	}
+
+	.tools {
+		flex: 0 0 auto;
+		justify-content: flex-end;
+		align-self: flex-start;
+	}
+}
+
+// Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
+.span {
+	// No default dark color for text other then Label and such. So this is to fix this
+	text-color: $unity-text-color;
+
+	@include margin-box(0);
+	@include padding-box(0);
+	@extend .no-background;
+
+	&.disabled {
+		opacity: 0.5;
+	}
+
+	&.faded {
+		opacity: 0.75;
+	}
+}
+
+.text {
+	min-height: 9;		// Normally 15, make sure it's tighter
 }

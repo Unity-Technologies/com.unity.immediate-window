@@ -33,6 +33,19 @@ $caret-text-color: #646464;
 
 $link-text-color: #0808FC;
 
+$text-faded: rgba(0, 0, 0, 0.5);
+$property-label-enumerable: $text-faded;
+$property-label: rgb(142, 34, 150);
+$property-label-private: rgb(185, 86, 0);
+
+$value-string: rgb(197, 25, 22);
+$value-number: rgb(28, 1, 210);
+$value-null: $value-number;
+
+$method-name: #B12697;
+$method-argument: $value-number;
+$methiod-return: $unity-background-dark-contrast;
+
 //--------------------------------------------------------------------------------------------------
 // Custom backgrounds
 //--------------------------------------------------------------------------------------------------
@@ -76,6 +89,13 @@ $play-background: resource("Builtin Skins/LightSkin/Images/IN foldout act.png");
 $play-pressed-background: resource("Builtin Skins/LightSkin/Images/IN foldout.png");
 $context-background: resource("Builtin Skins/LightSkin/Images/ShurikenModuleActive.png");
 $context-pressed-background: resource("Builtin Skins/LightSkin/Images/ShurikenEmitterActive.png");
+
+$icon-node0: resource("Builtin Skins/LightSkin/Images/node0 hex.png");
+$icon-node0-on: resource("Builtin Skins/LightSkin/Images/node0 hex on.png");
+$icon-node1: resource("Builtin Skins/LightSkin/Images/node1 hex.png");
+$icon-node1-on: resource("Builtin Skins/LightSkin/Images/node1 hex on.png");
+$icon-node2: resource("Builtin Skins/LightSkin/Images/node2 hex.png");
+$icon-node2-on: resource("Builtin Skins/LightSkin/Images/node2 hex on.png");
 
 //--------------------------------------------------------------------------------------------------
 // Common stylesheet

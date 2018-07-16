@@ -14,6 +14,7 @@ namespace UnityEditor.ImmediateWindow.Services
         public bool ShowPrivate = true;
         public bool MultiLineMode;
         public bool ShowContext = true;
+        public List<string> Namespaces = new List<string>();
 
         public static void Init(ref State value)
         {

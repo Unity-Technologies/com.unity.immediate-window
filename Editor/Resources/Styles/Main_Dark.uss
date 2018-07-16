@@ -33,8 +33,8 @@
   margin-right: 0;
 }
 
-.row {
-  flex: 1 0 0;
+.row, .quickInspector .expandable .viewModes, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
+  flex: 0 0 auto;
   flex-direction: row;
 }
 
@@ -82,7 +82,7 @@
   position-right: 0;
   position-left: 0;
 }
-#immediateWindow .no-background, #immediateWindow #console #console-output .output-item #text {
+#immediateWindow .no-background, #immediateWindow .span {
   background: rgba(0, 0, 0, 0);
   background-image: none;
   margin-top: 0;
@@ -98,6 +98,7 @@
   background-color: rgba(200, 0, 0, 0.8);
   border-color: #FF0000;
   flex-direction: row;
+  word-wrap: true;
   border-top-width: 1;
   border-left-width: 1;
   border-bottom-width: 1;
@@ -185,6 +186,9 @@
 #immediateWindow #console {
   flex: 1 0 0;
 }
+#immediateWindow #console .console-log {
+  word-wrap: true;
+}
 #immediateWindow #console #console-mode-singleline {
   flex: 1 0 0;
 }
@@ -198,21 +202,23 @@
   flex: 1 0 0;
 }
 #immediateWindow #console #console-output .content-view {
-  flex: 1 0 0;
+  flex: 0 0 auto;
 }
 #immediateWindow #console #console-output .output-item {
-  margin-top: 0;
-  margin-left: 6;
-  margin-bottom: 0;
-  margin-right: 6;
+  flex: 0 0 auto;
+  margin-top: 2;
+  margin-left: 4;
+  margin-bottom: 2;
+  margin-right: 4;
+  padding-top: 1;
+  padding-left: 2;
+  padding-bottom: 2;
+  padding-right: 2;
   border-top-width: 0;
   border-left-width: 0;
   border-bottom-width: 1;
   border-right-width: 0;
   border-color: rgba(0, 0, 0, 0.05);
-}
-#immediateWindow #console #console-output .output-item #text {
-  word-wrap: true;
 }
 #immediateWindow #console #console-input {
   position-bottom: 0;
@@ -251,6 +257,9 @@
   font-style: italic;
   word-wrap: true;
 }
+#immediateWindow #context .context-inspector .namespace .object-container {
+  flex: 1 0 0;
+}
 
 #toggleContainer {
   flex: 0 0 auto;
@@ -271,6 +280,54 @@
 .icon.context.pressed {
   background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenEmitterActive.png");
 }
+.icon.node0 {
+  width: 14;
+  height: 14;
+  background-image: resource("Builtin Skins/DarkSkin/Images/node0 hex.png");
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.icon.node0.pressed {
+  background-image: resource("Builtin Skins/DarkSkin/Images/node0 hex on.png");
+}
+.icon.node1 {
+  width: 14;
+  height: 14;
+  background-image: resource("Builtin Skins/DarkSkin/Images/node1 hex.png");
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.icon.node1.pressed {
+  background-image: resource("Builtin Skins/DarkSkin/Images/node1 hex on.png");
+}
+.icon.node2 {
+  width: 14;
+  height: 14;
+  background-image: resource("Builtin Skins/DarkSkin/Images/node2 hex.png");
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.icon.node2.pressed {
+  background-image: resource("Builtin Skins/DarkSkin/Images/node2 hex on.png");
+}
 .icon.popup {
   width: 14;
   height: 14;
@@ -290,10 +347,10 @@
 .icon.cancel {
   width: 14;
   height: 14;
-  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus.png");
+  background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenCheckMarkMixed.png");
 }
 .icon.cancel.pressed {
-  background-image: resource("Builtin Skins/DarkSkin/Images/ol minus act.png");
+  background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenCheckMarkNormal.png");
 }
 
 #toolbarContainer {
@@ -401,6 +458,16 @@
   margin-bottom: 0;
   margin-right: 5;
 }
+#toolbarContainer Button.compact {
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
 
 .arrow {
   font-size: 8;
@@ -409,17 +476,10 @@
 }
 
 .quickInspector {
+  flex: 0 0 auto;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 2;
-  margin-left: 4;
-  margin-bottom: 2;
-  margin-right: 4;
-  padding-top: 1;
-  padding-left: 2;
-  padding-bottom: 2;
-  padding-right: 2;
 }
 .quickInspector .value {
   flex-direction: column;
@@ -432,46 +492,126 @@
 .quickInspector .typename {
   font-style: italic;
   opacity: 0.5;
+  word-wrap: false;
 }
 .quickInspector .propertyValueGroup {
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex: 0 0 auto;
 }
 .quickInspector .propertyValueGroup.private .propertyLabel {
-  text-color: #b95600;
+  text-color: #EB8752;
 }
-.quickInspector .row {
+.quickInspector .typeInspector {
+  flex: 1 0 0;
+  flex-wrap: wrap;
+}
+.quickInspector .row, .quickInspector .expandable .viewModes, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-}
-.quickInspector .collapsedPropertyGroup {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-left: 4;
-  margin-right: 4;
-}
-.quickInspector .expandedPropertyGroup {
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 10;
 }
 .quickInspector .isNumber {
-  text-color: #1c01d2;
+  text-color: #9079F0;
 }
 .quickInspector .isNull {
   font-style: italic;
-  text-color: #1c01d2;
+  text-color: #9079F0;
+  padding-right: 2;
 }
 .quickInspector .isString {
-  text-color: #c51916;
+  text-color: #E83F3B;
 }
 .quickInspector .propertyLabel {
-  text-color: #8e2296;
+  text-color: #E16DEA;
+  word-wrap: false;
+  flex: 0 0 auto;
 }
-.quickInspector .span {
+.quickInspector .enumerable .propertyLabel {
+  text-color: #954F9B;
+  font-style: italic;
+}
+.quickInspector .empty {
+  opacity: 0.25;
+  font-style: italic;
+  word-wrap: true;
+}
+.quickInspector .span#pinned-symbol {
+  margin-left: 75;
+  font-style: italic;
+  opacity: 0.25;
+}
+.quickInspector .collapsedPropertyGroup, .quickInspector .collapsedArrayGroup {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 0 1 auto;
+  margin-left: 4;
+  margin-right: 4;
+}
+.quickInspector .collapsedPropertyGroup .typeInspector, .quickInspector .collapsedArrayGroup .typeInspector {
+  flex: 1 0 auto;
+  flex-wrap: wrap;
+}
+.quickInspector .expandedPropertyGroup, .quickInspector .expandedArrayGroup {
+  flex-direction: column;
+  justify-content: center;
+}
+.quickInspector .expandable .viewModes {
+  flex-wrap: wrap;
+}
+.quickInspector .expandable ExpandedClassType .expandedClassLabel {
+  text-color: rgba(255, 255, 255, 0.5);
+}
+.quickInspector .expandable ExpandedMethodGroup Method {
+  flex: 1 0 auto;
+  flex-direction: row;
+}
+.quickInspector .expandable ExpandedMethodGroup Method .name {
+  text-color: #A1F7B5;
+}
+.quickInspector .expandable ExpandedMethodGroup Method .return {
+  margin-right: 4;
+  text-color: rgba(181, 65, 194, 0.89);
+}
+.quickInspector .expandable ExpandedMethodGroup Method .parameter .parameterType {
+  text-color: #5CB0D7;
+  margin-right: 4;
+}
+.quickInspector .expandable ExpandedMethodGroup Method .parameters {
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.expandable {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+}
+.expandable .expandedGroup {
+  margin-left: 10;
+}
+.expandable .collapseRow {
+  flex: 1 0 0;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.expandable .collapsedGroup {
+  flex: 0 1 auto;
+  flex-direction: row;
+}
+.expandable .collapseView {
+  flex: 0 1 auto;
+}
+.expandable .tools {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  align-self: flex-start;
+}
+
+.span {
+  text-color: #b4b4b4;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
@@ -481,12 +621,13 @@
   padding-bottom: 0;
   padding-right: 0;
 }
-.quickInspector .span.pinned {
-  margin-left: 75;
-  font-style: italic;
-  opacity: 0.25;
+.span.disabled {
+  opacity: 0.5;
 }
-.quickInspector .empty {
-  opacity: 0.25;
-  font-style: italic;
+.span.faded {
+  opacity: 0.75;
+}
+
+.text {
+  min-height: 9;
 }
