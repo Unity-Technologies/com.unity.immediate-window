@@ -33,6 +33,19 @@ $caret-text-color: #646464;
 
 $link-text-color: #4F80F8;
 
+$text-faded: rgba(255, 255, 255, 0.5);
+$property-label-enumerable: #954F9B;
+$property-label: #E16DEA;
+$property-label-private: #EB8752;
+
+$value-string: #E83F3B;
+$value-number: #9079F0;
+$value-null: $value-number;
+
+$method-name: #A1F7B5;
+$method-argument: #5CB0D7;
+$methiod-return: rgba(181, 65, 194, 0.89);
+
 //--------------------------------------------------------------------------------------------------
 // Custom backgrounds
 //--------------------------------------------------------------------------------------------------
@@ -68,14 +81,21 @@ $toolbar-search-cancel-background: resource("Builtin Skins/DarkSkin/Images/toolb
 $toolbar-search-cancel-active-background: resource("Builtin Skins/DarkSkin/Images/toolbarsearchCancelButtonActive.png");
 $toolbar-search-cancel-off-background: resource("Builtin Skins/DarkSkin/Images/toolbarsearchCancelButtonOff.png");
 
-$cancel-background: resource("Builtin Skins/DarkSkin/Images/ol minus.png");
-$cancel-pressed-background: resource("Builtin Skins/DarkSkin/Images/ol minus act.png");
+$cancel-background: resource("Builtin Skins/DarkSkin/Images/ShurikenCheckMarkMixed.png");
+$cancel-pressed-background: resource("Builtin Skins/DarkSkin/Images/ShurikenCheckMarkNormal.png");
 $popup-background: resource("Builtin Skins/DarkSkin/Images/popup.png");
 $popup-pressed-background: resource("Builtin Skins/DarkSkin/Images/popup act.png");
 $play-background: resource("Builtin Skins/DarkSkin/Images/IN foldout act.png");
 $play-pressed-background: resource("Builtin Skins/DarkSkin/Images/IN foldout.png");
 $context-background: resource("Builtin Skins/DarkSkin/Images/ShurikenModuleActive.png");
 $context-pressed-background: resource("Builtin Skins/DarkSkin/Images/ShurikenEmitterActive.png");
+
+$icon-node0: resource("Builtin Skins/DarkSkin/Images/node0 hex.png");
+$icon-node0-on: resource("Builtin Skins/DarkSkin/Images/node0 hex on.png");
+$icon-node1: resource("Builtin Skins/DarkSkin/Images/node1 hex.png");
+$icon-node1-on: resource("Builtin Skins/DarkSkin/Images/node1 hex on.png");
+$icon-node2: resource("Builtin Skins/DarkSkin/Images/node2 hex.png");
+$icon-node2-on: resource("Builtin Skins/DarkSkin/Images/node2 hex on.png");
 
 //--------------------------------------------------------------------------------------------------
 // Common stylesheet

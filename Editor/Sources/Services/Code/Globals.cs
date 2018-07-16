@@ -1,21 +1,23 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.ImmediateWindow.TestObjects;
 using UnityEditor.ImmediateWindow.UI;
+using UnityEngine;
 
 namespace UnityEditor.ImmediateWindow.Services
 {
     public class Globals
     {
-        public object _0;
-        public object _1;
-        public object _2;
-        public object _3;
-        public object _4;
-        public object _5 = Inspector.GetAllStaticInstances().ToArray();
-        public object _6 = new SecretStruct();
-        public object _7;
-        public object _8 = SimpleObject.Create();
-        public object _9 = ComplexObject.Create();
+        public object __0;
+        public object __1;
+        public object __2;
+        public object __3;
+        public object __4 = GameObject.Find("Main Camera").transform;
+        public object __5 = new Dictionary<string, int> { {"my", 10}, {"yessir", 20} };
+        public object __6 = new List<string> {"test", "yes"};
+        public object __7 = new SecretStruct();
+        public object __8 = SimpleObject.Create();
+        public object __9 = ComplexObject.Create();
 
         public object _ImmediateWindowReservedGlobal;
     }

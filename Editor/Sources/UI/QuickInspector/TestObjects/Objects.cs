@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UnityEditor.ImmediateWindow.TestObjects
 {
@@ -38,6 +39,10 @@ namespace UnityEditor.ImmediateWindow.UI
         public int myOhMy;
         public SimpleObject Simple;
         public object Loop;
+        public int[] Numbers = new int[] {4, 5, 6};
+        public string[] Strings = new string[] {"yes", "works!"};
+        public IEnumerable<string> StringsEnum = new List<string> {"yes enum", "works enum!"};
+        public object ObjectArray = new object[] {"yes enum", "works enum!", 123, SimpleObject.Create()};
 
         static public bool HasLooped = false;
         

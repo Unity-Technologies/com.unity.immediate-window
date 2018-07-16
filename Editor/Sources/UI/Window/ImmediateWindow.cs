@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEditor.Experimental.UIElements;
 using UnityEditor.ImmediateWindow.Services;
+using UnityEditor.Analytics;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
@@ -21,6 +22,8 @@ namespace UnityEditor.ImmediateWindow.UI
         public void OnEnable()
         {
             CurrentWindow = this;
+          
+            SetupAnalytics();
             
             Evaluator.Init(ref Evaluator);
             State.Init(ref State);
@@ -36,6 +39,15 @@ namespace UnityEditor.ImmediateWindow.UI
             }
         }
 
+        private void SetupAnalytics()
+        {
+            int maxEventsPerHour = 100;
+            int maxNumberOfElementInStruct = 100;
+            string vendorKey = "unity.immediate-window";
+
+            EditorAnalytics.RegisterEventWithLimit("evaluatecode", maxEventsPerHour, maxNumberOfElementInStruct, vendorKey);
+        }
+
         public void SetSideViewVisibility(bool visibility)
         {
             UIUtils.SetElementDisplay(SideView, visibility);
@@ -45,7 +57,7 @@ namespace UnityEditor.ImmediateWindow.UI
         internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
         internal VisualElement SideView { get { return this.GetRootVisualContainer().Q<VisualElement>("sideview"); } }
         
-        [MenuItem("Window/Debug/Immediate Window", priority = 1500)]
+        [MenuItem("Window/Analysis/Immediate Window")]
         internal static void ShowPackageManagerWindow()
         {
             var window = GetWindow<ImmediateWindow>(false, "Immediate", true);

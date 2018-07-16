@@ -21,11 +21,11 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
 - Object Inspector
     + To show and inspect values
     * Add all properties
-        * getters/setters (expandable for value)
         * Arrays
             * With pagination for large arrays)
-        * Methods
     * Add pagination for all (...)
+    * Editing
+        * Allow inline edit of values (eg: click on string and change it right there)
 - Save Settings
     + Better experience
     * Save List of 'using'

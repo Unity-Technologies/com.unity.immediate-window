@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using UnityEngine;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using UnityEditor;
-using UnityEditor.ImmediateWindow.UI;
+using Microsoft.CodeAnalysis.Recommendations;
+using Microsoft.CodeAnalysis.Text;
+using UnityEditor.ImmediateWindow.Services;
 
 namespace UnityEditor.ImmediateWindow.Services
 {
@@ -22,8 +23,12 @@ namespace UnityEditor.ImmediateWindow.Services
         public event Action<string, CompilationErrorException> OnEvaluationError = delegate { };
         public event Action<string> OnBeforeEvaluation = delegate { };
 
+        private AdhocWorkspace Workspace { get; set; }
+        private SourceText Text { get; set; }
+        private string Code { get; set; }
+
         private Globals Globals { get; set; }
-        private ScriptState State { get; set; }
+        private ScriptState ScriptState { get; set; }
 
         public static void Init(ref Evaluator value)
         {
@@ -47,10 +52,10 @@ namespace UnityEditor.ImmediateWindow.Services
             SymbolCount = 1;
             Globals = new Globals();
             List<MetadataReference> references = new List<MetadataReference>();
-            foreach(var assembly in Inspector.GetAllAssemblies())
+            foreach(var assembly in Inspector.GetAllAssemblies(true))
                 references.Add(MetadataReference.CreateFromFile(assembly.Location));
 
-            /* For easier debuggin
+            /* For easier debugging
             references.Add(MetadataReference.CreateFromFile(typeof(Evaluator).Assembly.Location));
             references.Add(MetadataReference.CreateFromFile(typeof(UnityEditor.BuildOptions).Assembly.Location));
             references.Add(MetadataReference.CreateFromFile(typeof(UnityEngine.Application).Assembly.Location));
@@ -58,11 +63,51 @@ namespace UnityEditor.ImmediateWindow.Services
             
             var options = ScriptOptions.Default.WithReferences(references);
 
-            State = await CSharpScript.RunAsync("", options, globals: Globals);
+            ScriptState = await CSharpScript.RunAsync("", options, globals: Globals);
             
-            // Set some default common namespaces
-            await AddNamespace("UnityEngine");
-            await AddNamespace("UnityEditor");
+            // Set some default common namespaces for easier debugging
+            await AddNamespace(new List<string>
+            {
+                "UnityEngine",
+                "UnityEditor",
+                "System.Collections",
+                "System.Collections.Generic",
+                "System.Linq"
+            });
+
+            /* Test using workspaces
+        string _text = 
+            @"using System;using UnityE
+namespace TEST
+{
+    public class MyClass
+    {
+        public static void Print()
+        {
+            Console.WriteLine(""Hello World"");
+        }
+    }
+}";
+            Workspace = new AdhocWorkspace();
+            string projName = "Immediate Window";
+            ProjectId projId = ProjectId.CreateNewId();
+            VersionStamp versionStamp = VersionStamp.Create();
+            ProjectInfo projInfo = ProjectInfo.Create(projId, versionStamp, projName, projName, LanguageNames.CSharp);
+            SourceText sourceText = SourceText.From(_text);
+
+            projInfo = projInfo.WithMetadataReferences(references);
+            Workspace.AddProject(projInfo);
+            Document doc = Workspace.AddDocument(Workspace.CurrentSolution.ProjectIds[0], "console.cs", sourceText);
+
+            SemanticModel semanticModel = doc.GetSemanticModelAsync().Result;
+
+            IEnumerable<Diagnostic> diagnostics = semanticModel.GetDiagnostics();
+            IEnumerable<ISymbol> symbols = Recommender.GetRecommendedSymbolsAtPositionAsync(semanticModel, 25, Workspace).Result;
+            foreach (var symbol in symbols)
+            {
+                Debug.Log($"Symbol: {symbol.Name}");
+            }
+            */
         }
         
         public async void Evaluate(string code)
@@ -72,7 +117,7 @@ namespace UnityEditor.ImmediateWindow.Services
 
             // Don't call delegate method in try/catch block to avoid silencing throws
             if (error == null)
-                OnEvaluationSuccess(State.ReturnValue);
+                OnEvaluationSuccess(ScriptState.ReturnValue);
             else
             {
                 var message = string.Join(Environment.NewLine, error.Diagnostics);
@@ -86,7 +131,7 @@ namespace UnityEditor.ImmediateWindow.Services
             CompilationErrorException error = null;
             try
             {
-                State = await State.ContinueWithAsync(code);
+                ScriptState = await ScriptState.ContinueWithAsync(code);
             }
             catch (CompilationErrorException e)
             {
@@ -105,25 +150,26 @@ namespace UnityEditor.ImmediateWindow.Services
          */
         public async Task<string> AddToNextGlobal(object obj, Action onUnRegister = null)
         {
-            //UnityEditor.ImmediateWindow.UI.ComplexStruct a = _ImmediateWindowReservedGlobal;
             var targetType = obj.GetType();
             var symbol = "_0";
 
             if (targetType.IsVisible)
             {
+                var parsed = new ParsedAssemblyQualifiedName.ParsedAssemblyQualifiedName(targetType.AssemblyQualifiedName);
+
                 symbol = string.Format("_{0}", SymbolCount++);
                 Globals._ImmediateWindowReservedGlobal = obj;
-                var code = string.Format("var {0} = ({1})_ImmediateWindowReservedGlobal;", symbol, targetType.FullName);
+                var code = string.Format("var {0} = _ImmediateWindowReservedGlobal as {1};", 
+                    symbol, parsed.CSharpStyleName.Value);
                 var error = await EvaluateSilently(code);
             
                 if (error != null)
-                    Debug.Log("Error while trying to add a symbol: " + error.Message);                
+                    Debug.Log("Error while trying to add a symbol: " + error.Message + " -- Code: " + code + "\n");                
             }
 
             if (OnUnRegister != null)
                 OnUnRegister();
             
-            Globals._0 = obj;
             OnUnRegister = onUnRegister;
             
             return symbol;
@@ -133,11 +179,37 @@ namespace UnityEditor.ImmediateWindow.Services
         // solid way to add a namespace without simply re-evaluating.
         public async Task<CompilationErrorException> AddNamespace(string ns)
         {
-            var error = await EvaluateSilently($"using {ns};");
+            return await AddNamespace(new List<string> {ns});
+        }
+        
+        public async Task<CompilationErrorException> AddNamespace(IEnumerable<string> namespaces)
+        {
+            State.Instance.Namespaces.AddRange(namespaces);
+
+            var code = "";
+            foreach (var ns in namespaces)
+                code += $"using {ns};\n";
+
+            var error = await EvaluateSilently(code);
             if (error != null)
-                Debug.Log("Error clicking namespace: " + error.Message);
+                Debug.Log("Error adding namespace: " + error.Message + "\n\n" + code);
 
             return error;
+        }
+
+        public async void GetAutocomplete(string code)
+        {
+            /*
+            var syntaxTree = ScriptState.Script.GetCompilation().SyntaxTrees.First();
+            var semanticModel = ScriptState.Script.GetCompilation().GetSemanticModel(syntaxTree);
+
+            AdhocWorkspace workspace = new AdhocWorkspace();
+            var symbols = await Recommender.GetRecommendedSymbolsAtPositionAsync(semanticModel, code.Length - 2, workspace);
+            foreach (var symbol in symbols)
+            {
+                Debug.Log($"Symbol: {symbol.Name}");
+            }
+            */
         }
     }
 }

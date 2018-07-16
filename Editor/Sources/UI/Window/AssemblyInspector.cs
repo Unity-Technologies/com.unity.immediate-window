@@ -40,12 +40,13 @@ namespace UnityEditor.ImmediateWindow.UI
         private void OnLabelClick(MouseDownEvent evt)
         {
             Expanded = !Expanded;
+            Arrow.SetDirection(Expanded ? Arrow.Direction.Down : Arrow.Direction.Right);
             
             if (Expanded)
             {
                 foreach (var ns in Inspector.GetAllNamespaces(Assembly))
                 {
-                    var inspector = new NamespaceInspector(ns);
+                    var inspector = new NamespaceInspector(ns, Assembly);
                     Container.Add(inspector);
                 }
             }

@@ -1,4 +1,7 @@
-﻿using UnityEditor.ImmediateWindow.Services;
+﻿using System.Linq;
+using System.Reflection;
+using UnityEditor.ImmediateWindow.Services;
+using UnityEditor.ImmediateWindow.TestObjects;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 
@@ -11,15 +14,22 @@ namespace UnityEditor.ImmediateWindow.UI
         private Label Label { get; set; }
         private string Namespace { get; set; }
         private bool IsUsing { get; set; }
+        private Assembly Assembly { get; set; }
+        private VisualElement ObjectContainer { get; set; }
         
-        public NamespaceInspector(string ns)
+        public NamespaceInspector(string ns, Assembly assembly)
         {
+            Assembly = assembly;
             Namespace = ns;
             AddToClassList("namespace");
 
             Label = new Label(ns);
             Label.AddToClassList("namespace-label");
             Add(Label);
+
+            ObjectContainer = new VisualElement();
+            ObjectContainer.AddToClassList("object-container");
+            Add(ObjectContainer);
             
             RegisterCallback<MouseDownEvent>(OnClick);
             tooltip = $"Click to have namespace {ns} be used in your current context";
@@ -40,6 +50,21 @@ namespace UnityEditor.ImmediateWindow.UI
                     
             Label.text = $"✓ {Namespace}";
             IsUsing = true;
+
+            //SetNamespaceObjects();
+        }
+
+        private void SetNamespaceObjects()
+        {
+            ObjectContainer.Clear();
+            
+            var objects = Inspector.GetAllStaticInstancesForAssembly(Assembly);
+            Debug.Log("Count: " +  objects.Count() + " -- " + Namespace + " ---- " + typeof(SecretStruct).Namespace);
+            foreach (var obj in objects)
+            {
+                var element = new QuickInspector(obj);
+                ObjectContainer.Add(element);
+            }
         }
     }
 }
