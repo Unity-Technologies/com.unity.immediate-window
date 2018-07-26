@@ -28,16 +28,6 @@ namespace UnityEditor.ImmediateWindow.UI
             Evaluator.Instance.OnEvaluationSuccess += OnEvaluationSuccess;
             Evaluator.Instance.OnEvaluationError += OnEvaluationError;
             Evaluator.Instance.OnBeforeEvaluation += OnBeforeEvaluation;
-            
-            /* Used for debug
-            Evaluator.Instance.Evaluate("_9");
-            Evaluator.Instance.Evaluate("1");
-            Evaluator.Instance.Evaluate("1");
-            Evaluator.Instance.Evaluate("1");
-            Evaluator.Instance.Evaluate("1");
-            Evaluator.Instance.Evaluate("1");
-            Evaluator.Instance.Evaluate("1");
-            */
         }
 
         private void OnBeforeEvaluation(string code)
@@ -63,9 +53,13 @@ namespace UnityEditor.ImmediateWindow.UI
                 Content.Add(new OutputItem(output.ToString()));                
             }
 
-            Content.Add(new OutputItem(output));
+            AddObject(output);
+        }
 
-            ScrollToEnd();
+        public void AddObject(object obj)
+        {
+            Content.Add(new OutputItem(obj));
+            ScrollToEnd();            
         }
 
         // TODO: Doesn't quite work.

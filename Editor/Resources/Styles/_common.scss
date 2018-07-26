@@ -142,6 +142,8 @@
 	font-size: 12;
 }
 
+$tree-margin: 15;
+
 //--------------------------------------------------------------------------------------------------
 // Styles
 //--------------------------------------------------------------------------------------------------
@@ -253,6 +255,11 @@ $toolbar-height: 18;
 			@include position(auto, auto, auto, 5);
 			@include button(3,3,4,3);
 		}
+	}
+
+	Button.compact {
+		@include margin-box(0);
+		@include padding-box(0);
 	}
 
 	.spinner {
@@ -378,6 +385,23 @@ $toolbar-height: 18;
 				// Possibly should be in quick inspector if quick inspector starts having assemblies and namespaces too
 				.object-container {
 					flex: 1 0 0;
+
+					.type {
+						margin-left: $tree-margin;
+					}
+
+					.typeProperties {
+						margin-left: $tree-margin;
+					}
+
+					.typename {
+						text-color: $property-label;
+					}
+
+					.propertyLabel {
+						text-color: $value-number;
+					}
+
 				}
 			}
 		}
@@ -535,12 +559,6 @@ $toolbar-height: 18;
 			}
 		}
 	}
-
-	Button.compact {
-		@include margin-box(0);
-		@include padding-box(0);
-	}
-
 }
 
 .arrow {
@@ -661,11 +679,30 @@ $toolbar-height: 18;
 		.viewModes {
 			@extend .row;
 			flex-wrap: wrap;
+
+			TypeViewSelection {
+				@extend .row;
+				flex-wrap: wrap;
+
+				TypeViewMenu {
+					Label {
+						text-color: $package-tag-color;
+						font-style: italic;
+					}
+				}
+			}
 		}
 
 		ExpandedClassType {
 			.expandedClassLabel {
 				text-color: $text-faded;
+			}
+		}
+
+		ExpandedInterfaceGroup {
+			Interface {
+				flex: 1 0 auto;
+				flex-direction: row;
 			}
 		}
 
@@ -680,7 +717,7 @@ $toolbar-height: 18;
 
 				.return {
 					margin-right: 4;
-					text-color: $methiod-return;
+					text-color: $method-return;
 				}
 
 				.parameter {
@@ -720,7 +757,7 @@ $toolbar-height: 18;
 	}
 
 	.collapsedGroup {
-		flex: 0 1 auto;
+		flex: 1 1 auto;
 		flex-direction: row;
 	}
 

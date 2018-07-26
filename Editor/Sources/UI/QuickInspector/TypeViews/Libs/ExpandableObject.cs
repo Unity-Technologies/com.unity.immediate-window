@@ -23,7 +23,7 @@ namespace UnityEditor.ImmediateWindow.UI
 
             var views = new Container("viewModes");
             var typeViewSelection = new TypeViewSelection(obj, context);
-            typeViewSelection.OnTypeSwitch += OnTypeSwitch;
+            context.OnTypeSwitch += OnTypeSwitch;
             views.Add(typeViewSelection);
 
             Content = new ExtendedExpandable();

@@ -4,6 +4,7 @@ using UnityEditor.Experimental.UIElements;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEditor.Analytics;
 
+
 namespace UnityEditor.ImmediateWindow.UI
 {
     internal class ImmediateWindow : EditorWindow
@@ -38,7 +39,7 @@ namespace UnityEditor.ImmediateWindow.UI
                 template.StretchToParentSize();
             }
         }
-
+        
         private void SetupAnalytics()
         {
             int maxEventsPerHour = 100;
@@ -56,6 +57,7 @@ namespace UnityEditor.ImmediateWindow.UI
         internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
         internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
         internal VisualElement SideView { get { return this.GetRootVisualContainer().Q<VisualElement>("sideview"); } }
+        public Console Console { get { return this.GetRootVisualContainer().Q<Console>("console"); } }
         
         [MenuItem("Window/Analysis/Immediate Window")]
         internal static void ShowPackageManagerWindow()

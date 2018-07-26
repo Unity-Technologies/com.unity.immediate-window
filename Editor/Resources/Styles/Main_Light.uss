@@ -33,7 +33,7 @@
   margin-right: 0;
 }
 
-.row, .quickInspector .expandable .viewModes, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
+.row, .quickInspector .expandable .viewModes, .quickInspector .expandable .viewModes TypeViewSelection, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
   flex: 0 0 auto;
   flex-direction: row;
 }
@@ -163,6 +163,16 @@
 #immediateWindow .alert #close:hover {
   text-color: #000000;
 }
+#immediateWindow Button.compact {
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
 #immediateWindow .spinner {
   flex: 0 0 auto;
   position-top: -7;
@@ -259,6 +269,18 @@
 }
 #immediateWindow #context .context-inspector .namespace .object-container {
   flex: 1 0 0;
+}
+#immediateWindow #context .context-inspector .namespace .object-container .type {
+  margin-left: 15;
+}
+#immediateWindow #context .context-inspector .namespace .object-container .typeProperties {
+  margin-left: 15;
+}
+#immediateWindow #context .context-inspector .namespace .object-container .typename {
+  text-color: #8e2296;
+}
+#immediateWindow #context .context-inspector .namespace .object-container .propertyLabel {
+  text-color: #1c01d2;
 }
 
 #toggleContainer {
@@ -458,16 +480,6 @@
   margin-bottom: 0;
   margin-right: 5;
 }
-#toolbarContainer Button.compact {
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
 
 .arrow {
   font-size: 8;
@@ -507,7 +519,7 @@
   flex: 1 0 0;
   flex-wrap: wrap;
 }
-.quickInspector .row, .quickInspector .expandable .viewModes, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
+.quickInspector .row, .quickInspector .expandable .viewModes, .quickInspector .expandable .viewModes TypeViewSelection, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
@@ -561,8 +573,19 @@
 .quickInspector .expandable .viewModes {
   flex-wrap: wrap;
 }
+.quickInspector .expandable .viewModes TypeViewSelection {
+  flex-wrap: wrap;
+}
+.quickInspector .expandable .viewModes TypeViewSelection TypeViewMenu Label {
+  text-color: #d25a00;
+  font-style: italic;
+}
 .quickInspector .expandable ExpandedClassType .expandedClassLabel {
   text-color: rgba(0, 0, 0, 0.5);
+}
+.quickInspector .expandable ExpandedInterfaceGroup Interface {
+  flex: 1 0 auto;
+  flex-direction: row;
 }
 .quickInspector .expandable ExpandedMethodGroup Method {
   flex: 1 0 auto;
@@ -598,7 +621,7 @@
   justify-content: space-between;
 }
 .expandable .collapsedGroup {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   flex-direction: row;
 }
 .expandable .collapseView {

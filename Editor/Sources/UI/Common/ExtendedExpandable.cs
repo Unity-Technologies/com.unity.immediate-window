@@ -8,10 +8,10 @@ namespace UnityEditor.ImmediateWindow.UI
     /// 
     ///                            Content
     /// |-----------------------------------------------------|
-    ///                       CollapsedGroup
-    ///    |---------------------------------------------------|
+    ///           CollapsedGroup
+    /// |---------------------------------|
     ///                  CollapseViewContainer
-    ///                               V
+    ///                      |----------------|
     ///      Label          CollapseView          Tools
     ///    |-------------|----------------|--------------------|
     ///  ► MyClass          {desc}                      Tools
@@ -89,7 +89,7 @@ namespace UnityEditor.ImmediateWindow.UI
             CollapseViewContainer = new Container("collapseView");
             CollapsedGroup.Add(CollapseViewContainer);
             CollapsedView = new VisualElement();
-            
+
             OnExpandStateChanged += OnExpandState;
         }
 

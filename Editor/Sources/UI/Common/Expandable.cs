@@ -38,14 +38,14 @@ namespace UnityEditor.ImmediateWindow.UI
             Arrow = new ArrowToggle();
 
             Content = new Container("collapseRow");
-            Content.RegisterCallback<MouseDownEvent>(OnClick);                
             Add(Content);
                 
             CollapsedGroup = new Container("collapsedGroup");
-            ExpandedGroup = new Container("expandedGroup");
-            
+            CollapsedGroup.RegisterCallback<MouseDownEvent>(OnClick);                
             CollapsedGroup.Add(Arrow);
             Content.Add(CollapsedGroup);
+
+            ExpandedGroup = new Container("expandedGroup");            
             Add(ExpandedGroup);
             
             Expanded = expanded;
