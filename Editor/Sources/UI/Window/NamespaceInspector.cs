@@ -28,10 +28,10 @@ namespace UnityEditor.ImmediateWindow.UI
             Add(Label);
 
             ObjectContainer = new VisualElement();
-            ObjectContainer.AddToClassList("object-container");
+            ObjectContainer.AddClasses("object-container");
             Add(ObjectContainer);
             
-            RegisterCallback<MouseDownEvent>(OnClick);
+            Label.RegisterCallback<MouseDownEvent>(OnClick);
             tooltip = $"Click to have namespace {ns} be used in your current context";
         }
 
@@ -40,31 +40,55 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             if (IsUsing)
             {
-                Debug.Log("Cannot remove a namespace. Reset context if you want to clear them.");
-                return;                
+                // Debug.Log("Cannot remove a namespace. Reset context if you want to clear them.");
             }
-            
-            var error = await Evaluator.Instance.AddNamespace(Namespace);
-            if (error != null)
-                return;
-                    
-            Label.text = $"✓ {Namespace}";
-            IsUsing = true;
+            else
+            {
+                var error = await Evaluator.Instance.AddNamespace(Namespace);
+                if (error != null)
+                    return;    
 
-            //SetNamespaceObjects();
+                Label.text = $"{Namespace} ✓";
+                IsUsing = true;
+            }
+
+            if (ObjectContainer.childCount > 0)
+                ObjectContainer.Clear();
+            else
+                SetNamespaceObjects();
         }
 
         private void SetNamespaceObjects()
         {
-            ObjectContainer.Clear();
-            
-            var objects = Inspector.GetAllStaticInstancesForAssembly(Assembly);
-            Debug.Log("Count: " +  objects.Count() + " -- " + Namespace + " ---- " + typeof(SecretStruct).Namespace);
-            foreach (var obj in objects)
+            var types = Inspector.GetAllTypesWithStaticPropertiesForAssemblyNamespace(Assembly, Namespace);
+            foreach (var type in types)
             {
-                var element = new QuickInspector(obj);
-                ObjectContainer.Add(element);
+                var typeContainer = new Container("type");
+                var typeLabel = new Label(type.Name);
+                typeLabel.AddToClassList("typename");
+
+                typeContainer.Add(typeLabel);
+                
+                var propertiesContainer = new Container("typeProperties");
+                
+                foreach (var property in Inspector.GetAllStaticInstancesForType(type))
+                {
+                    var propertyLabel = new Label(property.Label);
+                    propertyLabel.AddClasses("propertyLabel");
+                    propertyLabel.RegisterCallback<MouseDownEvent>(evt => OnPropertyClick(property));
+
+                    propertiesContainer.Add(propertyLabel);                    
+                }
+                
+                typeContainer.Add(propertiesContainer);
+                ObjectContainer.Add(typeContainer);
             }
         }
+
+        void OnPropertyClick(PropertyInfo property)
+        {
+            ImmediateWindow.CurrentWindow.Console.ConsoleOutput.AddObject(property.Value);
+        }
+        
     }
 }

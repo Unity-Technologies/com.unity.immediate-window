@@ -4,9 +4,9 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class IEnumerableInspector : VisualElement
+    internal class CollapsedArrayGroup : VisualElement
     {
-        public IEnumerableInspector(IEnumerable obj)
+        public CollapsedArrayGroup(IEnumerable obj)
         {
             AddToClassList("collapsedArrayGroup");
             

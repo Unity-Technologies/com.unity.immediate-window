@@ -5,6 +5,12 @@ namespace UnityEditor.ImmediateWindow.TestObjects
 {
     public class SecretStruct
     {
+        static public bool SomeStaticValue = false;
+        static public string SomeStaticPropertyValue
+        {
+            get { return "yessir!!!";}
+        }
+        
         public int BestValue = 1978;
     }
 }
@@ -34,7 +40,15 @@ namespace UnityEditor.ImmediateWindow.UI
         }
     }
 
-    public class ComplexObject
+    public class InheritedObject
+    {
+        public int[] InheritedField = new int[] {4, 5, 6};
+        public string InheritedProperty { get; } = "yes";
+
+        public void InheritedMethod() {}
+    }
+    
+    public class ComplexObject : InheritedObject
     {
         public int myOhMy;
         public SimpleObject Simple;
@@ -43,6 +57,7 @@ namespace UnityEditor.ImmediateWindow.UI
         public string[] Strings = new string[] {"yes", "works!"};
         public IEnumerable<string> StringsEnum = new List<string> {"yes enum", "works enum!"};
         public object ObjectArray = new object[] {"yes enum", "works enum!", 123, SimpleObject.Create()};
+        public Dictionary<string, int> SimpleDict = new Dictionary<string, int> { {"key1", 100}, {"key2", 200}};
 
         static public bool HasLooped = false;
         

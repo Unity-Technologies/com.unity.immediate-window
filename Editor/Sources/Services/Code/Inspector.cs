@@ -12,23 +12,6 @@ namespace UnityEditor.ImmediateWindow.Services
         {
         }
 
-        // Get all instances of 
-        public static IEnumerable<object> GetAllStaticInstances()
-        {
-            var objects = new List<object>();
-            
-            var assemblies = GetAllAssemblies();
-
-            foreach (Assembly assembly in assemblies)
-            {
-                objects.AddRange(GetAllStaticInstancesForAssembly(assembly));
-            }
-
-            //Debug.Log("Count: " + objects.Count);
-            
-            return objects;
-        }
-
         public static IEnumerable<Type> GetLoadableTypes(Assembly assembly) {
             if (assembly == null) throw new ArgumentNullException("assembly");
             
@@ -58,10 +41,9 @@ namespace UnityEditor.ImmediateWindow.Services
             return types;
         }
 
-        public static IEnumerable<object> GetAllStaticInstancesForAssembly(Assembly assembly)
+        public static IEnumerable<Type> GetAllTypesWithStaticPropertiesForAssembly(Assembly assembly)
         {
-            var objects = new List<object>();
-            //Debug.Log("Assembly: " + a.FullName);
+            var result = new List<Type>();
                 
             Type[] types;
             try
@@ -83,49 +65,58 @@ namespace UnityEditor.ImmediateWindow.Services
                 t != null &&
                 !t.IsInterface &&
                 !t.IsAbstract &&
+                !t.IsEnum &&
                 !t.ContainsGenericParameters))
             {
                 if (!t.IsClass && !t.IsValueType) continue;
                 
                 var staticProperties = t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-
                 if (!staticProperties.Any()) continue;
 
-                var content = t.FullName;
-                foreach (var p in staticProperties)
-                {
-                    content += "\n    " + p.Name + " -- " + p.FieldType.FullName;
-                    try
-                    {
-                        objects.Add(p.GetValue(t));
-                    }
-                    catch (Exception error)
-                    {
-                        var message = "Instances: Could not get property value: " + p.Name + " -- " + error.Message;
-                        if (error.StackTrace != null)
-                            message += "\n\nStack trace: " + error.StackTrace;
-                        if (error.InnerException != null)
-                            message += "\n\n\nInner Exception: " + error.InnerException.Message;
-
-                        Debug.LogError(message);
-                    }
-                }
-
-                //Debug.Log(content);                    
-                //objects.Add(t);
+                result.Add(t);
             }
 
-            return objects;
+            return result;
+        }
+        
+        public static IEnumerable<UI.PropertyInfo> GetAllStaticInstancesForType(Type type)
+        {
+            var propertyInfos = new List<UI.PropertyInfo>();
+
+            if (!type.IsClass && !type.IsValueType) return propertyInfos;
+            
+            var staticProperties = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+
+            if (!staticProperties.Any()) return propertyInfos;
+
+            // TODO: Big duplicate of GetPropertyInfo
+            foreach (var p in staticProperties)
+            {
+                propertyInfos.Add(new UI.PropertyInfo {Field = p, Object = type, IsPrivate =  p.IsPrivate});
+            }
+
+            foreach (var prop in type.GetProperties())
+            {
+                if (prop.GetGetMethod() == null)
+                    continue;
+
+                // TODO: Technically should not skip them but simply mark them as such in the inspector
+                if (prop.GetCustomAttributes().OfType<System.ObsoleteAttribute>().Any())
+                    continue;
+
+                // TODO: Technically should at least add those. Just can't show the value (since they take arguments)
+                if (prop.GetGetMethod().GetParameters().Any())
+                    continue;
+
+                propertyInfos.Add(new UI.PropertyInfo {Field = null, Property = prop, IsPrivate = false, Object = type});
+            }
+
+            return propertyInfos;
         }
 
-        public static IEnumerable<object> GetAllStaticInstancesForAssemblyNamespace(Assembly assembly, string ns)
+        public static IEnumerable<Type> GetAllTypesWithStaticPropertiesForAssemblyNamespace(Assembly assembly, string ns)
         {
-            Debug.Log("as: " + assembly.FullName);
-            return GetAllStaticInstancesForAssembly(assembly).Where(t =>
-            {
-                Debug.Log("T: " + t.GetType().FullName + " -- ns: " + t.GetType().Namespace);
-                return t.GetType().Namespace == ns;
-            });
+            return GetAllTypesWithStaticPropertiesForAssembly(assembly).Where(t => t.Namespace == ns);
         }
 
         // Get list of all relevant assemblies

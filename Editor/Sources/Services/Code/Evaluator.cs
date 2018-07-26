@@ -197,7 +197,7 @@ namespace TEST
             return error;
         }
 
-        public async void GetAutocomplete(string code)
+        public void GetAutocomplete(string code)
         {
             /*
             var syntaxTree = ScriptState.Script.GetCompilation().SyntaxTrees.First();

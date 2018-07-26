@@ -22,9 +22,11 @@ namespace ParsedAssemblyQualifiedName
 		public readonly List<ParsedAssemblyQualifiedName> GenericParameters = new List<ParsedAssemblyQualifiedName>();
 		public readonly Lazy<string> CSharpStyleName;
 		public readonly Lazy<string> VBNetStyleName;
+		public bool UseShortTypeName;
 
-		public ParsedAssemblyQualifiedName(string AssemblyQualifiedName)
+		public ParsedAssemblyQualifiedName(string AssemblyQualifiedName, bool useShortTypeName = false)
 		{
+			UseShortTypeName = useShortTypeName;
 			int index = -1;
 			block rootBlock = new block();
 			{
@@ -50,7 +52,7 @@ namespace ParsedAssemblyQualifiedName
 						currentBlock.iEnd = i - 1;
 						if (AssemblyQualifiedName[currentBlock.iStart] != '[')
 						{
-							currentBlock.parsedAssemblyQualifiedName = new ParsedAssemblyQualifiedName(AssemblyQualifiedName.Substring(currentBlock.iStart, i - currentBlock.iStart));
+							currentBlock.parsedAssemblyQualifiedName = new ParsedAssemblyQualifiedName(AssemblyQualifiedName.Substring(currentBlock.iStart, i - currentBlock.iStart), UseShortTypeName);
 							if (bcount == 2)
 								this.GenericParameters.Add(currentBlock.parsedAssemblyQualifiedName);
 						}
@@ -112,11 +114,26 @@ namespace ParsedAssemblyQualifiedName
 				});
 		}
 
+		internal static string ShortTypeName(string typeName)
+		{
+			return typeName.IndexOf('.') > 0 ? typeName.Split('.').Last() : typeName;
+		}
+
+		internal string GetTypeName()
+		{
+			return UseShortTypeName ? ShortTypeName(TypeName) : TypeName;
+		}
+
 		internal string LanguageStyle(string prefix, string suffix)
 		{
+			var typeName = GetTypeName();
 			if (this.GenericParameters.Count > 0)
 			{
-				StringBuilder sb = new StringBuilder(this.TypeName.Substring(0, this.TypeName.IndexOf('`')));
+				var typeNameString = TypeName.Substring(0, TypeName.IndexOf('`'));
+				if (UseShortTypeName)
+					typeNameString = ShortTypeName(typeNameString);
+				
+				StringBuilder sb = new StringBuilder(typeNameString);
 				sb.Append(prefix);
 				bool pendingElement = false;
 				foreach (var param in this.GenericParameters)
@@ -130,7 +147,7 @@ namespace ParsedAssemblyQualifiedName
 				return sb.ToString();
 			}
 			else
-				return this.TypeName;
+				return typeName;
 		}
 		class block
 		{

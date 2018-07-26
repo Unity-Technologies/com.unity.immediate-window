@@ -1,4 +1,5 @@
 ﻿using UnityEditor.ImmediateWindow.Services;
+using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
@@ -48,6 +49,7 @@ namespace UnityEditor.ImmediateWindow.UI
             Context = context;
 
             Content.Label = new TypeNameView(CurrentObject);
+            Content.Label.RegisterCallback<MouseDownEvent>(OnTypeClick);
 
             OnExpandState(Content.Expanded);
         }
@@ -70,6 +72,7 @@ namespace UnityEditor.ImmediateWindow.UI
 
         async void OnTypeClick(MouseDownEvent evt)
         {
+            Debug.Log("Type clicked!!");
             PinnedSymbol = await Evaluator.Instance.AddToNextGlobal(CurrentObject, () =>
             {
                 PinnedSymbol = "";

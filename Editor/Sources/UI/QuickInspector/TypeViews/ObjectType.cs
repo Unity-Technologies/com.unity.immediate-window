@@ -5,6 +5,7 @@ namespace UnityEditor.ImmediateWindow.UI
 {
     internal class ObjectType : ITypeView
     {
+        public string Name { get; } = "Object";
         public double Priority {get { return -1; }}    // Lower priority then standard
 
         public bool HasView(Type type)
