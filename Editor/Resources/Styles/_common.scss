@@ -53,10 +53,10 @@
 }
 
 @mixin slice($top, $right, $bottom, $left) {
-	@if $top != 'auto' {slice-top: $top;}
-	@if $left != 'auto' {slice-left: $left;}
-	@if $bottom != 'auto' {slice-bottom: $bottom;}
-	@if $right != 'auto' {slice-right: $right;}
+	@if $top != 'auto' {-unity-slice-top: $top;}
+	@if $left != 'auto' {-unity-slice-left: $left;}
+	@if $bottom != 'auto' {-unity-slice-bottom: $bottom;}
+	@if $right != 'auto' {-unity-slice-right: $right;}
 }
 
 @mixin slice-box($size) {
@@ -64,10 +64,10 @@
 }
 
 @mixin position($top, $right, $bottom, $left) {
-	@if $top != 'auto' {position-top: $top;}
-	@if $left != 'auto' {position-left: $left;}
-	@if $bottom != 'auto' {position-bottom: $bottom;}
-	@if $right != 'auto' {position-right: $right;}
+	@if $top != 'auto' {top: $top;}
+	@if $left != 'auto' {left: $left;}
+	@if $bottom != 'auto' {bottom: $bottom;}
+	@if $right != 'auto' {right: $right;}
 }
 
 @mixin text-clip() {
@@ -76,17 +76,17 @@
 
 @mixin selected-element() {
 	background-color: $unity-list-selected-background;
-	text-color: $unity-text-color-highlight;
+	color: $unity-text-color-highlight;
 }
 
 @mixin active-tab() {
 	background-color: $unity-background-dark-contrast;
-	text-color: $unity-text-color-highlight;
+	color: $unity-text-color-highlight;
 }
 
 @mixin inactive-tab() {
 	background-color: $unity-background-light-contrast;
-	text-color: $unity-text-color;
+	color: $unity-text-color;
 }
 
 @mixin button($top, $right, $bottom, $left) {
@@ -104,10 +104,10 @@
 		max-height: 0;
 		min-width: 0;
 		max-width: 0;
-		border-top: 0;
-		border-left: 0;
-		border-bottom: 0;
-		border-right: 0;
+		border-top-width: 0;
+		border-left-width: 0;
+		border-bottom-width: 0;
+		border-right-width: 0;
 		min-width: 0;
 		@include border-box(0);
 		@include padding-box(0);
@@ -117,7 +117,7 @@
 	}
 
 	&:hover {
-		text-color: $unity-text-color;
+		color: $unity-text-color;
 	}
 }
 
@@ -157,10 +157,10 @@ $tree-margin: 15;
 	max-height: 0;
 	min-width: 0;
 	max-width: 0;
-	border-top: 0;
-	border-left: 0;
-	border-bottom: 0;
-	border-right: 0;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-bottom-width: 0;
+	border-right-width: 0;
 	@include border-box(0);
 	@include padding-box(0);
 	@include margin-box(0);
@@ -181,10 +181,10 @@ $tree-margin: 15;
 	@include padding(1, 3, 1, 3);
 	@include font-small();
 	border-radius: 5;
-	text-alignment: middle-center;
+	-unity-text-align: middle-center;
 
 	border-color: #000000;
-	text-color: #000000;
+	color: #000000;
 }
 
 $spinner-large-size: 32;
@@ -209,7 +209,7 @@ $toolbar-height: 18;
 		@extend .column;
 
 		#VerticalScroller {
-			position-bottom: 0;
+			bottom: 0;
 		}
 
 		#HorizontalScroller {
@@ -217,11 +217,11 @@ $toolbar-height: 18;
 		}
 
 		#ContentViewport {
-			position-bottom: 0;
+			bottom: 0;
 
 			#ContentView {
-				position-right: 0;
-				position-left: 0;
+				right: 0;
+				left: 0;
 			}
 		}
 	}
@@ -237,15 +237,15 @@ $toolbar-height: 18;
 		background-color: rgba(200,0,0,0.8);
 		border-color: #FF0000;
 		flex-direction: row;
-		word-wrap: true;
+		-unity-word-wrap: true;
 
 		@include border-box(1);
 		@include padding(5, 10, 5, 10);
 
 		#alertMessage {
 			flex: 1 0 0;
-			text-color: $unity-text-color-highlight;
-			word-wrap: true;
+			color: $unity-text-color-highlight;
+			-unity-word-wrap: true;
 			@include text-clip();
 		}
 
@@ -289,7 +289,7 @@ $toolbar-height: 18;
 		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
 
 		.console-log {
-			word-wrap: true;
+			-unity-word-wrap: true;
 		}
 
 
@@ -334,11 +334,11 @@ $toolbar-height: 18;
 		}
 
 		#console-input {
-			position-bottom: 0;
+			bottom: 0;
 		}
 
 		#console-input-multiline {
-			position-bottom: 0;
+			bottom: 0;
 			height: 250;
 		}
 	}
@@ -369,8 +369,8 @@ $toolbar-height: 18;
 
 			.assembly-label {
 				flex: 1 0 0;
-				font-style: bold;
-				word-wrap: true;
+				-unity-font-style: bold;
+				-unity-word-wrap: true;
 			}
 
 			.namespace {
@@ -378,8 +378,8 @@ $toolbar-height: 18;
 
 				.namespace-label {
 					flex: 1 0 0;
-					font-style: italic;
-					word-wrap: true;
+					-unity-font-style: italic;
+					-unity-word-wrap: true;
 				}
 
 				// Possibly should be in quick inspector if quick inspector starts having assemblies and namespaces too
@@ -395,11 +395,11 @@ $toolbar-height: 18;
 					}
 
 					.typename {
-						text-color: $property-label;
+						color: $property-label;
 					}
 
 					.propertyLabel {
-						text-color: $value-number;
+						color: $value-number;
 					}
 
 				}
@@ -516,7 +516,7 @@ $toolbar-height: 18;
 		.toolbarButton {
 			flex: 1 0 0;
 			font-size: 9;
-			text-alignment: middle-center;
+			-unity-text-align: middle-center;
 			background-image: $toolbar-button-background;
 			@include button-box(0);
 			@include margin(0, -1, 0, 0);
@@ -584,9 +584,9 @@ $toolbar-height: 18;
 	}
 
 	.typename {
-		font-style: italic;
+		-unity-font-style: italic;
 		opacity: 0.5;
-		word-wrap: false;
+		-unity-word-wrap: false;
 	}
 
 	.propertyValueGroup {
@@ -597,7 +597,7 @@ $toolbar-height: 18;
 
 		&.private {
 			.propertyLabel {
-				text-color: $property-label-private;
+				color: $property-label-private;
 			}
 		}
 	}
@@ -615,42 +615,42 @@ $toolbar-height: 18;
 
 
 	.isNumber {
-		text-color: $value-number;
+		color: $value-number;
 	}
 
 	.isNull {
-		font-style: italic;
-		text-color: $value-null;
+		-unity-font-style: italic;
+		color: $value-null;
 		padding-right: 2;				// Hack to Fix italic getting clipped
 	}
 
 	.isString {
-		text-color: $value-string;
+		color: $value-string;
 	}
 
 	.propertyLabel {
-		text-color: $property-label;
-		word-wrap: false;
+		color: $property-label;
+		-unity-word-wrap: false;
 		flex: 0 0 auto;
 	}
 
 	.enumerable {
 		.propertyLabel {
-			text-color: $property-label-enumerable;
-			font-style: italic;
+			color: $property-label-enumerable;
+			-unity-font-style: italic;
 		}
 	}
 
 	.empty {
 		opacity: 0.25;
-		font-style:italic;
-		word-wrap: true;
+		-unity-font-style:italic;
+		-unity-word-wrap: true;
 	}
 
 	.span {
 		&#pinned-symbol {
 			margin-left: 75;
-			font-style: italic;
+			-unity-font-style: italic;
 			opacity: 0.25;
 		}
 	}
@@ -686,8 +686,8 @@ $toolbar-height: 18;
 
 				TypeViewMenu {
 					Label {
-						text-color: $package-tag-color;
-						font-style: italic;
+						color: $package-tag-color;
+						-unity-font-style: italic;
 					}
 				}
 			}
@@ -695,7 +695,7 @@ $toolbar-height: 18;
 
 		ExpandedClassType {
 			.expandedClassLabel {
-				text-color: $text-faded;
+				color: $text-faded;
 			}
 		}
 
@@ -712,19 +712,19 @@ $toolbar-height: 18;
 				flex-direction: row;
 
 				.name {
-					text-color: $method-name;
+					color: $method-name;
 				}
 
 				.return {
 					margin-right: 4;
-					text-color: $method-return;
+					color: $method-return;
 				}
 
 				.parameter {
 					@extend .row;
 
 					.parameterType {
-						text-color: $method-argument;
+						color: $method-argument;
 						margin-right: 4;
 					}
 
@@ -769,13 +769,17 @@ $toolbar-height: 18;
 		flex: 0 0 auto;
 		justify-content: flex-end;
 		align-self: flex-start;
+
+		Button.compact {
+			height: 16; // otherwise takes the entire height content and is too big
+		}
 	}
 }
 
 // Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
 .span {
 	// No default dark color for text other then Label and such. So this is to fix this
-	text-color: $unity-text-color;
+	color: $unity-text-color;
 
 	@include margin-box(0);
 	@include padding-box(0);

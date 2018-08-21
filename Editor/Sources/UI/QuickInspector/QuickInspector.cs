@@ -9,7 +9,7 @@ namespace UnityEditor.ImmediateWindow.UI
     /**
      * Displays most generic object (will decide what is the proper display type should be)
      */
-    internal class QuickInspector : VisualElement
+    public class QuickInspector : VisualElement
     {
         private object Obj { get; set; }
 

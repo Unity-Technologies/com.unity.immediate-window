@@ -52,7 +52,7 @@ namespace UnityEditor.ImmediateWindow.Services
             SymbolCount = 1;
             Globals = new Globals();
             List<MetadataReference> references = new List<MetadataReference>();
-            foreach(var assembly in Inspector.GetAllAssemblies(true))
+            foreach(var assembly in Inspector.GetReferencableAssemblies())
                 references.Add(MetadataReference.CreateFromFile(assembly.Location));
 
             /* For easier debugging
@@ -70,6 +70,7 @@ namespace UnityEditor.ImmediateWindow.Services
             {
                 "UnityEngine",
                 "UnityEditor",
+                "System",
                 "System.Collections",
                 "System.Collections.Generic",
                 "System.Linq"

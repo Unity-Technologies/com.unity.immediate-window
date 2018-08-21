@@ -5,7 +5,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ExpandedClassType : VisualElement
+    public class ExpandedClassType : VisualElement
     {
         public ExpandedClassType(object obj)
         {

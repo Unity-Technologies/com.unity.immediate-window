@@ -3,7 +3,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class CollapsedPropertyGroup : VisualElement
+    public class CollapsedPropertyGroup : VisualElement
     {
         public CollapsedPropertyGroup(object obj)
         {

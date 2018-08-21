@@ -4,7 +4,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ClassView : VisualElement
+    public class ClassView : VisualElement
     {
         private ExtendedExpandable Content { get; set; }
         
@@ -20,10 +20,7 @@ namespace UnityEditor.ImmediateWindow.UI
         {
             var viewFull = new Label();
             viewFull.AddClasses("icon node1 viewFull");
-            
             var views = new Container("viewModes");
-            // TODO: Set back when ready
-            // views.Add(viewFull);
                 
             Content = new ExtendedExpandable();
             Content.Tools.Add(views);

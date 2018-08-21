@@ -52,6 +52,8 @@ namespace UnityEditor.ImmediateWindow.UI
             var menu = new GenericMenu();
             menu.AddItem(new GUIContent("Simple"), false, obj => CreateTemplate("Simple"), null);
             menu.AddItem(new GUIContent("Function"), false, obj => CreateTemplate("Function"), null);
+            menu.AddItem(new GUIContent("Custom Type View"), false, obj => CreateTemplate("Custom Type View"), null);
+            menu.AddItem(new GUIContent("Custom Expandable Type View"), false, obj => CreateTemplate("Custom Expandable Type View"), null);
             
             var menuPosition = new Vector2(TemplatesDropdown.layout.xMin, TemplatesDropdown.layout.center.y);
             menuPosition = this.LocalToWorld(menuPosition);
@@ -61,16 +63,132 @@ namespace UnityEditor.ImmediateWindow.UI
 
         private void CreateTemplate(string name)
         {
-            var code = "using UnityEditor;\nusing UnityEngine;\n\n";
+            var code = "";
             if (name == "Simple")
             {
-                code += "public class Test\n{\n  public void Func()\n  {\n    Debug.Log(\"works!\");\n  }\n}\nvar x = new Test();\nx.Func();\nx\n";
+                code = @"using UnityEditor;
+using UnityEngine;
+
+public class Test
+{
+  public void Func()
+  {
+    Debug.Log(""works!"");
+    }
+}
+var x = new Test();
+x.Func();
+x
+";
             }
             else if (name == "Function")
             {
-                code += "public class Test\n{\n  public object Func()\n  {\n    return 123;\n  }\n}\nvar x = new Test();\nx.Func()\n";                
-            }
+                code = @"using UnityEditor;
+using UnityEngine;
 
+public class Test
+{
+  public object Func()
+  {
+    return 123;
+  }
+}
+var x = new Test();
+x.Func()
+";
+            } 
+            else if (name == "Custom Type View")
+            {
+                code = @"using UnityEditor;
+using UnityEngine;
+using System;
+using UnityEngine.Experimental.UIElements;
+using UnityEditor.ImmediateWindow.UI;
+
+// NOTE: Currently only works the first time it is ran after any compilation. Need to investigate why.
+
+public class MyType
+{
+    public string Useful = ""useful property"";
+    public string NotUseful = ""not a useful property"";
+}
+
+public class MyCustomViewer : ATypeView
+{
+    public override bool HasView(Type type)
+    {
+        return type == typeof(MyType);
+    }
+
+    public override VisualElement GetView(object obj, ViewContext context)
+    {
+        var typeview = new Label();
+        typeview.text = (obj as MyType).Useful;     // Show only useful properties
+        return typeview;
+    }
+}
+
+// For quick view in the console
+var x = new MyType();
+x
+";
+            }
+            else if (name == "Custom Expandable Type View")
+            {
+                code = @"using UnityEditor;
+using UnityEngine;
+using System;
+using UnityEngine.Experimental.UIElements;
+using UnityEditor.ImmediateWindow.UI;
+
+// Type view using the standard expandable object system.
+
+// NOTE: Currently only works the first time it is ran after any compilation. Need to investigate why.
+
+public class MyType
+{
+    public string Useful = ""useful property"";
+    public int[] AnArrayProperty = new int[] {1,2,3};
+    public string NotUseful = ""not a useful property"";
+}
+
+public class MyCustomViewer : ATypeView
+{
+    public override bool HasView(Type type)
+    {
+        return type == typeof(MyType);
+    }
+
+    public override VisualElement GetView(object obj, ViewContext context)
+    {
+        // Return the expandable view by default
+        if (context.Mode == ViewMode.Default)
+            return new ExpandableObject(obj, context);
+
+        var theObj = (obj as MyType);
+        if (context.Mode == ViewMode.Collapsed)        // The view to return in the collapsed state of the object (single line)
+        {
+            // Show only useful properties;
+            var content = new VisualElement();
+            content.Add(new TypeInspector(theObj.AnArrayProperty, new ViewContext {Mode = ViewMode.Collapsed}));
+            content.Add(new Label(theObj.Useful));
+            return content;
+        }
+        if (context.Mode == ViewMode.Expanded)       // The view to return in the expanded state of the object (every line has a property)
+            return new ExpandedClassType(obj);;                // Show everything
+        if (context.Mode == ViewMode.Value)            // The view to return when only the basic type value is viewed
+            return new TypeNameView(obj);
+        
+        throw new Exception(""Should not get here"");
+    }
+}
+
+// For quick view in the console
+var x = new MyType();
+x
+";
+            }
+            
             Console.SetMultilineCode(code);
         }
 

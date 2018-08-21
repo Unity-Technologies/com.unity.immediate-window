@@ -15,10 +15,10 @@
   max-height: 0;
   min-width: 0;
   max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
   border-top-width: 0;
   border-left-width: 0;
   border-bottom-width: 0;
@@ -54,9 +54,9 @@
   padding-right: 3;
   font-size: 9;
   border-radius: 5;
-  text-alignment: middle-center;
+  -unity-text-align: middle-center;
   border-color: #000000;
-  text-color: #000000;
+  color: #000000;
 }
 
 #immediateWindow {
@@ -70,17 +70,17 @@
   flex-direction: row;
 }
 #immediateWindow .scrollView #VerticalScroller {
-  position-bottom: 0;
+  bottom: 0;
 }
 #immediateWindow .scrollView #HorizontalScroller {
   height: 0;
 }
 #immediateWindow .scrollView #ContentViewport {
-  position-bottom: 0;
+  bottom: 0;
 }
 #immediateWindow .scrollView #ContentViewport #ContentView {
-  position-right: 0;
-  position-left: 0;
+  right: 0;
+  left: 0;
 }
 #immediateWindow .no-background, #immediateWindow .span {
   background: rgba(0, 0, 0, 0);
@@ -98,7 +98,7 @@
   background-color: rgba(200, 0, 0, 0.8);
   border-color: #FF0000;
   flex-direction: row;
-  word-wrap: true;
+  -unity-word-wrap: true;
   border-top-width: 1;
   border-left-width: 1;
   border-bottom-width: 1;
@@ -110,23 +110,23 @@
 }
 #immediateWindow .alert #alertMessage {
   flex: 1 0 0;
-  text-color: #f4f4f4;
-  word-wrap: true;
+  color: #f4f4f4;
+  -unity-word-wrap: true;
   overflow: hidden;
 }
 #immediateWindow .alert #close {
   flex: 0 0 auto;
   max-height: 30;
-  position-left: 5;
+  left: 5;
   flex: 0 0 auto;
   padding-top: 3;
   padding-left: 3;
   padding-bottom: 4;
   padding-right: 3;
-  slice-top: 4;
-  slice-left: 6;
-  slice-bottom: 4;
-  slice-right: 6;
+  -unity-slice-top: 4;
+  -unity-slice-left: 6;
+  -unity-slice-bottom: 4;
+  -unity-slice-right: 6;
 }
 #immediateWindow .alert #close.display-none {
   position: absolute;
@@ -137,10 +137,10 @@
   max-height: 0;
   min-width: 0;
   max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
   min-width: 0;
   border-top-width: 0;
   border-left-width: 0;
@@ -154,14 +154,14 @@
   margin-left: 0;
   margin-bottom: 0;
   margin-right: 0;
-  slice-top: 0;
-  slice-left: 0;
-  slice-bottom: 0;
-  slice-right: 0;
+  -unity-slice-top: 0;
+  -unity-slice-left: 0;
+  -unity-slice-bottom: 0;
+  -unity-slice-right: 0;
   visibility: hidden;
 }
 #immediateWindow .alert #close:hover {
-  text-color: #b4b4b4;
+  color: #b4b4b4;
 }
 #immediateWindow Button.compact {
   margin-top: 0;
@@ -175,8 +175,8 @@
 }
 #immediateWindow .spinner {
   flex: 0 0 auto;
-  position-top: -7;
-  position-left: -7;
+  top: -7;
+  left: -7;
   min-width: 14;
   min-height: 14;
   max-width: 14;
@@ -185,8 +185,8 @@
 }
 #immediateWindow .largeSpinner {
   flex: 0 0 auto;
-  position-top: -16;
-  position-left: -16;
+  top: -16;
+  left: -16;
   min-width: 32;
   min-height: 32;
   max-width: 32;
@@ -197,7 +197,7 @@
   flex: 1 0 0;
 }
 #immediateWindow #console .console-log {
-  word-wrap: true;
+  -unity-word-wrap: true;
 }
 #immediateWindow #console #console-mode-singleline {
   flex: 1 0 0;
@@ -231,10 +231,10 @@
   border-color: rgba(0, 0, 0, 0.05);
 }
 #immediateWindow #console #console-input {
-  position-bottom: 0;
+  bottom: 0;
 }
 #immediateWindow #console #console-input-multiline {
-  position-bottom: 0;
+  bottom: 0;
   height: 250;
 }
 #immediateWindow #sideview {
@@ -256,16 +256,16 @@
 }
 #immediateWindow #context .context-inspector .assembly-label {
   flex: 1 0 0;
-  font-style: bold;
-  word-wrap: true;
+  -unity-font-style: bold;
+  -unity-word-wrap: true;
 }
 #immediateWindow #context .context-inspector .namespace {
   margin-left: 10;
 }
 #immediateWindow #context .context-inspector .namespace .namespace-label {
   flex: 1 0 0;
-  font-style: italic;
-  word-wrap: true;
+  -unity-font-style: italic;
+  -unity-word-wrap: true;
 }
 #immediateWindow #context .context-inspector .namespace .object-container {
   flex: 1 0 0;
@@ -277,10 +277,10 @@
   margin-left: 15;
 }
 #immediateWindow #context .context-inspector .namespace .object-container .typename {
-  text-color: #E16DEA;
+  color: #E16DEA;
 }
 #immediateWindow #context .context-inspector .namespace .object-container .propertyLabel {
-  text-color: #9079F0;
+  color: #9079F0;
 }
 
 #toggleContainer {
@@ -387,25 +387,25 @@
   align-items: flex-start;
   background-image: resource("Builtin Skins/DarkSkin/Images/Toolbar.png");
   margin-top: -1;
-  slice-top: 1;
-  slice-left: 1;
-  slice-bottom: 1;
-  slice-right: 1;
+  -unity-slice-top: 1;
+  -unity-slice-left: 1;
+  -unity-slice-bottom: 1;
+  -unity-slice-right: 1;
 }
 #toolbarContainer #toolbarView .toolbarButton {
   flex: 1 0 0;
   font-size: 9;
-  text-alignment: middle-center;
+  -unity-text-align: middle-center;
   background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
   flex: 0 0 auto;
   padding-top: 0;
   padding-left: 0;
   padding-bottom: 0;
   padding-right: 0;
-  slice-top: 4;
-  slice-left: 6;
-  slice-bottom: 4;
-  slice-right: 6;
+  -unity-slice-top: 4;
+  -unity-slice-left: 6;
+  -unity-slice-bottom: 4;
+  -unity-slice-right: 6;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
@@ -425,10 +425,10 @@
   max-height: 0;
   min-width: 0;
   max-width: 0;
-  border-top: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-right: 0;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
   min-width: 0;
   border-top-width: 0;
   border-left-width: 0;
@@ -442,14 +442,14 @@
   margin-left: 0;
   margin-bottom: 0;
   margin-right: 0;
-  slice-top: 0;
-  slice-left: 0;
-  slice-bottom: 0;
-  slice-right: 0;
+  -unity-slice-top: 0;
+  -unity-slice-left: 0;
+  -unity-slice-bottom: 0;
+  -unity-slice-right: 0;
   visibility: hidden;
 }
 #toolbarContainer #toolbarView .toolbarButton:hover {
-  text-color: #b4b4b4;
+  color: #b4b4b4;
 }
 #toolbarContainer #toolbarView .toolbarButton.space {
   margin-left: 7;
@@ -502,9 +502,9 @@
   align-items: center;
 }
 .quickInspector .typename {
-  font-style: italic;
+  -unity-font-style: italic;
   opacity: 0.5;
-  word-wrap: false;
+  -unity-word-wrap: false;
 }
 .quickInspector .propertyValueGroup {
   flex-direction: row;
@@ -513,7 +513,7 @@
   flex: 0 0 auto;
 }
 .quickInspector .propertyValueGroup.private .propertyLabel {
-  text-color: #EB8752;
+  color: #EB8752;
 }
 .quickInspector .typeInspector {
   flex: 1 0 0;
@@ -525,33 +525,33 @@
   flex-wrap: wrap;
 }
 .quickInspector .isNumber {
-  text-color: #9079F0;
+  color: #9079F0;
 }
 .quickInspector .isNull {
-  font-style: italic;
-  text-color: #9079F0;
+  -unity-font-style: italic;
+  color: #9079F0;
   padding-right: 2;
 }
 .quickInspector .isString {
-  text-color: #E83F3B;
+  color: #E83F3B;
 }
 .quickInspector .propertyLabel {
-  text-color: #E16DEA;
-  word-wrap: false;
+  color: #E16DEA;
+  -unity-word-wrap: false;
   flex: 0 0 auto;
 }
 .quickInspector .enumerable .propertyLabel {
-  text-color: #954F9B;
-  font-style: italic;
+  color: #954F9B;
+  -unity-font-style: italic;
 }
 .quickInspector .empty {
   opacity: 0.25;
-  font-style: italic;
-  word-wrap: true;
+  -unity-font-style: italic;
+  -unity-word-wrap: true;
 }
 .quickInspector .span#pinned-symbol {
   margin-left: 75;
-  font-style: italic;
+  -unity-font-style: italic;
   opacity: 0.25;
 }
 .quickInspector .collapsedPropertyGroup, .quickInspector .collapsedArrayGroup {
@@ -577,11 +577,11 @@
   flex-wrap: wrap;
 }
 .quickInspector .expandable .viewModes TypeViewSelection TypeViewMenu Label {
-  text-color: #ffa44e;
-  font-style: italic;
+  color: #ffa44e;
+  -unity-font-style: italic;
 }
 .quickInspector .expandable ExpandedClassType .expandedClassLabel {
-  text-color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 .quickInspector .expandable ExpandedInterfaceGroup Interface {
   flex: 1 0 auto;
@@ -592,14 +592,14 @@
   flex-direction: row;
 }
 .quickInspector .expandable ExpandedMethodGroup Method .name {
-  text-color: #A1F7B5;
+  color: #A1F7B5;
 }
 .quickInspector .expandable ExpandedMethodGroup Method .return {
   margin-right: 4;
-  text-color: rgba(181, 65, 194, 0.89);
+  color: rgba(181, 65, 194, 0.89);
 }
 .quickInspector .expandable ExpandedMethodGroup Method .parameter .parameterType {
-  text-color: #5CB0D7;
+  color: #5CB0D7;
   margin-right: 4;
 }
 .quickInspector .expandable ExpandedMethodGroup Method .parameters {
@@ -632,9 +632,12 @@
   justify-content: flex-end;
   align-self: flex-start;
 }
+.expandable .tools Button.compact {
+  height: 16;
+}
 
 .span {
-  text-color: #b4b4b4;
+  color: #b4b4b4;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;

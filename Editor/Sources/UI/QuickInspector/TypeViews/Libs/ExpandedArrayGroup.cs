@@ -4,7 +4,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ExpandedArrayGroup : VisualElement
+    public class ExpandedArrayGroup : VisualElement
     {
         public ExpandedArrayGroup(object obj)
         {

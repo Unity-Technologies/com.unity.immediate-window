@@ -35,7 +35,7 @@ namespace UnityEditor.ImmediateWindow.Services
         public static IEnumerable<Type> GetTypesWithInterface(Type type)
         {
             var types = new List<Type>();
-            foreach (var assembly in GetAllAssemblies(true))
+            foreach (var assembly in GetAllAssemblies())
                 types.AddRange(GetTypesWithInterface(assembly, type));
 
             return types;
@@ -44,7 +44,9 @@ namespace UnityEditor.ImmediateWindow.Services
         public static IEnumerable<Type> GetAllTypesWithStaticPropertiesForAssembly(Assembly assembly)
         {
             var result = new List<Type>();
-                
+            if (assembly.IsDynamic)
+                return result;
+
             Type[] types;
             try
             {
@@ -119,10 +121,18 @@ namespace UnityEditor.ImmediateWindow.Services
             return GetAllTypesWithStaticPropertiesForAssembly(assembly).Where(t => t.Namespace == ns);
         }
 
+        public static IEnumerable<Assembly> GetAllAssemblies()
+        {
+            AppDomain app = AppDomain.CurrentDomain;
+            var allAssemblies = app.GetAssemblies();
+
+            return allAssemblies;
+        }
+
         // Get list of all relevant assemblies
         // Currently not taking all assemblies because it caused an issue when setting up
         // the code analyser. Need to investigate.
-        public static IEnumerable<Assembly> GetAllAssemblies(bool includeSystem = false)
+        public static IEnumerable<Assembly> GetRelevantAssemblies(bool includeSystem = false)
         {
             AppDomain app = AppDomain.CurrentDomain;
             var allAssemblies = app.GetAssemblies();
@@ -137,6 +147,11 @@ namespace UnityEditor.ImmediateWindow.Services
                 assemblies.AddRange(allAssemblies.Where(assembly => assembly.FullName.Contains("System")));
            
             return assemblies;
+        }
+
+        public static IEnumerable<Assembly> GetReferencableAssemblies()
+        {
+            return GetAllAssemblies().Where(assembly => !assembly.IsDynamic && !string.IsNullOrEmpty(assembly.Location));
         }
         
         public static IEnumerable<string> GetAllNamespaces(Assembly assembly)

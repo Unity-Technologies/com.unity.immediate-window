@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.ImmediateWindow.UI;
 
 namespace UnityEditor.ImmediateWindow.TestObjects
 {
     public class SecretStruct
     {
+        static public SimpleObject SomeStaticObject = new SimpleObject() {a = 100, x = "some string"};
         static public bool SomeStaticValue = false;
         static public string SomeStaticPropertyValue
         {

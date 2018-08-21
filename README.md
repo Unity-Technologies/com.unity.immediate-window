@@ -4,6 +4,7 @@ An immediate window we can all believe in!
 
 Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second Guessing: Mathieu Rivest
 
+[Documentation](Documentation/com.unity.immediate-window.md)
 
 # TODO
 
@@ -20,9 +21,6 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
     * Show a list of last "usings" (assembly list with a 'using' checkbox)
 - Object Inspector
     + To show and inspect values
-    * Add all properties
-        * Arrays
-            * With pagination for large arrays)
     * Add pagination for all (...)
     * Editing
         * Allow inline edit of values (eg: click on string and change it right there)
@@ -41,14 +39,6 @@ Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second G
     + Better experience
 - Codebase Heat Map
     + Easier and intuitive code exploration
-- Use cases
-    * Can I do RMGUI?
-    * Can I do IMGUI?
- - Remove Visual Scripting dependency
-    * Need to separate roslyn into a separate package and have visual scripting use this also
- - UI
-    * Reduce margin size for expanded properties
-        * (currently goes after the property name but should go under like in browsers)
 - QA
     * Freeze-proof (while(true) {} shouldn't freeze unity/computer)
 ```
