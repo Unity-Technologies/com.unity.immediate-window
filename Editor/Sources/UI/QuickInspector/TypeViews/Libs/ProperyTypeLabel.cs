@@ -2,7 +2,7 @@
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ProperyTypeLabel : VisualElement
+    public class ProperyTypeLabel : VisualElement
     {
         public ProperyTypeLabel(object property)
         {

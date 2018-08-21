@@ -3,7 +3,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ExpandedPropertyGroup : VisualElement
+    public class ExpandedPropertyGroup : VisualElement
     {
         public ExpandedPropertyGroup(object obj)
         {

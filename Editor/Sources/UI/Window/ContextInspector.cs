@@ -21,7 +21,7 @@ namespace UnityEditor.ImmediateWindow.UI
             Container.StretchToParentSize();
             Container.AddToClassList("context-inspector-scrollview");
             
-            foreach (var assembly in Inspector.GetAllAssemblies(true))
+            foreach (var assembly in Inspector.GetAllAssemblies())
             {
                 var inspector = new AssemblyInspector(assembly);
                 Container.Add(inspector);

@@ -4,7 +4,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class PropertyValueGroup : VisualElement
+    public class PropertyValueGroup : VisualElement
     {
         public PropertyValueGroup(PropertyInfo property, ViewContext context)
         {

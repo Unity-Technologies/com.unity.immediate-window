@@ -4,7 +4,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class Method : VisualElement
+    public class Method : VisualElement
     {
         public Method(MethodInfo info, object obj)
         {

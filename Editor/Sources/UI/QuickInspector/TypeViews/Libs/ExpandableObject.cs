@@ -5,7 +5,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ExpandableObject : VisualElement
+    public class ExpandableObject : VisualElement
     {
         private ExtendedExpandable Content { get; set; }
         

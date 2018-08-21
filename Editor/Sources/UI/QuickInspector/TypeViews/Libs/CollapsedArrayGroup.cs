@@ -4,7 +4,7 @@ using UnityEngine.Experimental.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class CollapsedArrayGroup : VisualElement
+    public class CollapsedArrayGroup : VisualElement
     {
         public CollapsedArrayGroup(IEnumerable obj)
         {

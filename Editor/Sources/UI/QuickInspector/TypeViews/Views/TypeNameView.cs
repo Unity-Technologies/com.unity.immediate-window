@@ -1,6 +1,6 @@
 ﻿namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class TypeNameView : Span
+    public class TypeNameView : Span
     {
         public TypeNameView(object obj)
         {

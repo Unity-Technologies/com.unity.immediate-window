@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal struct PropertyInfo
+    public struct PropertyInfo
     {
         public FieldInfo Field;
         public System.Reflection.PropertyInfo Property;
