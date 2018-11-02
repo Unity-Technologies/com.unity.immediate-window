@@ -7,7 +7,7 @@ using UnityEditor.Analytics;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    internal class ImmediateWindow : EditorWindow
+    public class ImmediateWindow : EditorWindow
     {
         public const string PackagePath = "Packages/com.unity.immediate-window/";
         public const string ResourcesPath = PackagePath + "Editor/Resources/";
@@ -17,8 +17,8 @@ namespace UnityEditor.ImmediateWindow.UI
 
         public static ImmediateWindow CurrentWindow;
         
-        public Evaluator Evaluator;
-        public State State;
+        internal Evaluator Evaluator;
+        internal State State;
 
         public void OnEnable()
         {
@@ -57,10 +57,10 @@ namespace UnityEditor.ImmediateWindow.UI
         internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
         internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
         internal VisualElement SideView { get { return this.GetRootVisualContainer().Q<VisualElement>("sideview"); } }
-        public Console Console { get { return this.GetRootVisualContainer().Q<Console>("console"); } }
+        internal Console Console { get { return this.GetRootVisualContainer().Q<Console>("console"); } }
         
         [MenuItem("Window/Analysis/Immediate Window")]
-        internal static void ShowPackageManagerWindow()
+        public static void ShowPackageManagerWindow()
         {
             var window = GetWindow<ImmediateWindow>(false, "Immediate", true);
             window.minSize = new Vector2(700, 250);

@@ -1,7 +1,11 @@
 {
-    "name": "Unity.ImmediateWindow.Editor",
-    "references": [],
-    "optionalUnityReferences": [],
+    "name": "Unity.ImmediateWindow.Tests",
+    "references": [
+        "Unity.ImmediateWindow.Editor"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
     "includePlatforms": [
         "Editor"
     ],

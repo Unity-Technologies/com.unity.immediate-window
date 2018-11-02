@@ -11,9 +11,6 @@ It is currently only available as a *preview package*.
 Add ```"registry": "https://staging-packages.unity.com",``` to
 your project manifest and install from the *Package Manager Window*.
 
-Alternatively, simply ```git clone git@gitlab.internal.unity3d.com:mathieur/com.unity.immediate-window.git```
-in your project's *Packages* folder and you're good to go!
-
 The window is accessible through the ```Window/Analysis/Immediate Window``` editor menu.
 
 ## Overview
@@ -172,7 +169,7 @@ so it's not exactly suitable for iterating with yet.
 # FAQ
 
 ###### Q: This is an overcomplicated design and too hard to use
-*A: [Pull Requests](https://gitlab.internal.unity3d.com/mathieur/com.unity.immediate-window) are welcomed, whining is not!*
+*A: [Pull Requests](https://gitlab.cds.internal.unity3d.com/upm-packages/tools/com.unity.immediate-window) are welcomed, whining is not!*
 
 ###### Q: You rock!
 *A: Don't we all?*

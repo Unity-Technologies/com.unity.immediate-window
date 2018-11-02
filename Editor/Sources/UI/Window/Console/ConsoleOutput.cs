@@ -96,7 +96,7 @@ namespace UnityEditor.ImmediateWindow.UI
             Content = new ScrollView();
             Content.name = "output-content";
             Content.verticalScroller.slider.pageSize = 10;
-            Content.stretchContentWidth = true;
+            Content.contentContainer.StretchToParentWidth();
             Content.StretchToParentSize();
             Add(Content);
 

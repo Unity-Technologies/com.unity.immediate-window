@@ -563,8 +563,13 @@ $toolbar-height: 18;
 
 .arrow {
 	font-size: 8;
-	padding-top: 3;
+	@include padding(3, 2, 0, 2);
 	margin-right: 2;
+	opacity: 0.5;
+
+	&.expanded {
+		padding-right: 1;
+	}
 }
 
 .quickInspector {

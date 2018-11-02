@@ -17,7 +17,7 @@ namespace UnityEditor.ImmediateWindow.UI
         private void Refresh()
         {
             Container = new ScrollView();
-            Container.stretchContentWidth = true;
+            Container.contentContainer.StretchToParentWidth();
             Container.StretchToParentSize();
             Container.AddToClassList("context-inspector-scrollview");
             
