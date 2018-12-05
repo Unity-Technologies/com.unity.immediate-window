@@ -4,7 +4,7 @@ using UnityEditor.ImmediateWindow.UI;
 
 namespace UnityEditor.ImmediateWindow.TestObjects
 {
-    public class SecretStruct
+    internal class SecretStruct
     {
         static public SimpleObject SomeStaticObject = new SimpleObject() {a = 100, x = "some string"};
         static public bool SomeStaticValue = false;
@@ -19,7 +19,7 @@ namespace UnityEditor.ImmediateWindow.TestObjects
 
 namespace UnityEditor.ImmediateWindow.UI
 {
-    public class SimpleObject
+    internal class SimpleObject
     {
         public int a;
         public string x;
@@ -42,7 +42,7 @@ namespace UnityEditor.ImmediateWindow.UI
         }
     }
 
-    public class InheritedObject
+    internal class InheritedObject
     {
         public int[] InheritedField = new int[] {4, 5, 6};
         public string InheritedProperty { get; } = "yes";
@@ -50,7 +50,7 @@ namespace UnityEditor.ImmediateWindow.UI
         public void InheritedMethod() {}
     }
     
-    public class ComplexObject : InheritedObject
+    internal class ComplexObject : InheritedObject
     {
         public int myOhMy;
         public SimpleObject Simple;

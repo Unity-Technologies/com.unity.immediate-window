@@ -7,7 +7,7 @@ using UnityEditor.ImmediateWindow.UI;
 
 namespace UnityEditor.ImmediateWindow.UI.Tests
 {
-    public class WindowTests
+    internal class WindowTests
     {
         // A Test behaves as an ordinary method
         [Test]

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ParsedAssemblyQualifiedName
 {
-	public class ParsedAssemblyQualifiedName
+	internal class ParsedAssemblyQualifiedName
 	{
 		public Lazy<AssemblyName> AssemblyNameDescriptor;
 		public Lazy<Type> FoundType;
