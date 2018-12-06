@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEditor.ImmediateWindow.TestObjects;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {

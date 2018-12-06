@@ -34,7 +34,6 @@
 }
 
 .row, .quickInspector .expandable .viewModes, .quickInspector .expandable .viewModes TypeViewSelection, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
-  flex: 0 0 auto;
   flex-direction: row;
 }
 
@@ -44,16 +43,16 @@
 }
 
 .tag {
-  border-top-width: 1;
-  border-left-width: 1;
-  border-bottom-width: 1;
-  border-right-width: 1;
-  padding-top: 1;
-  padding-left: 3;
-  padding-bottom: 1;
-  padding-right: 3;
-  font-size: 9;
-  border-radius: 5;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  padding-top: px1;
+  padding-left: 3px;
+  padding-bottom: 1px;
+  padding-right: 3px;
+  font-size: 9px;
+  border-radius: 5px;
   -unity-text-align: middle-center;
   border-color: #000000;
   color: #000000;
@@ -82,7 +81,7 @@
   right: 0;
   left: 0;
 }
-#immediateWindow .no-background, #immediateWindow .span {
+#immediateWindow .no-background, #immediateWindow .textfield-label, #immediateWindow .span, #immediateWindow .span TextInput, .span #immediateWindow TextInput {
   background: rgba(0, 0, 0, 0);
   background-image: none;
   margin-top: 0;
@@ -99,34 +98,31 @@
   border-color: #FF0000;
   flex-direction: row;
   -unity-word-wrap: true;
-  border-top-width: 1;
-  border-left-width: 1;
-  border-bottom-width: 1;
-  border-right-width: 1;
-  padding-top: 5;
-  padding-left: 10;
-  padding-bottom: 5;
-  padding-right: 10;
+  white-space: normal;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  padding-right: 10px;
 }
 #immediateWindow .alert #alertMessage {
   flex: 1 0 0;
   color: #f4f4f4;
   -unity-word-wrap: true;
+  white-space: normal;
   overflow: hidden;
 }
 #immediateWindow .alert #close {
   flex: 0 0 auto;
-  max-height: 30;
-  left: 5;
-  flex: 0 0 auto;
-  padding-top: 3;
-  padding-left: 3;
-  padding-bottom: 4;
-  padding-right: 3;
-  -unity-slice-top: 4;
-  -unity-slice-left: 6;
-  -unity-slice-bottom: 4;
-  -unity-slice-right: 6;
+  max-height: 30px;
+  left: 5px;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-bottom: 4px;
+  padding-right: 3px;
 }
 #immediateWindow .alert #close.display-none {
   position: absolute;
@@ -169,28 +165,28 @@
   margin-bottom: 0;
   margin-right: 0;
   padding-top: 0;
-  padding-left: 0;
+  padding-left: 4px;
   padding-bottom: 0;
-  padding-right: 0;
+  padding-right: 4px;
 }
 #immediateWindow .spinner {
   flex: 0 0 auto;
-  top: -7;
-  left: -7;
-  min-width: 14;
-  min-height: 14;
-  max-width: 14;
-  max-height: 14;
+  top: -7px;
+  left: -7px;
+  min-width: 14px;
+  min-height: 14px;
+  max-width: 14px;
+  max-height: 14px;
   background-image: resource("Images/Dark/loading");
 }
 #immediateWindow .largeSpinner {
   flex: 0 0 auto;
-  top: -16;
-  left: -16;
-  min-width: 32;
-  min-height: 32;
-  max-width: 32;
-  max-height: 32;
+  top: -16px;
+  left: -16px;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 32px;
+  max-height: 32px;
   background-image: resource("Images/Dark/loading");
 }
 #immediateWindow #console {
@@ -198,6 +194,7 @@
 }
 #immediateWindow #console .console-log {
   -unity-word-wrap: true;
+  white-space: normal;
 }
 #immediateWindow #console #console-mode-singleline {
   flex: 1 0 0;
@@ -216,17 +213,17 @@
 }
 #immediateWindow #console #console-output .output-item {
   flex: 0 0 auto;
-  margin-top: 2;
-  margin-left: 4;
-  margin-bottom: 2;
-  margin-right: 4;
-  padding-top: 1;
-  padding-left: 2;
-  padding-bottom: 2;
-  padding-right: 2;
+  margin-top: 2px;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  margin-right: 4px;
+  padding-top: 1px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+  padding-right: 2px;
   border-top-width: 0;
   border-left-width: 0;
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-right-width: 0;
   border-color: rgba(0, 0, 0, 0.05);
 }
@@ -235,11 +232,11 @@
 }
 #immediateWindow #console #console-input-multiline {
   bottom: 0;
-  height: 250;
+  height: 250px;
 }
 #immediateWindow #sideview {
-  flex: 0.5 0 0;
-  border-left-width: 1;
+  flex: 0.35 0 0;
+  border-left-width: 1px;
   border-color: rgba(0, 0, 0, 0.25);
 }
 #immediateWindow #context {
@@ -258,23 +255,25 @@
   flex: 1 0 0;
   -unity-font-style: bold;
   -unity-word-wrap: true;
+  white-space: normal;
 }
 #immediateWindow #context .context-inspector .namespace {
-  margin-left: 10;
+  margin-left: 10px;
 }
 #immediateWindow #context .context-inspector .namespace .namespace-label {
   flex: 1 0 0;
   -unity-font-style: italic;
   -unity-word-wrap: true;
+  white-space: normal;
 }
 #immediateWindow #context .context-inspector .namespace .object-container {
   flex: 1 0 0;
 }
 #immediateWindow #context .context-inspector .namespace .object-container .type {
-  margin-left: 15;
+  margin-left: 15px;
 }
 #immediateWindow #context .context-inspector .namespace .object-container .typeProperties {
-  margin-left: 15;
+  margin-left: 15px;
 }
 #immediateWindow #context .context-inspector .namespace .object-container .typename {
   color: #E16DEA;
@@ -295,16 +294,16 @@
 }
 
 .icon.context {
-  max-width: 14;
-  max-height: 14;
+  max-width: 14px;
+  max-height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenModuleActive.png");
 }
 .icon.context.pressed {
   background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenEmitterActive.png");
 }
 .icon.node0 {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/node0 hex.png");
   margin-top: 0;
   margin-left: 0;
@@ -319,8 +318,8 @@
   background-image: resource("Builtin Skins/DarkSkin/Images/node0 hex on.png");
 }
 .icon.node1 {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/node1 hex.png");
   margin-top: 0;
   margin-left: 0;
@@ -335,8 +334,8 @@
   background-image: resource("Builtin Skins/DarkSkin/Images/node1 hex on.png");
 }
 .icon.node2 {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/node2 hex.png");
   margin-top: 0;
   margin-left: 0;
@@ -351,24 +350,24 @@
   background-image: resource("Builtin Skins/DarkSkin/Images/node2 hex on.png");
 }
 .icon.popup {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/popup.png");
 }
 .icon.popup.pressed {
   background-image: resource("Builtin Skins/DarkSkin/Images/popup act.png");
 }
 .icon.play {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/IN foldout act.png");
 }
 .icon.play.pressed {
   background-image: resource("Builtin Skins/DarkSkin/Images/IN foldout.png");
 }
 .icon.cancel {
-  width: 14;
-  height: 14;
+  width: 14px;
+  height: 14px;
   background-image: resource("Builtin Skins/DarkSkin/Images/ShurikenCheckMarkMixed.png");
 }
 .icon.cancel.pressed {
@@ -379,42 +378,37 @@
   flex: 0 0 auto;
   flex-direction: row;
   align-items: flex-start;
-  height: 18;
+  height: 18px;
 }
 #toolbarContainer #toolbarView {
   flex: 1 0 0;
   flex-direction: row;
   align-items: flex-start;
   background-image: resource("Builtin Skins/DarkSkin/Images/Toolbar.png");
-  margin-top: -1;
-  -unity-slice-top: 1;
-  -unity-slice-left: 1;
-  -unity-slice-bottom: 1;
-  -unity-slice-right: 1;
+  margin-top: -1px;
+  -unity-slice-top: 1px;
+  -unity-slice-left: 1px;
+  -unity-slice-bottom: 1px;
+  -unity-slice-right: 1px;
 }
 #toolbarContainer #toolbarView .toolbarButton {
   flex: 1 0 0;
-  font-size: 9;
+  font-size: 9px;
   -unity-text-align: middle-center;
   background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button.png");
-  flex: 0 0 auto;
   padding-top: 0;
   padding-left: 0;
   padding-bottom: 0;
   padding-right: 0;
-  -unity-slice-top: 4;
-  -unity-slice-left: 6;
-  -unity-slice-bottom: 4;
-  -unity-slice-right: 6;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
-  margin-right: -1;
+  margin-right: -1px;
   padding-top: 0;
-  padding-left: 5;
+  padding-left: 5px;
   padding-bottom: 0;
-  padding-right: 5;
-  height: 19;
+  padding-right: 5px;
+  height: 19px;
 }
 #toolbarContainer #toolbarView .toolbarButton.display-none {
   position: absolute;
@@ -452,7 +446,7 @@
   color: #b4b4b4;
 }
 #toolbarContainer #toolbarView .toolbarButton.space {
-  margin-left: 7;
+  margin-left: 7px;
 }
 #toolbarContainer #toolbarView .toolbarButton.active {
   background-image: resource("Builtin Skins/DarkSkin/Images/toolbar button act.png");
@@ -468,23 +462,48 @@
 #toolbarContainer #toolbarView #toolbarRight {
   flex: 1 0 0;
   flex-direction: row;
+  align-items: center;
   justify-content: flex-end;
 }
 #toolbarContainer #toolbarView #toolbarRight #toolbarSearch {
   flex: 1 0 0;
-  height: 18;
-  max-width: 500;
+  height: 18px;
+  max-width: 500px;
   flex-direction: row;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
-  margin-right: 5;
+  margin-right: 5px;
+}
+#toolbarContainer #toolbarView #toolbarRight Label {
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+  margin-right: 2px;
+}
+#toolbarContainer #toolbarView #toolbarRight #reset {
+  min-height: 16px;
+  height: 16px;
+  margin-top: 0;
+  margin-left: 2px;
+  margin-bottom: 0;
+  margin-right: 2px;
 }
 
 .arrow {
-  font-size: 8;
-  padding-top: 3;
-  margin-right: 2;
+  align-self: center;
+  width: 12px;
+  height: 10px;
+  font-size: 8px;
+  padding-top: 1px;
+  padding-left: 2px;
+  padding-bottom: 0;
+  padding-right: 2px;
+  margin-right: 2px;
+  opacity: 0.5;
+}
+.arrow.expanded {
+  padding-right: 1px;
 }
 
 .quickInspector {
@@ -492,6 +511,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
 }
 .quickInspector .value {
   flex-direction: column;
@@ -515,24 +535,33 @@
 .quickInspector .propertyValueGroup.private .propertyLabel {
   color: #EB8752;
 }
+.quickInspector .propertyValueGroup > PropertyLabel {
+  justify-self: flex-start;
+}
 .quickInspector .typeInspector {
   flex: 1 0 0;
   flex-wrap: wrap;
+}
+.quickInspector .typeInspector > TextField {
+  flex: 0 1 auto;
+}
+.quickInspector .typeInspector > TextField TextInput {
+  flex: 0 1 auto;
 }
 .quickInspector .row, .quickInspector .expandable .viewModes, .quickInspector .expandable .viewModes TypeViewSelection, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
 }
-.quickInspector .isNumber {
+.quickInspector .isNumber > TextInput {
   color: #9079F0;
 }
-.quickInspector .isNull {
+.quickInspector .isNull > TextInput {
   -unity-font-style: italic;
   color: #9079F0;
-  padding-right: 2;
+  padding-right: 2px;
 }
-.quickInspector .isString {
+.quickInspector .isString > TextInput {
   color: #E83F3B;
 }
 .quickInspector .propertyLabel {
@@ -548,9 +577,10 @@
   opacity: 0.25;
   -unity-font-style: italic;
   -unity-word-wrap: true;
+  white-space: normal;
 }
 .quickInspector .span#pinned-symbol {
-  margin-left: 75;
+  margin-left: 75px;
   -unity-font-style: italic;
   opacity: 0.25;
 }
@@ -559,8 +589,8 @@
   flex-wrap: wrap;
   align-items: center;
   flex: 0 1 auto;
-  margin-left: 4;
-  margin-right: 4;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 .quickInspector .collapsedPropertyGroup .typeInspector, .quickInspector .collapsedArrayGroup .typeInspector {
   flex: 1 0 auto;
@@ -575,6 +605,7 @@
 }
 .quickInspector .expandable .viewModes TypeViewSelection {
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 .quickInspector .expandable .viewModes TypeViewSelection TypeViewMenu Label {
   color: #ffa44e;
@@ -595,12 +626,12 @@
   color: #A1F7B5;
 }
 .quickInspector .expandable ExpandedMethodGroup Method .return {
-  margin-right: 4;
+  margin-right: 4px;
   color: rgba(181, 65, 194, 0.89);
 }
 .quickInspector .expandable ExpandedMethodGroup Method .parameter .parameterType {
   color: #5CB0D7;
-  margin-right: 4;
+  margin-right: 4px;
 }
 .quickInspector .expandable ExpandedMethodGroup Method .parameters {
   flex: 0 1 auto;
@@ -609,11 +640,11 @@
 }
 
 .expandable {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   flex-wrap: wrap;
 }
 .expandable .expandedGroup {
-  margin-left: 10;
+  margin-left: 10px;
 }
 .expandable .collapseRow {
   flex: 1 0 0;
@@ -621,22 +652,35 @@
   justify-content: space-between;
 }
 .expandable .collapsedGroup {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   flex-direction: row;
+  align-items: center;
+}
+.expandable .collapsedGroup > .typename {
+  align-self: flex-start;
+  flex: 1 0 auto;
+}
+.expandable .collapsedGroup > .arrow {
+  align-self: flex-start;
+  margin-top: 1px;
 }
 .expandable .collapseView {
   flex: 0 1 auto;
+  align-self: flex-start;
 }
 .expandable .tools {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   justify-content: flex-end;
   align-self: flex-start;
 }
 .expandable .tools Button.compact {
-  height: 16;
+  height: 16px;
+}
+.expandable .tools .viewModes {
+  justify-content: flex-end;
 }
 
-.span {
+.textfield-label, .span, .span TextInput {
   color: #b4b4b4;
   margin-top: 0;
   margin-left: 0;
@@ -647,13 +691,13 @@
   padding-bottom: 0;
   padding-right: 0;
 }
-.span.disabled {
+.textfield-label.disabled, .disabled.span, .span TextInput.disabled {
   opacity: 0.5;
 }
-.span.faded {
+.textfield-label.faded, .faded.span, .span TextInput.faded {
   opacity: 0.75;
 }
 
 .text {
-  min-height: 9;
+  min-height: 9px;
 }

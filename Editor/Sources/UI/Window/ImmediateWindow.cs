@@ -1,9 +1,6 @@
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using UnityEditor.Experimental.UIElements;
+using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.Services;
-using UnityEditor.Analytics;
-
 
 namespace UnityEditor.ImmediateWindow.UI
 {
@@ -29,14 +26,15 @@ namespace UnityEditor.ImmediateWindow.UI
             Evaluator.Init(ref Evaluator);
             State.Init(ref State);
 
-            this.GetRootVisualContainer().AddStyleSheetPath(EditorGUIUtility.isProSkin ? DarkStylePath : LightStylePath);
+            string path = EditorGUIUtility.isProSkin ? DarkStylePath : LightStylePath;
+            rootVisualElement.styleSheets.Add(EditorGUIUtility.Load(path) as StyleSheet);
 
             var windowResource = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
             if (windowResource != null)
             {
-                var template = windowResource.CloneTree(null);
-                this.GetRootVisualContainer().Add(template);
-                template.StretchToParentSize();
+                var root = windowResource.CloneTree();
+                rootVisualElement.Add(root);
+                root.StretchToParentSize();
             }
         }
         
@@ -54,10 +52,10 @@ namespace UnityEditor.ImmediateWindow.UI
             UIUtils.SetElementDisplay(SideView, visibility);
         }
         
-        internal VisualElement Content { get { return this.GetRootVisualContainer().Q<VisualElement>("immediateWindow"); } }
-        internal Context Context { get { return this.GetRootVisualContainer().Q<Context>("context"); } }
-        internal VisualElement SideView { get { return this.GetRootVisualContainer().Q<VisualElement>("sideview"); } }
-        internal Console Console { get { return this.GetRootVisualContainer().Q<Console>("console"); } }
+        internal VisualElement Content { get { return this.rootVisualElement.Q<VisualElement>("immediateWindow"); } }
+        internal Context Context { get { return this.rootVisualElement.Q<Context>("context"); } }
+        internal VisualElement SideView { get { return this.rootVisualElement.Q<VisualElement>("sideview"); } }
+        internal Console Console { get { return this.rootVisualElement.Q<Console>("console"); } }
         
         [MenuItem("Window/Analysis/Immediate Window")]
         public static void ShowPackageManagerWindow()

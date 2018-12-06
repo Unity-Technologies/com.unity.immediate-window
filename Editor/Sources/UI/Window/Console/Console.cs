@@ -1,4 +1,4 @@
-﻿using UnityEngine.Experimental.UIElements;
+﻿using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
@@ -36,6 +36,7 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleOutput.name = "console-output";
 
             ConsoleInput =  new TextField();
+            ConsoleInput.multiline = false;
             ConsoleInput.name = "console-input";
             ConsoleInput.RegisterCallback<KeyDownEvent>(OnInputKeyPressed);
             ConsoleSingleLine.Add(ConsoleOutput);
@@ -145,7 +146,15 @@ namespace UnityEditor.ImmediateWindow.UI
                     doEvaluate = true;
                     break;
             }
-            
+
+            if (evt.character == '\n')
+            {
+                doEvaluate = true;
+                var textinput = ConsoleInput.Q<VisualElement>("unity-text-input");
+                if (textinput != null)
+                    textinput.Focus();
+            }
+
             if (doEvaluate)
                 CodeEvaluate();
             

@@ -1,8 +1,6 @@
 ﻿using System;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using UnityEngine.Experimental.UIElements.StyleEnums;
+using UnityEngine.UIElements;
 
 namespace UnityEditor.ImmediateWindow.UI
 {
