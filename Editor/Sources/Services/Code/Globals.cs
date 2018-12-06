@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace UnityEditor.ImmediateWindow.Services
 {
+    /// <summary>
+    /// Object containing global variables used for shortcuts in debugging purposes
+    /// </summary>
     public class Globals
     {
         public object __0;

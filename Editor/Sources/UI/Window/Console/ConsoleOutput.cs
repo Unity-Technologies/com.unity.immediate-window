@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.Scripting;
-using UnityEngine.Experimental.UIElements;
-using UnityScript.Scripting;
-using UnityEditor.ImmediateWindow.Services;
+using UnityEngine.UIElements;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
-using UnityEngine.Experimental.UIElements.StyleEnums;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
 
 namespace UnityEditor.ImmediateWindow.UI
@@ -91,8 +87,10 @@ namespace UnityEditor.ImmediateWindow.UI
             if (Content != null)
             {
                 previous = Content.Children().ToList();
+                if (Children().Contains(Content))
+                    Remove(Content);
             }
-            
+
             Content = new ScrollView();
             Content.name = "output-content";
             Content.verticalScroller.slider.pageSize = 10;

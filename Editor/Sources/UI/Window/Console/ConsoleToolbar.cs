@@ -1,4 +1,4 @@
-﻿using UnityEngine.Experimental.UIElements;
+﻿using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
  
@@ -35,7 +35,7 @@ namespace UnityEditor.ImmediateWindow.UI
             RunButton.RegisterCallback<MouseUpEvent>(ClearRunClick);
             ResetButton.RegisterCallback<MouseUpEvent>(ResetClick);
             TemplatesDropdown.RegisterCallback<MouseUpEvent>(TemplatesClick);
-            PrivateToggle.OnValueChanged(OnPrivateToggle);
+            PrivateToggle.RegisterValueChangedCallback(OnPrivateToggle);
 
             PrivateToggle.value = State.Instance.ShowPrivate;
 
@@ -102,7 +102,7 @@ x.Func()
                 code = @"using UnityEditor;
 using UnityEngine;
 using System;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.UI;
 
 // NOTE: Currently only works the first time it is ran after any compilation. Need to investigate why.
@@ -138,7 +138,7 @@ x
                 code = @"using UnityEditor;
 using UnityEngine;
 using System;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.UI;
 
 // Type view using the standard expandable object system.

@@ -90,10 +90,10 @@
 }
 
 @mixin button($top, $right, $bottom, $left) {
-	flex: 0 0 auto;
+//	flex: 0 0 auto;
 
 	@include padding($top, $right, $bottom, $left);
-	@include slice(4, 6, 4, 6);
+	//@include slice(4px, 6px, 4px, 6px);
 
 	&.display-none {
 		position: absolute;
@@ -126,8 +126,8 @@
 }
 
 @mixin console-margins() {
-	@include margin(2, 4, 2, 4); // Default editor for Label
-	@include padding(1, 2, 2, 2); // Default editor for Label
+	@include margin(2px, 4px, 2px, 4px); // Default editor for Label
+	@include padding(1px, 2px, 2px, 2px); // Default editor for Label
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -135,14 +135,14 @@
 //--------------------------------------------------------------------------------------------------
 
 @mixin font-small() {
-	font-size: 9;
+	font-size: 9px;
 }
 
 @mixin font-normal() {
-	font-size: 12;
+	font-size: 12px;
 }
 
-$tree-margin: 15;
+$tree-margin: 15px;
 
 //--------------------------------------------------------------------------------------------------
 // Styles
@@ -167,7 +167,6 @@ $tree-margin: 15;
 }
 
 .row {
-	flex: 0 0 auto;
 	flex-direction: row;
 }
 
@@ -177,21 +176,21 @@ $tree-margin: 15;
 }
 
 .tag {
-	@include border-box(1);
-	@include padding(1, 3, 1, 3);
+	@include border-box(1px);
+	@include padding(px1, 3px, 1px, 3px);
 	@include font-small();
-	border-radius: 5;
+	border-radius: 5px;
 	-unity-text-align: middle-center;
 
 	border-color: #000000;
 	color: #000000;
 }
 
-$spinner-large-size: 32;
-$spinner-large-half-size: 16;
-$spinner-normal-size: 14;
-$spinner-normal-half-size: 7;
-$toolbar-height: 18;
+$spinner-large-size: 32px;
+$spinner-large-half-size: 16px;
+$spinner-normal-size: 14px;
+$spinner-normal-half-size: 7px;
+$toolbar-height: 18px;
 
 #immediateWindow {
 	flex: 1 0 0;
@@ -238,28 +237,30 @@ $toolbar-height: 18;
 		border-color: #FF0000;
 		flex-direction: row;
 		-unity-word-wrap: true;
+		white-space: normal;
 
-		@include border-box(1);
-		@include padding(5, 10, 5, 10);
+		@include border-box(1px);
+		@include padding(5px, 10px, 5px, 10px);
 
 		#alertMessage {
 			flex: 1 0 0;
 			color: $unity-text-color-highlight;
 			-unity-word-wrap: true;
+			white-space: normal;
 			@include text-clip();
 		}
 
 		#close {
 			flex: 0 0 auto;
-			max-height: 30;
-			@include position(auto, auto, auto, 5);
-			@include button(3,3,4,3);
+			max-height: 30px;
+			@include position(auto, auto, auto, 5px);
+			@include button(3px,3px,4px,3px);
 		}
 	}
 
 	Button.compact {
 		@include margin-box(0);
-		@include padding-box(0);
+		@include padding(0, 4px, 0, 4px);
 	}
 
 	.spinner {
@@ -286,10 +287,11 @@ $toolbar-height: 18;
 
 	#console {
 		flex: 1 0 0;
-		$height-console-output: 250;		// Hack until I figure out how to make scrollview work
+		$height-console-output: 250px;		// Hack until I figure out how to make scrollview work
 
 		.console-log {
 			-unity-word-wrap: true;
+			white-space: normal;
 		}
 
 
@@ -325,7 +327,7 @@ $toolbar-height: 18;
 				flex: 0 0 auto;
 
 				@include console-margins();
-				@include border(0, 0, 1, 0);
+				@include border(0, 0, 1px, 0);
 				border-color: rgba(0, 0, 0, 0.05);
 
 				#content {
@@ -339,14 +341,14 @@ $toolbar-height: 18;
 
 		#console-input-multiline {
 			bottom: 0;
-			height: 250;
+			height: 250px;
 		}
 	}
 
 	#sideview {
-		flex: 0.5 0 0;
+		flex: 0.35 0 0;
 
-		border-left-width: 1;
+		border-left-width: 1px;
 		border-color: rgba(0, 0, 0, 0.25);
 	}
 
@@ -371,15 +373,17 @@ $toolbar-height: 18;
 				flex: 1 0 0;
 				-unity-font-style: bold;
 				-unity-word-wrap: true;
+				white-space: normal;
 			}
 
 			.namespace {
-				margin-left: 10;
+				margin-left: 10px;
 
 				.namespace-label {
 					flex: 1 0 0;
 					-unity-font-style: italic;
 					-unity-word-wrap: true;
+					white-space: normal;
 				}
 
 				// Possibly should be in quick inspector if quick inspector starts having assemblies and namespaces too
@@ -423,8 +427,8 @@ $toolbar-height: 18;
 
 .icon {
 	&.context {
-		max-width: 14;
-		max-height: 14;
+		max-width: 14px;
+		max-height: 14px;
 		background-image: $context-background;
 
 		&.pressed {
@@ -433,8 +437,8 @@ $toolbar-height: 18;
 	}
 
 	&.node0 {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $icon-node0;
 		@include margin-box(0);
 		@include padding-box(0);
@@ -445,8 +449,8 @@ $toolbar-height: 18;
 	}
 
 	&.node1 {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $icon-node1;
 		@include margin-box(0);
 		@include padding-box(0);
@@ -457,8 +461,8 @@ $toolbar-height: 18;
 	}
 
 	&.node2 {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $icon-node2;
 		@include margin-box(0);
 		@include padding-box(0);
@@ -469,8 +473,8 @@ $toolbar-height: 18;
 	}
 
 	&.popup {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $popup-background;
 
 		&.pressed {
@@ -479,8 +483,8 @@ $toolbar-height: 18;
 	}
 
 	&.play {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $play-background;
 
 		&.pressed {
@@ -489,8 +493,8 @@ $toolbar-height: 18;
 	}
 
 	&.cancel {
-		width: 14;
-		height: 14;
+		width: 14px;
+		height: 14px;
 		background-image: $cancel-background;
 
 		&.pressed {
@@ -510,21 +514,21 @@ $toolbar-height: 18;
 		flex-direction: row;
 		align-items: flex-start;
 		background-image: $toolbar-background;
-		margin-top: -1;
-		@include slice(1, 1, 1, 1);
+		margin-top: -1px;
+		@include slice(1px, 1px, 1px, 1px);
 
 		.toolbarButton {
 			flex: 1 0 0;
-			font-size: 9;
+			font-size: 9px;
 			-unity-text-align: middle-center;
 			background-image: $toolbar-button-background;
 			@include button-box(0);
-			@include margin(0, -1, 0, 0);
-			@include padding(0, 5, 0, 5);
-			height: 19;
+			@include margin(0, -1px, 0, 0);
+			@include padding(0, 5px, 0, 5px);
+			height: 19px;
 
 			&.space {
-				margin-left: 7;
+				margin-left: 7px;
 			}
 
 			&.active {
@@ -548,27 +552,41 @@ $toolbar-height: 18;
 		#toolbarRight {
 			flex: 1 0 0;
 			flex-direction: row;
+			align-items: center;
 			justify-content: flex-end;
 
 			#toolbarSearch {
 				flex: 1 0 0;
 				height: $toolbar-height;
-				max-width: 500;
+				max-width: 500px;
 				flex-direction: row;
-				@include margin(0, 5, 0, 0);
+				@include margin(0, 5px, 0, 0);
+			}
+
+			Label {
+				@include margin-box(2px);
+			}
+
+			#reset {
+				min-height: 16px;
+				height: 16px;
+				@include margin(0, 2px, 0, 2px);
 			}
 		}
 	}
 }
 
 .arrow {
-	font-size: 8;
-	@include padding(3, 2, 0, 2);
-	margin-right: 2;
+	align-self: center;
+	width: 12px;
+	height: 10px;
+	font-size: 8px;
+	@include padding(1px, 2px, 0, 2px);
+	margin-right: 2px;
 	opacity: 0.5;
 
 	&.expanded {
-		padding-right: 1;
+		padding-right: 1px;
 	}
 }
 
@@ -605,11 +623,26 @@ $toolbar-height: 18;
 				color: $property-label-private;
 			}
 		}
+
+		& > PropertyLabel {
+			justify-self: flex-start;
+		}
+
+		& > .typeInspector {
+		}
 	}
 
+	justify-content: flex-end;
 	.typeInspector {
 		flex: 1 0 0;
 		flex-wrap: wrap;
+
+		& > TextField {
+			flex: 0 1 auto;
+			TextInput {
+				flex: 0 1 auto;
+			}
+		}
 	}
 
 	.row {
@@ -619,17 +652,17 @@ $toolbar-height: 18;
 	}
 
 
-	.isNumber {
+	.isNumber > TextInput {
 		color: $value-number;
 	}
 
-	.isNull {
+	.isNull > TextInput {
 		-unity-font-style: italic;
 		color: $value-null;
-		padding-right: 2;				// Hack to Fix italic getting clipped
+		padding-right: 2px;				// Hack to Fix italic getting clipped
 	}
 
-	.isString {
+	.isString > TextInput {
 		color: $value-string;
 	}
 
@@ -650,11 +683,12 @@ $toolbar-height: 18;
 		opacity: 0.25;
 		-unity-font-style:italic;
 		-unity-word-wrap: true;
+		white-space: normal;
 	}
 
 	.span {
 		&#pinned-symbol {
-			margin-left: 75;
+			margin-left: 75px;
 			-unity-font-style: italic;
 			opacity: 0.25;
 		}
@@ -666,8 +700,8 @@ $toolbar-height: 18;
 		align-items: center;
 		flex: 0 1 auto;
 
-		margin-left: 4;
-		margin-right: 4;
+		margin-left: 4px;
+		margin-right: 4px;
 
 		.typeInspector {
 			flex: 1 0 auto;
@@ -688,6 +722,7 @@ $toolbar-height: 18;
 			TypeViewSelection {
 				@extend .row;
 				flex-wrap: wrap;
+				justify-content: flex-end;
 
 				TypeViewMenu {
 					Label {
@@ -721,7 +756,7 @@ $toolbar-height: 18;
 				}
 
 				.return {
-					margin-right: 4;
+					margin-right: 4px;
 					color: $method-return;
 				}
 
@@ -730,7 +765,7 @@ $toolbar-height: 18;
 
 					.parameterType {
 						color: $method-argument;
-						margin-right: 4;
+						margin-right: 4px;
 					}
 
 					.parameterName {
@@ -748,11 +783,11 @@ $toolbar-height: 18;
 }
 
 .expandable {
-	flex: 0 0 auto;
+	flex: 1 0 auto;
 	flex-wrap: wrap;
 
 	.expandedGroup {
-		margin-left: 10;
+		margin-left: 10px;
 	}
 
 	.collapseRow {
@@ -762,27 +797,42 @@ $toolbar-height: 18;
 	}
 
 	.collapsedGroup {
-		flex: 1 1 auto;
+		flex: 0 1 auto;
 		flex-direction: row;
+		align-items: center;
+
+		& > .typename {
+			align-self: flex-start;
+			flex: 1 0 auto;
+		}
+
+		& > .arrow {
+			align-self: flex-start;
+			margin-top: 1px;
+		}
 	}
 
 	.collapseView {
 		flex: 0 1 auto;
+		align-self: flex-start;
 	}
 
 	.tools {
-		flex: 0 0 auto;
+		flex: 1 0 auto;
 		justify-content: flex-end;
 		align-self: flex-start;
 
 		Button.compact {
-			height: 16; // otherwise takes the entire height content and is too big
+			height: 16px; // otherwise takes the entire height content and is too big
+		}
+
+		.viewModes {
+			justify-content: flex-end;
 		}
 	}
 }
 
-// Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
-.span {
+.textfield-label {
 	// No default dark color for text other then Label and such. So this is to fix this
 	color: $unity-text-color;
 
@@ -799,6 +849,15 @@ $toolbar-height: 18;
 	}
 }
 
+// Used for label that shouldn't have their default margin/padding (since it's put on the quick inspector line instead
+.span {
+	@extend .textfield-label;
+
+	TextInput {
+		@extend .textfield-label;
+	}
+}
+
 .text {
-	min-height: 9;		// Normally 15, make sure it's tighter
+	min-height: 9px;		// Normally 15, make sure it's tighter
 }

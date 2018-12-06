@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.UIElements;
+using UnityEditor.UIElements;
 
 #if UNITY_2018_3_OR_NEWER
 [assembly: UxmlNamespacePrefix("UnityEditor.ImmediateWindow.UI", "imw")]
