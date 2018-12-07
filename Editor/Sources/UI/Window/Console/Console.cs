@@ -38,7 +38,17 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleInput =  new TextField();
             ConsoleInput.multiline = false;
             ConsoleInput.name = "console-input";
-            ConsoleInput.RegisterCallback<KeyDownEvent>(OnInputKeyPressed);
+            ConsoleInput.RegisterCallback<KeyDownEvent>(evt =>
+            {
+                if (!IsKeyEventUp(evt.keyCode))
+                    OnInputKeyPressed(evt.keyCode, evt.character);
+            });
+            // Currently a bug where KeyDown event is not sent for up/down arrow
+            ConsoleInput.RegisterCallback<KeyUpEvent>(evt =>
+            {
+                if (IsKeyEventUp(evt.keyCode))
+                    OnInputKeyPressed(evt.keyCode, evt.character);
+            });
             ConsoleSingleLine.Add(ConsoleOutput);
             ConsoleSingleLine.Add(ConsoleInput);
             
@@ -52,6 +62,11 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleToolbar.Console = this;
 
             SetMode(MultiLineMode);
+        }
+
+        private bool IsKeyEventUp(KeyCode keyCode)
+        {
+            return keyCode == KeyCode.UpArrow || keyCode == KeyCode.DownArrow;
         }
 
         private void OnMultiLineFocusOut(FocusOutEvent evt)
@@ -124,10 +139,10 @@ namespace UnityEditor.ImmediateWindow.UI
                 CodeEvaluate();
         }
 
-        private void OnInputKeyPressed(KeyDownEvent evt)
+        private void OnInputKeyPressed(KeyCode keyCode, char character)
         {
             var doEvaluate = false;
-            switch (evt.keyCode)
+            switch (keyCode)
             {
                 case KeyCode.UpArrow:
                 {
@@ -147,7 +162,7 @@ namespace UnityEditor.ImmediateWindow.UI
                     break;
             }
 
-            if (evt.character == '\n')
+            if (character == '\n')
             {
                 doEvaluate = true;
                 var textinput = ConsoleInput.Q<VisualElement>("unity-text-input");
