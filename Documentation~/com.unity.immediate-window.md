@@ -6,11 +6,6 @@ The immediate window is used to instantly evaluate C# code inside the Unity Edit
 
 ## Installation
 
-It is currently only available as a *preview package*.
-
-Add ```"registry": "https://staging-packages.unity.com",``` to
-your project manifest and install from the *Package Manager Window*.
-
 The window is accessible through the ```Window/Analysis/Immediate Window``` editor menu.
 
 ## Overview
