@@ -4,7 +4,7 @@ An immediate window we can all believe in!
 
 Original Author and Supreme Lord Of Absoluteness Without Hesitation And Second Guessing: Mathieu Rivest
 
-[Documentation](Documentation/com.unity.immediate-window.md)
+[Documentation](Documentation~/com.unity.immediate-window.md)
 
 # TODO
 
