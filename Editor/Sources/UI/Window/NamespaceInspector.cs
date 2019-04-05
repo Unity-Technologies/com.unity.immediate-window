@@ -16,6 +16,8 @@ namespace UnityEditor.ImmediateWindow.UI
         private bool IsUsing { get; set; }
         private Assembly Assembly { get; set; }
         private VisualElement ObjectContainer { get; set; }
+
+        public NamespaceInspector() { }
         
         public NamespaceInspector(string ns, Assembly assembly)
         {

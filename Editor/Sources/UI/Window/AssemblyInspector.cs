@@ -13,6 +13,8 @@ namespace UnityEditor.ImmediateWindow.UI
         private VisualElement Container { get; set; }
         private bool Expanded { get; set; }
         private Assembly Assembly { get; set; }
+
+        public AssemblyInspector() { }
         
         public AssemblyInspector(Assembly assembly)
         {
