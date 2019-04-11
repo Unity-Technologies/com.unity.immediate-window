@@ -161,14 +161,6 @@ If you want to experiment with creating a custom type view, you can look at the 
 [Code Snippets](#codeSnippets) dropdown of the multiline view. Currently this will only output the correct inspector to the console when run once due to an unknown bug,
 so it's not exactly suitable for iterating with yet.
 
-# FAQ
-
-###### Q: This is an overcomplicated design and too hard to use
-*A: [Pull Requests](https://gitlab.cds.internal.unity3d.com/upm-packages/tools/com.unity.immediate-window) are welcomed, whining is not!*
-
-###### Q: You rock!
-*A: Don't we all?*
-
 # Author Contact
 
 Mathieu Rivest
