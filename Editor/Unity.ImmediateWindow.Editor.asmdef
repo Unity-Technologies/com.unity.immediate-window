@@ -7,7 +7,7 @@
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
+    "overrideReferences": true,
     "precompiledReferences": [
       "Microsoft.CodeAnalysis.CSharp.dll",
       "Microsoft.CodeAnalysis.CSharp.Workspaces.dll",
