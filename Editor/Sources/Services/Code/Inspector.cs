@@ -11,16 +11,6 @@ namespace UnityEditor.ImmediateWindow.Services
         public Inspector()
         {
         }
-
-        public static IEnumerable<Type> GetLoadableTypes(Assembly assembly) {
-            if (assembly == null) throw new ArgumentNullException("assembly");
-            
-            try {
-                return assembly.GetTypes();
-            } catch (ReflectionTypeLoadException e) {
-                return e.Types.Where(t => t != null);
-            }
-        }
         
         /// <summary>
         /// Get all types of a specific type/interface in an assembly
@@ -29,7 +19,7 @@ namespace UnityEditor.ImmediateWindow.Services
         /// <param name="type">Type (can be Interface type)</param>
         /// <returns></returns>
         public static IEnumerable<Type> GetTypesWithInterface(Assembly assembly, Type type) {
-            return GetLoadableTypes(assembly).Where(type.IsAssignableFrom).ToList();
+            return assembly.GetTypesSafe().Where(type.IsAssignableFrom).ToList();
         }
 
         public static IEnumerable<Type> GetTypesWithInterface(Type type)
@@ -47,21 +37,7 @@ namespace UnityEditor.ImmediateWindow.Services
             if (assembly.IsDynamic)
                 return result;
 
-            Type[] types;
-            try
-            {
-                types = assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException e)
-            {
-                var message = $"Could not load types for assembly (some types in this assembly might refer to assemblies that are not referenced): {assembly.FullName}\n"; 
-                foreach (var except in e.LoaderExceptions)
-                    message += "\n   -- Loader exception: " + except.Message;
-                
-                Debug.LogWarning(message);
-                
-                types = e.Types.Where(t => t != null).ToArray();
-            }
+            IEnumerable<Type> types = assembly.GetTypesSafe(true);
 
             foreach (Type t in types.Where(t =>
                 t != null &&
@@ -156,7 +132,7 @@ namespace UnityEditor.ImmediateWindow.Services
         
         public static IEnumerable<string> GetAllNamespaces(Assembly assembly)
         {
-            return GetLoadableTypes(assembly)
+            return assembly.GetTypesSafe()
                 .Select(t => t.Namespace)
                 .Distinct()
                 .OrderBy(ns => ns);
