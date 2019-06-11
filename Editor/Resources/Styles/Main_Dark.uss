@@ -23,7 +23,7 @@
   border-left-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
-  padding-top: px1;
+  padding-top: 1px;
   padding-left: 3px;
   padding-bottom: 1px;
   padding-right: 3px;

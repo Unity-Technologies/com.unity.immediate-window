@@ -145,7 +145,7 @@ $tree-margin: 15px;
 
 .tag {
 	@include border-box(1px);
-	@include padding(px1, 3px, 1px, 3px);
+	@include padding(1px, 3px, 1px, 3px);
 	@include font-small();
 	border-radius: 5px;
 	-unity-text-align: middle-center;
