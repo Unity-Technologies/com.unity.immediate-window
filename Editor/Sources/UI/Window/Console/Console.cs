@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using System.Threading.Tasks;
+using UnityEngine.UIElements;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
@@ -40,7 +41,7 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleInput.name = "console-input";
             ConsoleInput.RegisterCallback<KeyDownEvent>(evt =>
             {
-                if (!IsKeyEventUp(evt.keyCode))
+                if (!IsKeyEventUp(evt.keyCode) && evt.keyCode != KeyCode.None)
                     OnInputKeyPressed(evt.keyCode, evt.character);
             });
             // Currently a bug where KeyDown event is not sent for up/down arrow
@@ -56,7 +57,7 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleInputMultiLine.multiline = true;
             ConsoleInputMultiLine.name = "console-input-multiline";
             ConsoleMultiLine.Add(ConsoleInputMultiLine);
-            ConsoleInputMultiLine.RegisterCallback<KeyDownEvent>(OnMultiLineInputKeyPressed);
+            ConsoleInputMultiLine.RegisterCallback<KeyUpEvent>(OnMultiLineInputKeyPressed);
             ConsoleInputMultiLine.RegisterCallback<FocusOutEvent>(OnMultiLineFocusOut);
             
             ConsoleToolbar.Console = this;
@@ -66,7 +67,7 @@ namespace UnityEditor.ImmediateWindow.UI
 
         private bool IsKeyEventUp(KeyCode keyCode)
         {
-            return keyCode == KeyCode.UpArrow || keyCode == KeyCode.DownArrow;
+            return keyCode == KeyCode.UpArrow || keyCode == KeyCode.DownArrow || keyCode == KeyCode.Return;
         }
 
         private void OnMultiLineFocusOut(FocusOutEvent evt)
@@ -115,7 +116,7 @@ namespace UnityEditor.ImmediateWindow.UI
             ConsoleOutput.ResetScrollView(true);
         }
 
-        private void OnMultiLineInputKeyPressed(KeyDownEvent evt)
+        private async void OnMultiLineInputKeyPressed(KeyUpEvent evt)
         {
             var doEvaluate = false;
             switch (evt.keyCode)
@@ -136,10 +137,10 @@ namespace UnityEditor.ImmediateWindow.UI
             }
             
             if (doEvaluate)
-                CodeEvaluate();
+                await CodeEvaluate();
         }
 
-        private void OnInputKeyPressed(KeyCode keyCode, char character)
+        private async void OnInputKeyPressed(KeyCode keyCode, char character)
         {
             var doEvaluate = false;
             switch (keyCode)
@@ -163,16 +164,13 @@ namespace UnityEditor.ImmediateWindow.UI
             }
 
             if (character == '\n')
-            {
                 doEvaluate = true;
-                var textinput = ConsoleInput.Q<VisualElement>("unity-text-input");
-                if (textinput != null)
-                    textinput.Focus();
-            }
-
-            if (doEvaluate)
-                CodeEvaluate();
             
+            if (doEvaluate)
+                await CodeEvaluate();
+
+            ConsoleInput.Q<VisualElement>("unity-text-input")?.Focus();
+
             Evaluator.Instance.GetAutocomplete(ConsoleInput.text);
         }
 
@@ -194,7 +192,7 @@ namespace UnityEditor.ImmediateWindow.UI
                 ConsoleInput.value = ""; // Clear when reach the end
         }
 
-        public void CodeEvaluate()
+        public async Task CodeEvaluate()
         {
             var code = MultiLineMode ? ConsoleInputMultiLine.text : ConsoleInput.text;
             if (!MultiLineMode)
@@ -210,7 +208,7 @@ namespace UnityEditor.ImmediateWindow.UI
 
             EditorAnalytics.SendEventWithLimit("evaluatecode", new ImmediateWindowAnalytics {MultilineMode = MultiLineMode});
             
-            Evaluator.Instance.Evaluate(code);
+            await Evaluator.Instance.Evaluate(code);
         }
 
         public void SetMultilineCode(string code, bool save = true)

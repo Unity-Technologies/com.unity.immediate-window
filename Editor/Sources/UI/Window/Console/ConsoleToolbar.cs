@@ -201,10 +201,10 @@ x
             Console.CurrentCommand = null;
         }
 
-        private void ClearRunClick(MouseUpEvent evt)
+        private async void ClearRunClick(MouseUpEvent evt)
         {
             RunButton.RemoveFromClassList("pressed");
-            Console.CodeEvaluate();
+            await Console.CodeEvaluate();
         }
 
         private void RunClick(MouseDownEvent evt)
