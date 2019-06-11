@@ -484,7 +484,14 @@
 .arrow {
   font-size: 8;
   padding-top: 3;
+  padding-left: 2;
+  padding-bottom: 0;
+  padding-right: 2;
   margin-right: 2;
+  opacity: 0.5;
+}
+.arrow.expanded {
+  padding-right: 1;
 }
 
 .quickInspector {
