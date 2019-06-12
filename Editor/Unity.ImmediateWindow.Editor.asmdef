@@ -1,7 +1,6 @@
 {
     "name": "Unity.ImmediateWindow.Editor",
     "references": [],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -15,7 +14,6 @@
         "Microsoft.CodeAnalysis.dll",
         "Microsoft.CodeAnalysis.Scripting.dll",
         "Microsoft.CodeAnalysis.Workspaces.dll",
-        "Microsoft.CSharp.dll",
         "System.Collections.Immutable.dll",
         "System.Composition.AttributedModel.dll",
         "System.Composition.Convention.dll",
