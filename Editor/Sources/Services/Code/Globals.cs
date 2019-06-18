@@ -15,7 +15,7 @@ namespace UnityEditor.ImmediateWindow.Services
         public object __1;
         public object __2;
         public object __3;
-        public object __4 = GameObject.Find("Main Camera").transform;
+        public object __4;
         public object __5 = new Dictionary<string, int> { {"my", 10}, {"yessir", 20} };
         public object __6 = new List<string> {"test", "yes"};
         public object __7 = new SecretStruct();
