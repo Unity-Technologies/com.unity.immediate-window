@@ -6,22 +6,6 @@ test_platforms:
     image: package-ci/win10:stable
     flavor: m1.large
 ---
-promotion_fetch:
-  name: Fetch Package From Internal Registry
-  agent:
-    type: Unity::VM
-    image: package-ci/win10:stable
-    flavor: m1.large
-  variables:
-    UPMCI_PROMOTION: 1
-  commands:
-    - npm install upm-ci-utils@latest -g --registry https://api.bintray.com/npm/unity/unity-npm
-    - upm-ci package pack
-  artifacts:
-    packages:
-      paths:
-        - "upm-ci~/packages/**/*"
-
 {% for editor in test_editors %}
 {% for platform in test_platforms %}
 promotion_test_{{ platform.name }}_{{ editor.version }}:
@@ -33,14 +17,14 @@ promotion_test_{{ platform.name }}_{{ editor.version }}:
   variables:
     UPMCI_PROMOTION: 1
   commands:
-    - npm install upm-ci-utils@latest -g --registry https://api.bintray.com/npm/unity/unity-npm
+    - npm install upm-ci-utils@stable -g --registry https://api.bintray.com/npm/unity/unity-npm
     - upm-ci package test --unity-version {{ editor.version }}
   artifacts:
     logs:
       paths:
         - "upm-ci~/test-results/**/*"
   dependencies:
-    - .yamato/promotion.yml#promotion_fetch
+    - .yamato/upm-ci.yml#pack
 {% endfor %}
 {% endfor %}
 
@@ -73,7 +57,7 @@ promote:
   variables:
     UPMCI_PROMOTION: 1
   commands:
-    - npm install upm-ci-utils@latest -g --registry https://api.bintray.com/npm/unity/unity-npm
+    - npm install upm-ci-utils@stable -g --registry https://api.bintray.com/npm/unity/unity-npm
     - upm-ci package promote
   triggers:
     tags:
@@ -84,7 +68,7 @@ promote:
       paths:
         - "upm-ci~/packages/*.tgz"
   dependencies:
-    - .yamato/promotion.yml#promotion_fetch
+    - .yamato/upm-ci.yml#pack
 {% for editor in test_editors %}
 {% for platform in test_platforms %}
     - .yamato/promotion.yml#promotion_test_{{ platform.name }}_{{ editor.version }}
