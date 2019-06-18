@@ -6,31 +6,7 @@
 
 ***************************************************************************************************/
 .display-none {
-  position: absolute;
-  overflow: hidden;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
+  display: none;
 }
 
 .row, .quickInspector .expandable .viewModes, .quickInspector .expandable .viewModes TypeViewSelection, .quickInspector .expandable ExpandedMethodGroup Method .parameter {
@@ -47,7 +23,7 @@
   border-left-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
-  padding-top: px1;
+  padding-top: 1px;
   padding-left: 3px;
   padding-bottom: 1px;
   padding-right: 3px;
@@ -125,36 +101,7 @@
   padding-right: 3px;
 }
 #immediateWindow .alert #close.display-none {
-  position: absolute;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  min-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  -unity-slice-top: 0;
-  -unity-slice-left: 0;
-  -unity-slice-bottom: 0;
-  -unity-slice-right: 0;
-  visibility: hidden;
+  display: none;
 }
 #immediateWindow .alert #close:hover {
   color: #000000;
@@ -231,8 +178,10 @@
   bottom: 0;
 }
 #immediateWindow #console #console-input-multiline {
-  bottom: 0;
-  height: 250px;
+  flex: 1 0 0;
+}
+#immediateWindow #console #console-input-multiline TextInput {
+  -unity-text-align: upper-left;
 }
 #immediateWindow #sideview {
   flex: 0.35 0 0;
@@ -296,6 +245,8 @@
 .icon.context {
   max-width: 14px;
   max-height: 14px;
+  min-width: 14px;
+  min-height: 14px;
   background-image: resource("Builtin Skins/LightSkin/Images/ShurikenModuleActive.png");
 }
 .icon.context.pressed {
@@ -392,7 +343,6 @@
   -unity-slice-right: 1px;
 }
 #toolbarContainer #toolbarView .toolbarButton {
-  flex: 1 0 0;
   font-size: 9px;
   -unity-text-align: middle-center;
   background-image: resource("Builtin Skins/LightSkin/Images/toolbar button.png");
@@ -411,36 +361,7 @@
   height: 19px;
 }
 #toolbarContainer #toolbarView .toolbarButton.display-none {
-  position: absolute;
-  border-radius: 0;
-  width: 0;
-  height: 0;
-  min-height: 0;
-  max-height: 0;
-  min-width: 0;
-  max-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  min-width: 0;
-  border-top-width: 0;
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-right-width: 0;
-  padding-top: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-  -unity-slice-top: 0;
-  -unity-slice-left: 0;
-  -unity-slice-bottom: 0;
-  -unity-slice-right: 0;
-  visibility: hidden;
+  display: none;
 }
 #toolbarContainer #toolbarView .toolbarButton:hover {
   color: #000000;
@@ -455,9 +376,15 @@
   background-image: resource("Builtin Skins/LightSkin/Images/toolbar button.png");
 }
 #toolbarContainer #toolbarView #toolbarLeft {
-  flex: 0 0 auto;
+  flex: 1 0 0;
   flex-direction: row;
   align-items: flex-start;
+}
+#toolbarContainer #toolbarView #toolbarLeft #templates {
+  -unity-slice-top: 0;
+  -unity-slice-left: 1px;
+  -unity-slice-bottom: 0;
+  -unity-slice-right: 1px;
 }
 #toolbarContainer #toolbarView #toolbarRight {
   flex: 1 0 0;
@@ -696,6 +623,10 @@
 }
 .textfield-label.faded, .faded.span, .span TextInput.faded {
   opacity: 0.75;
+}
+
+#immediateWindow .no-background, #immediateWindow .textfield-label, #immediateWindow .span, #immediateWindow .span TextInput, .span #immediateWindow TextInput, #immediateWindow .textfield-label, #immediateWindow .span, #immediateWindow .span TextInput, .span #immediateWindow TextInput, #immediateWindow .span, #immediateWindow .span TextInput, .span #immediateWindow TextInput {
+  padding-right: 2px;
 }
 
 .text {
