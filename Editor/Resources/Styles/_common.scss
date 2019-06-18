@@ -96,24 +96,7 @@
 	//@include slice(4px, 6px, 4px, 6px);
 
 	&.display-none {
-		position: absolute;
-		border-radius: 0;
-		width: 0;
-		height: 0;
-		min-height: 0;
-		max-height: 0;
-		min-width: 0;
-		max-width: 0;
-		border-top-width: 0;
-		border-left-width: 0;
-		border-bottom-width: 0;
-		border-right-width: 0;
-		min-width: 0;
-		@include border-box(0);
-		@include padding-box(0);
-		@include margin-box(0);
-		@include slice-box(0);
-		visibility: hidden;
+		display: none;
 	}
 
 	&:hover {
@@ -148,22 +131,7 @@ $tree-margin: 15px;
 // Styles
 //--------------------------------------------------------------------------------------------------
 .display-none {
-	position: absolute;
-	overflow: hidden;
-	border-radius: 0;
-	width: 0;
-	height: 0;
-	min-height: 0;
-	max-height: 0;
-	min-width: 0;
-	max-width: 0;
-	border-top-width: 0;
-	border-left-width: 0;
-	border-bottom-width: 0;
-	border-right-width: 0;
-	@include border-box(0);
-	@include padding-box(0);
-	@include margin-box(0);
+	display: none;
 }
 
 .row {
@@ -177,7 +145,7 @@ $tree-margin: 15px;
 
 .tag {
 	@include border-box(1px);
-	@include padding(px1, 3px, 1px, 3px);
+	@include padding(1px, 3px, 1px, 3px);
 	@include font-small();
 	border-radius: 5px;
 	-unity-text-align: middle-center;
@@ -226,7 +194,7 @@ $toolbar-height: 18px;
 	}
 
 	.no-background {
-		background: rgba(0, 0, 0, 0);
+		background-color: rgba(0, 0, 0, 0);
 		background-image: none;
 		@include margin-box(0);
 		@include padding-box(0);
@@ -236,7 +204,6 @@ $toolbar-height: 18px;
 		background-color: rgba(200,0,0,0.8);
 		border-color: #FF0000;
 		flex-direction: row;
-		-unity-word-wrap: true;
 		white-space: normal;
 
 		@include border-box(1px);
@@ -245,7 +212,6 @@ $toolbar-height: 18px;
 		#alertMessage {
 			flex: 1 0 0;
 			color: $unity-text-color-highlight;
-			-unity-word-wrap: true;
 			white-space: normal;
 			@include text-clip();
 		}
@@ -290,7 +256,6 @@ $toolbar-height: 18px;
 		$height-console-output: 250px;		// Hack until I figure out how to make scrollview work
 
 		.console-log {
-			-unity-word-wrap: true;
 			white-space: normal;
 		}
 
@@ -340,8 +305,11 @@ $toolbar-height: 18px;
 		}
 
 		#console-input-multiline {
-			bottom: 0;
-			height: 250px;
+			flex: 1 0 0;
+
+			TextInput {
+				-unity-text-align: upper-left;
+			}
 		}
 	}
 
@@ -372,7 +340,6 @@ $toolbar-height: 18px;
 			.assembly-label {
 				flex: 1 0 0;
 				-unity-font-style: bold;
-				-unity-word-wrap: true;
 				white-space: normal;
 			}
 
@@ -382,7 +349,6 @@ $toolbar-height: 18px;
 				.namespace-label {
 					flex: 1 0 0;
 					-unity-font-style: italic;
-					-unity-word-wrap: true;
 					white-space: normal;
 				}
 
@@ -429,6 +395,8 @@ $toolbar-height: 18px;
 	&.context {
 		max-width: 14px;
 		max-height: 14px;
+		min-width: 14px;
+		min-height: 14px;
 		background-image: $context-background;
 
 		&.pressed {
@@ -515,10 +483,9 @@ $toolbar-height: 18px;
 		align-items: flex-start;
 		background-image: $toolbar-background;
 		margin-top: -1px;
-		@include slice(1px, 1px, 1px, 1px);
+		@include slice(1, 1, 1, 1);
 
 		.toolbarButton {
-			flex: 1 0 0;
 			font-size: 9px;
 			-unity-text-align: middle-center;
 			background-image: $toolbar-button-background;
@@ -544,9 +511,13 @@ $toolbar-height: 18px;
 		}
 
 		#toolbarLeft {
-			flex: 0 0 auto;
+			flex: 1 0 0;
 			flex-direction: row;
 			align-items: flex-start;
+
+			#templates {
+				@include slice(0, 1, 0, 1);
+			}
 		}
 
 		#toolbarRight {
@@ -609,7 +580,6 @@ $toolbar-height: 18px;
 	.typename {
 		-unity-font-style: italic;
 		opacity: 0.5;
-		-unity-word-wrap: false;
 	}
 
 	.propertyValueGroup {
@@ -625,7 +595,6 @@ $toolbar-height: 18px;
 		}
 
 		& > PropertyLabel {
-			justify-self: flex-start;
 		}
 
 		& > .typeInspector {
@@ -668,7 +637,6 @@ $toolbar-height: 18px;
 
 	.propertyLabel {
 		color: $property-label;
-		-unity-word-wrap: false;
 		flex: 0 0 auto;
 	}
 
@@ -682,7 +650,6 @@ $toolbar-height: 18px;
 	.empty {
 		opacity: 0.25;
 		-unity-font-style:italic;
-		-unity-word-wrap: true;
 		white-space: normal;
 	}
 
@@ -856,6 +823,10 @@ $toolbar-height: 18px;
 	TextInput {
 		@extend .textfield-label;
 	}
+}
+
+#immediateWindow .no-background, #immediateWindow .textfield-label, #immediateWindow .span, #immediateWindow .span TextInput, .span #immediateWindow TextInput {
+	padding-right: 2px; // Hack to Fix italic getting clipped
 }
 
 .text {

@@ -111,7 +111,7 @@ namespace TEST
             */
         }
         
-        public async void Evaluate(string code)
+        public async Task Evaluate(string code)
         {
             OnBeforeEvaluation(code);
             var error = await EvaluateSilently(code);
