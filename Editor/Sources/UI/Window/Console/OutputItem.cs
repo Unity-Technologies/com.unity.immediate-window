@@ -1,5 +1,4 @@
 ﻿using UnityEngine.UIElements;
-using UnityScript.Scripting;
 using UnityEditor.ImmediateWindow.Services;
 using UnityEngine;
 using Evaluator = UnityEditor.ImmediateWindow.Services.Evaluator;
